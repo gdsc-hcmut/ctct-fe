@@ -247,7 +247,7 @@ const SlotCard: FC<SlotCardProps> = ({
             if (examSession === null) {
               setStartSessionModalOpen(true);
             } else if (!isNil(examSession)) {
-              navigate(`/room/tests/${examSession._id}`);
+              navigate(`/room/tests/session/${examSession._id}`);
             }
           };
         case SlotStatus.ENDED:
@@ -258,7 +258,7 @@ const SlotCard: FC<SlotCardProps> = ({
           return () => {};
       }
     })(),
-    [slotStatus]
+    [slotStatus, examSession]
   );
 
   const { mutateAsync: startSession, isLoading: isStartingSession } = useMutation({
@@ -274,6 +274,10 @@ const SlotCard: FC<SlotCardProps> = ({
   });
 
   const result = useMemo(() => calculateProgress(examSession?.questions || []), [examSession]);
+
+  if (!examSession) {
+    return null;
+  }
 
   return (
     <>
