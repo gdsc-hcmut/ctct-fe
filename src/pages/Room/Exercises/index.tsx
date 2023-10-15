@@ -15,13 +15,14 @@ const Exercises: React.FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [isEnding, setIsEnding] = useState(false);
+  const [isRefetching, setIsRefetching] = useState(false);
 
   const { data: quiz, isLoading } = useQuery({
     enabled: !!params?.quizId,
     queryKey: [params.sessionId],
     queryFn: async () => {
       const { data } = await QuizSessionService.getById(params.sessionId as string);
+      setIsRefetching(false);
       return data.payload;
     },
     refetchOnWindowFocus: false,
@@ -31,6 +32,10 @@ const Exercises: React.FC = () => {
   const submit = useMutation({
     mutationFn: async () => {
       await QuizSessionService.submit(params.sessionId as string);
+    },
+    onSuccess: () => {
+      toast.success('Đã nộp bài!');
+      setIsRefetching(true);
       queryClient.invalidateQueries([params.sessionId]);
     },
     onError: () => {
@@ -55,13 +60,13 @@ const Exercises: React.FC = () => {
     <>
       {params?.quizId === undefined ? (
         <Main />
-      ) : isLoading || submit.isLoading || isEnding ? (
+      ) : isLoading || submit.isLoading || isRefetching ? (
         <Loading />
       ) : quiz ? (
         quiz.status === 'ENDED' ? (
           <Review quiz={quiz} />
         ) : (
-          <Detail quiz={quiz} handleSubmit={submit} setIsEnding={setIsEnding} />
+          <Detail quiz={quiz} handleSubmit={submit} setIsRefetching={setIsRefetching} />
         )
       ) : null}
     </>

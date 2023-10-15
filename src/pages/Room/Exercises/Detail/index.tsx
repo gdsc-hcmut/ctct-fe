@@ -14,8 +14,8 @@ import MobileOngoing from './MobileOngoing';
 const Detail: React.FC<{
   quiz: QuizSession;
   handleSubmit: UseMutationResult<void, unknown, void, unknown>;
-  setIsEnding: Dispatch<SetStateAction<boolean>>;
-}> = ({ quiz, handleSubmit, setIsEnding }) => {
+  setIsRefetching: Dispatch<SetStateAction<boolean>>;
+}> = ({ quiz, handleSubmit, setIsRefetching }) => {
   const params = useParams();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -26,7 +26,7 @@ const Detail: React.FC<{
     const onEndQuizSession = () => {
       toast.success('Đã nộp bài!');
       queryClient.invalidateQueries([params.sessionId]);
-      setIsEnding(true);
+      setIsRefetching(true);
     };
 
     socket.on(SocketEvent.END_QUIZ_SESSION, onEndQuizSession);
@@ -34,7 +34,7 @@ const Detail: React.FC<{
     return () => {
       socket.off(SocketEvent.END_QUIZ_SESSION, onEndQuizSession);
     };
-  }, [params, navigate, queryClient, pathname, setIsEnding]);
+  }, [params, navigate, queryClient, pathname, setIsRefetching]);
 
   return (
     <Page

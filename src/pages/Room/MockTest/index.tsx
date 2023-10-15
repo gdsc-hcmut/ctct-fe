@@ -16,13 +16,14 @@ const MockTest: FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const [isEnding, setIsEnding] = useState(false);
+  const [isRefetching, setIsRefetching] = useState(false);
 
   const { data: exam, isLoading } = useQuery({
     enabled: !!params?.sessionId,
-    queryKey: ['exam-session', params.sessionId],
+    queryKey: [params.sessionId],
     queryFn: async () => {
       const { data } = await ExamSessionService.getById(params.sessionId as string);
+      setIsRefetching(false);
       return data.payload;
     },
     refetchOnWindowFocus: false,
@@ -32,8 +33,11 @@ const MockTest: FC = () => {
   const submit = useMutation({
     mutationFn: async () => {
       await ExamSessionService.submit(params.sessionId as string);
+    },
+    onSuccess: () => {
       queryClient.invalidateQueries(['exam-session', exam?.fromExam._id]);
-      queryClient.invalidateQueries(['exam-session', params.sessionId]);
+      queryClient.invalidateQueries([params.sessionId]);
+      setIsRefetching(true);
     },
     onError: () => {
       toast.error('Đã có lỗi trong lúc nộp bài!');
@@ -49,12 +53,12 @@ const MockTest: FC = () => {
     }
   }, [exam, navigate, params, pathname]);
 
-  if (isLoading || !submit.isLoading || isEnding || !exam) {
+  if (isLoading || submit.isLoading || isRefetching || !exam) {
     return <Loading />;
   }
 
   return exam.status === SessionStatus.ONGOING ? (
-    <Ongoing exam={exam} handleSubmit={submit} setIsEnding={setIsEnding} />
+    <Ongoing exam={exam} handleSubmit={submit} setIsRefetching={setIsRefetching} />
   ) : (
     <Review exam={exam} />
   );

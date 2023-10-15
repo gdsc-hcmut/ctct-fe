@@ -67,7 +67,7 @@ const Main = () => {
     }
 
     const timeRange = getTimeRange(results[0].data.result);
-    return results[0].data.total && Date.now() >= timeRange[0] && Date.now() <= timeRange[1];
+    return results[0].data.total && Date.now() > timeRange[0] && Date.now() < timeRange[1];
   }, [results]);
 
   const isFinalExamOpen = useCallback(() => {
@@ -76,7 +76,7 @@ const Main = () => {
     }
 
     const timeRange = getTimeRange(results[1].data.result);
-    return results[1].data.total && Date.now() >= timeRange[0] && Date.now() <= timeRange[1];
+    return results[1].data.total && Date.now() > timeRange[0] && Date.now() < timeRange[1];
   }, [results]);
 
   return (

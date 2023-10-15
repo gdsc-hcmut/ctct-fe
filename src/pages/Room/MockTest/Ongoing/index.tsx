@@ -14,8 +14,8 @@ import MobileOngoing from './MobileOngoing';
 const Detail: React.FC<{
   exam: ExamSession;
   handleSubmit: UseMutationResult<void, unknown, void, unknown>;
-  setIsEnding: Dispatch<SetStateAction<boolean>>;
-}> = ({ exam, handleSubmit, setIsEnding }) => {
+  setIsRefetching: Dispatch<SetStateAction<boolean>>;
+}> = ({ exam, handleSubmit, setIsRefetching }) => {
   const params = useParams();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -25,7 +25,7 @@ const Detail: React.FC<{
   useEffect(() => {
     const onEndExamSession = () => {
       toast.success('Đã nộp bài!');
-      setIsEnding(true);
+      setIsRefetching(true);
       queryClient.invalidateQueries(['exam', params.examId, params.sessionId]);
     };
 
@@ -34,7 +34,7 @@ const Detail: React.FC<{
     return () => {
       socket.off(SocketEvent.END_EXAM_SESSION, onEndExamSession);
     };
-  }, [params, navigate, queryClient, pathname, setIsEnding]);
+  }, [params, navigate, queryClient, pathname, setIsRefetching]);
 
   return (
     <Page
