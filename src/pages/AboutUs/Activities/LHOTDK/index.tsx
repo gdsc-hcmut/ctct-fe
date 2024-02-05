@@ -1,11 +1,9 @@
 import { LazyLoadImage } from '../../../../components';
 import Achievement1 from '../../../../components/Achivement/Achievement1';
 import NewsCarousel from '../../../../components/NewsCarousel/NewsCarousel';
-// import { useWindowDimensions } from '../../../../hooks';
 import { Page } from '../../../../layout';
 
 const LHOTDKPage = () => {
-  // const { width } = useWindowDimensions();
   return (
     <Page title='Lớp học ôn tập'>
       <main className='with-nav-height flex flex-col gap-y-5 overflow-y-auto text-[16px] md:text-[14px] lg:gap-y-10 lg:text-[18px] xl:text-[20px] 2xl:gap-y-[54px] 3xl:gap-y-[60px]'>

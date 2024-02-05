@@ -1,7 +1,7 @@
 import { Carousel } from 'react-responsive-carousel';
 
 import { CarouselIndicator, Icon, LazyLoadImage } from '../../components';
-import { RevisionClassData as data } from '../../data/CarouselData';
+import { NewsData as data } from '../../data/CarouselData';
 import { useWindowDimensions } from '../../hooks';
 
 const NewsCarousel = () => {
@@ -16,7 +16,7 @@ const NewsCarousel = () => {
               className='flex w-[25%] cursor-pointer flex-col items-start justify-start gap-y-2 rounded-[20px] p-7 shadow-xl md:min-h-[500px] md:p-3 lg:min-h-[600px] lg:gap-y-3 lg:py-5 lg:px-4 xl:min-h-[550px] 2xl:min-h-[650px] 2xl:py-7 2xl:px-5'
               key={`new_${index}`}
               target='_blank'
-              href={item.hRef}
+              href={item.linkTo}
               rel='noreferrer'
             >
               <div className='w-[100%]'>
@@ -67,7 +67,7 @@ const NewsCarousel = () => {
               <div className='flex w-full justify-center pb-10' key={`new_${index}`}>
                 <a
                   target='_blank'
-                  href={item.hRef}
+                  href={item.linkTo}
                   className='flex w-[calc(100%-40px)] cursor-pointer flex-col items-start justify-center gap-y-2 rounded-[20px] p-3 shadow-xl'
                   rel='noreferrer'
                 >
