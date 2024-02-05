@@ -72,7 +72,7 @@ const NewsCarousel = () => {
                 <a
                   target='_blank'
                   href={item.linkTo}
-                  className='flex w-[calc(100%-40px)] cursor-pointer flex-col items-start justify-center gap-y-2 rounded-[20px] p-3 shadow-xl'
+                  className='flex h-[35rem] w-[calc(100%-40px)] cursor-pointer flex-col items-start justify-center gap-y-2 rounded-[20px] p-3 shadow-xl sm:h-[40rem]'
                   rel='noreferrer'
                 >
                   <div className='w-[100%]'>
