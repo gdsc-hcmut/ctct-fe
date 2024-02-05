@@ -48,12 +48,15 @@ import { ReactComponent as List } from '../../assets/svgs/ListIcon.svg';
 import { ReactComponent as LiveHelpIcon } from '../../assets/svgs/LiveHelpIcon.svg';
 import { ReactComponent as LocationIcon } from '../../assets/svgs/LocationIcon.svg';
 import { ReactComponent as LogoCTCT } from '../../assets/svgs/LogoCTCT.svg';
+import { ReactComponent as LogoCTCTNoText } from '../../assets/svgs/LogoCTCTNoText.svg';
 import { ReactComponent as LogoDiscord } from '../../assets/svgs/LogoDiscord.svg';
 import { ReactComponent as LogoFacebook } from '../../assets/svgs/LogoFacebook.svg';
+import { ReactComponent as LogoFacebookBlue } from '../../assets/svgs/LogoFacebookBlue.svg';
 import { ReactComponent as LogoGDSC } from '../../assets/svgs/LogoGDSC.svg';
 import { ReactComponent as LogoGmail } from '../../assets/svgs/LogoGmail.svg';
 import { ReactComponent as LogoLinkedin } from '../../assets/svgs/LogoLinkedin.svg';
 import { ReactComponent as Logout } from '../../assets/svgs/LogoutIcon.svg';
+import { ReactComponent as LogoYoutube } from '../../assets/svgs/LogoYoutube.svg';
 import { ReactComponent as MailIcon } from '../../assets/svgs/MailIcon.svg';
 import { ReactComponent as MockTestIcon } from '../../assets/svgs/MockTestIcon.svg';
 import { ReactComponent as OpenAside } from '../../assets/svgs/OpenAsideIcon.svg';
@@ -123,9 +126,12 @@ export default {
   FiveWingStarIcon,
   LocationIcon,
   LogoCTCT,
+  LogoCTCTNoText,
+  LogoFacebookBlue,
   LogoGDSC,
   LogoGoogle,
   LogoFessior,
+  LogoYoutube,
   Exercise,
   PhoneIcon,
   List,

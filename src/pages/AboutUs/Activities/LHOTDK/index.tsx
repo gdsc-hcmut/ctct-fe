@@ -1,6 +1,7 @@
 import { LazyLoadImage } from '../../../../components';
 import Achievement1 from '../../../../components/Achivement/Achievement1';
 import NewsCarousel from '../../../../components/NewsCarousel/NewsCarousel';
+import SocialMediaCarousel from '../../../../components/SocialMediaCarousel/SocialMediaCarousel';
 import { Page } from '../../../../layout';
 
 const LHOTDKPage = () => {
@@ -58,6 +59,7 @@ const LHOTDKPage = () => {
                   </p>
                 </div>
               </div>
+
               <div className='flex w-full flex-col items-start justify-between gap-8'>
                 <div className='flex w-full flex-col justify-start gap-2 md:items-center md:justify-center lg:gap-4 2xl:gap-5'>
                   <div className='text-justify text-[24px] font-bold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
@@ -72,6 +74,7 @@ const LHOTDKPage = () => {
                 </div>
                 <Achievement1 />
               </div>
+
               <div className='flex w-full flex-col items-start justify-between gap-8'>
                 <div className='flex w-full flex-col justify-start gap-2 md:items-center md:justify-center lg:gap-4 2xl:gap-5'>
                   <div className='text-justify text-[24px] font-bold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
@@ -83,6 +86,19 @@ const LHOTDKPage = () => {
                   </p>
                 </div>
                 <NewsCarousel />
+              </div>
+
+              <div className='flex w-full flex-col items-start justify-between gap-8'>
+                <div className='flex w-full flex-col justify-start gap-2 md:items-center md:justify-center lg:gap-4 2xl:gap-5'>
+                  <div className='text-justify text-[24px] font-bold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Các công cụ hỗ trợ học tập khác
+                  </div>
+                  <p className='mx-auto max-w-full text-justify leading-7 text-[#696984] md:text-center md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
+                    Câu lạc bộ Chúng Ta Cùng Tiến mang đến những công cụ hỗ trợ trên Internet để
+                    việc học tập và ôn luyện của sinh viên được diễn ra hiệu quả nhất.
+                  </p>
+                </div>
+                <SocialMediaCarousel />
               </div>
             </div>
           </div>

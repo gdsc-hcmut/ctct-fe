@@ -1,3 +1,5 @@
+import Icon from '../components/Icon';
+
 const CarouselData = [
   {
     id: 1,
@@ -107,27 +109,27 @@ const SocialMediaData = [
   {
     id: '1',
     name: 'Website',
+    logo: Icon.LogoCTCTNoText,
     title: 'Website Chúng Ta Cùng Tiến',
     description: 'Kho tài liệu học tập, bài tập rèn luyện trên website chungtacungtien.com',
-    imgSrc: require('../assets/svgs/LargeLogoCTCT.svg'),
     linkTo: 'https://chungtacungtien.com/',
   },
   {
     id: '2',
     name: 'Facebook',
+    logo: Icon.LogoFacebookBlue,
     title: 'Cộng đồng Chúng Ta Cùng Tiến',
     description:
       'Nhóm “Cộng đồng Chúng Ta Cùng Tiến” hỗ trợ hỏi đáp, giải bài tập các môn đại cương và một số môn chuyên ngành',
-    imgSrc: require('../assets/svgs/LargeLogoCTCT.svg'),
     linkTo: 'https://m.facebook.com/groups/chungtacungtien.group/?ref=share',
   },
   {
     id: '3',
     name: 'YouTube',
+    logo: Icon.LogoYoutube,
     title: 'CLB Chúng Ta Cùng Tiến - ĐHBK',
     description:
       'Kênh YouTube CLB Chúng Ta Cùng Tiến - ĐHBK với các video bài giảng, talkshow kinh nghiệm học tập',
-    imgSrc: require('../assets/svgs/LargeLogoCTCT.svg'),
     linkTo: 'https://www.youtube.com/@CLBChungtacungtienHBK',
   },
 ];
