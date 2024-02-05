@@ -64,6 +64,7 @@ const RevisionClassData = [
   {
     id: '1',
     name: 'NÀO CHÚNG TA CÙNG TIẾN!',
+    source: 'Đại học Quốc Gia TP.HCM',
     description:
       'Vào thứ Bảy và Chủ nhật hằng tuần, tại nhà H6 Trường ĐH Bách Khoa ĐHQG-HCM (Cơ sở Dĩ An) có hàng trăm sinh viên đến tham gia lớp học mang tên Chúng ta cùng tiến.',
     date: '9 tháng 4, năm 2019',
@@ -72,39 +73,33 @@ const RevisionClassData = [
   },
   {
     id: '2',
-    name: 'NÀO CHÚNG TA CÙNG TIẾN!',
+    name: 'TRỢ GIẢNG KHI CÒN NGỒI TRÊN GIẢNG ĐƯỜNG',
+    source: 'Báo Tuổi Trẻ',
     description:
-      'Vào thứ Bảy và Chủ nhật hằng tuần, tại nhà H6 Trường ĐH Bách Khoa ĐHQG-HCM (Cơ sở Dĩ An) có hàng trăm sinh viên đến tham gia lớp học mang tên Chúng ta cùng tiến.',
-    date: '9 tháng 4, năm 2019',
+      'Hiện nay những buổi học đại trà thường thu hút 100-200 SV tham gia, không chỉ SV học yếu mà có cả SV khá giỏi” - ThS Trần Tấn Phúc, giám đốc Trung tâm Hỗ trợ SV và việc làm, cho biết.',
+    date: '5 tháng 6, năm 2015',
     imgSrc: require('../assets/images/LHOTTTNews.png'),
-    hRef: 'https://vnuhcm.edu.vn/sinh-vien_33386864/nao-chung-ta-cung-tien-/313930366864.html',
+    hRef: 'https://tuoitre.vn/tro-giang-khi-con-ngoi-tren-giang-duong-757152.htm',
   },
   {
     id: '3',
-    name: 'NÀO CHÚNG TA CÙNG TIẾN!',
+    name: 'LỚP HỌC ĐỘC ĐÁO GIỮA GIẢNG ĐƯỜNG',
+    source: 'Báo Thanh Niên',
     description:
-      'Vào thứ Bảy và Chủ nhật hằng tuần, tại nhà H6 Trường ĐH Bách Khoa ĐHQG-HCM (Cơ sở Dĩ An) có hàng trăm sinh viên đến tham gia lớp học mang tên Chúng ta cùng tiến.',
-    date: '9 tháng 4, năm 2019',
+      '"Chúng ta cùng tiến" là tên một lớp học độc đáo được tổ chức định kỳ vào cuối tuần tại Trường ĐH Bách Khoa TP.HCM. Ở đó người dạy và học đều là sinh viên.',
+    date: '7 tháng 7, năm 2020',
     imgSrc: require('../assets/images/LHOTTTNews.png'),
-    hRef: 'https://vnuhcm.edu.vn/sinh-vien_33386864/nao-chung-ta-cung-tien-/313930366864.html',
+    hRef: 'https://thanhnien.vn/lop-hoc-doc-dao-giua-giang-duong-185971999.htm',
   },
   {
     id: '4',
-    name: 'NÀO CHÚNG TA CÙNG TIẾN!',
+    name: 'ĐỘC ĐÁO LỚP HỌC CÙNG TIẾN, GIÚP BẠN HỌC TỐT HƠN',
+    source: 'Truyền Hình Vĩnh Long',
     description:
-      'Vào thứ Bảy và Chủ nhật hằng tuần, tại nhà H6 Trường ĐH Bách Khoa ĐHQG-HCM (Cơ sở Dĩ An) có hàng trăm sinh viên đến tham gia lớp học mang tên Chúng ta cùng tiến.',
-    date: '9 tháng 4, năm 2019',
+      'Lớp học là hoạt động mỗi tuần của Câu lạc bộ Chúng Ta Cùng Tiến nhằm tạo cầu nối để các bạn sinh viên giúp đỡ lẫn nhau trong học tập',
+    date: '6 tháng 6, năm 2020',
     imgSrc: require('../assets/images/LHOTTTNews.png'),
-    hRef: 'https://vnuhcm.edu.vn/sinh-vien_33386864/nao-chung-ta-cung-tien-/313930366864.html',
-  },
-  {
-    id: '5',
-    name: 'NÀO CHÚNG TA CÙNG TIẾN!',
-    description:
-      'Vào thứ Bảy và Chủ nhật hằng tuần, tại nhà H6 Trường ĐH Bách Khoa ĐHQG-HCM (Cơ sở Dĩ An) có hàng trăm sinh viên đến tham gia lớp học mang tên Chúng ta cùng tiến.',
-    date: '9 tháng 4, năm 2019',
-    imgSrc: require('../assets/images/LHOTTTNews.png'),
-    hRef: 'https://vnuhcm.edu.vn/sinh-vien_33386864/nao-chung-ta-cung-tien-/313930366864.html',
+    hRef: 'https://www.youtube.com/watch?v=7YPnrVjdjQg&ab_channel=THVLT%E1%BB%95ngH%E1%BB%A3p',
   },
 ];
 

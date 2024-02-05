@@ -10,10 +10,10 @@ const NewsCarousel = () => {
   return (
     <>
       {width > 768 ? (
-        <div className='flex w-full flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
+        <div className='flex w-full flex-row items-start justify-start md:gap-8 lg:gap-12 2xl:gap-[56px]'>
           {data.map((item, index) => (
             <a
-              className='flex w-[25%] cursor-pointer flex-col items-start justify-center gap-y-2 rounded-[20px] py-7 px-5 shadow-xl md:p-3 lg:gap-y-3 lg:py-5 lg:px-4 2xl:py-7 2xl:px-5'
+              className='flex w-[25%] cursor-pointer flex-col items-start justify-start gap-y-2 rounded-[20px] p-7 shadow-xl md:min-h-[500px] md:p-3 lg:min-h-[600px] lg:gap-y-3 lg:py-5 lg:px-4 xl:min-h-[550px] 2xl:min-h-[650px] 2xl:py-7 2xl:px-5'
               key={`new_${index}`}
               target='_blank'
               href={item.hRef}
@@ -28,8 +28,8 @@ const NewsCarousel = () => {
                   objectFit='cover'
                 />
               </div>
-              <p className='text-start text-[12px] text-[#00CBB8] lg:text-[16px] 2xl:text-lg'>
-                Tin tức của ĐHQG-HCM
+              <p className='h-[24px] text-start text-[12px] text-[#00CBB8] lg:text-[16px] 2xl:text-lg'>
+                {item.source}
               </p>
               <p className='text-start font-medium leading-6 text-[#252641] lg:leading-8 2xl:leading-9'>
                 {item.name}
@@ -61,7 +61,7 @@ const NewsCarousel = () => {
             showArrows={false}
             renderIndicator={CarouselIndicator}
             stopOnHover
-            className='w-[calc(100%+40px])] flex flex-col items-center justify-center gap-y-5 bg-transparent'
+            className='flex w-full flex-col items-center justify-center gap-y-5 bg-transparent'
           >
             {data.map((item, index) => (
               <div className='flex w-full justify-center pb-10' key={`new_${index}`}>
@@ -80,7 +80,7 @@ const NewsCarousel = () => {
                       objectFit='cover'
                     />
                   </div>
-                  <p className='text-start text-[20px] text-[#00CBB8]'>Tin tức của ĐHQG-HCM</p>
+                  <p className='text-start text-[20px] text-[#00CBB8]'>{item.source}</p>
                   <p className='text-start text-[24px] font-medium leading-7 text-[#252641]'>
                     {item.name}
                   </p>
