@@ -1,5 +1,6 @@
 import { LazyLoadImage } from '../../../../components';
 import Achievement1 from '../../../../components/Achivement/Achievement1';
+import NewsCarousel from '../../../../components/NewsCarousel/NewsCarousel';
 // import { useWindowDimensions } from '../../../../hooks';
 import { Page } from '../../../../layout';
 
@@ -72,6 +73,18 @@ const LHOTDKPage = () => {
                   </p>
                 </div>
                 <Achievement1 />
+              </div>
+              <div className='flex w-full flex-col items-start justify-between gap-8'>
+                <div className='flex w-full flex-col justify-start gap-2 md:items-center md:justify-center lg:gap-4 2xl:gap-5'>
+                  <div className='text-justify text-[24px] font-bold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Tin tức
+                  </div>
+                  <p className='mx-auto max-w-full text-justify leading-7 text-[#696984] md:text-center md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
+                    Lớp Học Ôn Tập cùng Chúng Ta Cùng Tiến đã vinh dự và tự hào được xuất hiện trên
+                    các phương tiện truyền thông.
+                  </p>
+                </div>
+                <NewsCarousel />
               </div>
             </div>
           </div>
