@@ -3,6 +3,7 @@ import Achievement1 from '../../../../components/Achivement/Achievement1';
 import HeroSection from '../../../../components/HeroSection';
 import NewsCarousel from '../../../../components/NewsCarousel/NewsCarousel';
 import SocialMediaCarousel from '../../../../components/SocialMediaCarousel/SocialMediaCarousel';
+import Timetable from '../../../../components/Timetable';
 import { Page } from '../../../../layout';
 
 const LHOTDKPage = () => {
@@ -41,6 +42,7 @@ const LHOTDKPage = () => {
                   />
                 </div>
               </div>
+
               <div className='relative flex w-full flex-col-reverse items-start justify-between gap-5 md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
                 <div className='absolute top-0 left-0 z-0 hidden aspect-square h-[3rem] w-[3rem] rounded-full bg-[#5B61EB] md:-top-4 md:-left-4 md:block md:h-[4rem] md:w-[4rem] lg:-top-5 lg:-left-5 lg:h-[6rem] lg:w-[6rem] xl:-top-6 xl:-left-6 xl:h-[7rem] xl:w-[7rem] 2xl:-top-8 2xl:-left-8 2xl:h-[8rem] 2xl:w-[8rem]' />
                 <div className='relative block h-full w-[100%] overflow-hidden md:w-[50%]'>
@@ -62,6 +64,20 @@ const LHOTDKPage = () => {
                     nhà H6, Trường Đại học Bách khoa - ĐHQG-HCM, Cơ sở Dĩ An
                   </p>
                 </div>
+              </div>
+
+              <div className='flex w-full flex-col items-start justify-between gap-8'>
+                <div className='flex w-full flex-col justify-start gap-2 md:items-center md:justify-center lg:gap-4 2xl:gap-5'>
+                  <div className='text-justify text-[24px] font-bold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Các lớp học sắp tới
+                  </div>
+                  <p className='mx-auto max-w-full text-justify leading-7 text-[#696984] md:text-center md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
+                    Lịch học linh hoạt, được cập nhật hàng tuần phù hợp với nhu cầu của sinh viên.
+                    <br className='hidden md:block' /> Số lượng các lớp học được tăng cường vào gần
+                    mùa thi.
+                  </p>
+                </div>
+                <Timetable />
               </div>
 
               <div className='flex w-full flex-col items-start justify-between gap-8'>
