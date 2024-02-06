@@ -1,6 +1,7 @@
 import { ReactComponent as AboutUs } from '../../assets/svgs/AboutUsIcon.svg';
 import { ReactComponent as Activity } from '../../assets/svgs/ActivityIcon.svg';
 import { ReactComponent as Admin } from '../../assets/svgs/AdminIcon.svg';
+import { ReactComponent as AlarmClock } from '../../assets/svgs/AlarmClock.svg';
 import { ReactComponent as Answer } from '../../assets/svgs/AnswerIcon.svg';
 import { ReactComponent as ArrowLeft } from '../../assets/svgs/ArrowLeftIcon.svg';
 import { ReactComponent as ArrowRightFill } from '../../assets/svgs/ArrowRightFillIcon.svg';
@@ -47,6 +48,7 @@ import { ReactComponent as Library } from '../../assets/svgs/LibraryIcon.svg';
 import { ReactComponent as List } from '../../assets/svgs/ListIcon.svg';
 import { ReactComponent as LiveHelpIcon } from '../../assets/svgs/LiveHelpIcon.svg';
 import { ReactComponent as LocationIcon } from '../../assets/svgs/LocationIcon.svg';
+import { ReactComponent as LocationTransparent } from '../../assets/svgs/LocationTransparent.svg';
 import { ReactComponent as LogoCTCT } from '../../assets/svgs/LogoCTCT.svg';
 import { ReactComponent as LogoCTCTNoText } from '../../assets/svgs/LogoCTCTNoText.svg';
 import { ReactComponent as LogoDiscord } from '../../assets/svgs/LogoDiscord.svg';
@@ -90,6 +92,7 @@ export default {
   AboutUs,
   Activity,
   Admin,
+  AlarmClock,
   Answer,
   ArrowLeft,
   ArrowRightFill,
@@ -125,6 +128,7 @@ export default {
   FilterIcon,
   FiveWingStarIcon,
   LocationIcon,
+  LocationTransparent,
   LogoCTCT,
   LogoCTCTNoText,
   LogoFacebookBlue,
