@@ -24,7 +24,7 @@ const TimetableBar = ({ date }: TimetableBarProps) => {
   const dayOfWeek = translateDayOfWeekVietnamese(date.getDay());
 
   return (
-    <div className='relative flex h-fit w-full flex-col rounded-[1.25rem]  bg-white shadow-[0_0_20px_0_rgba(0,0,0,0.1)] md:h-[15rem] md:flex-row'>
+    <div className='relative flex h-fit w-full flex-col rounded-[1.25rem]  bg-white shadow-[0_0_20px_0_rgba(0,0,0,0.1)] md:h-[17rem] md:flex-row'>
       <div className='flex h-[25%] w-full flex-row items-center justify-center rounded-tl-[1.25rem] rounded-tr-[1.25rem] rounded-bl-none bg-[#5B72EE] md:h-full md:w-[13%] md:flex-col md:space-x-0 md:rounded-tr-none md:rounded-bl-[1.25rem]'>
         <p className='hidden text-[16px] font-semibold leading-[2rem] text-white md:block lg:font-bold xl:text-[20px] '>
           {dayOfWeek}

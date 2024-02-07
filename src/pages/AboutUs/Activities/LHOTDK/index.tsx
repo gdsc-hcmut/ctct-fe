@@ -1,5 +1,6 @@
 import { LazyLoadImage } from '../../../../components';
 import Achievement1 from '../../../../components/Achivement/Achievement1';
+import BenefitBoard from '../../../../components/BenefitBoard';
 import HeroSection from '../../../../components/HeroSection';
 import NewsCarousel from '../../../../components/NewsCarousel/NewsCarousel';
 import SocialMediaCarousel from '../../../../components/SocialMediaCarousel/SocialMediaCarousel';
@@ -9,7 +10,7 @@ import { Page } from '../../../../layout';
 const LHOTDKPage = () => {
   return (
     <Page title='Lớp học ôn tập'>
-      <main className='with-nav-height flex flex-col gap-y-5 overflow-y-auto text-[16px] md:text-[14px] lg:gap-y-10 lg:text-[18px] xl:text-[20px] 2xl:gap-y-[54px] 3xl:gap-y-[60px]'>
+      <main className='with-nav-height flex flex-col gap-y-5 overflow-hidden overflow-y-auto text-[16px] md:text-[14px] lg:gap-y-10 lg:text-[18px] xl:text-[20px] 2xl:gap-y-[54px] 3xl:gap-y-[60px]'>
         <HeroSection />
 
         <div className='mb-16 flex w-full flex-col gap-y-0 px-5 md:gap-y-12 md:px-12 lg:mb-24 lg:gap-y-20 lg:px-24 2xl:mb-32 2xl:gap-y-24 2xl:px-32 3xl:mb-36 3xl:gap-y-28 3xl:px-40'>
@@ -78,6 +79,20 @@ const LHOTDKPage = () => {
                   </p>
                 </div>
                 <Timetable />
+              </div>
+
+              <div className='relative flex flex-col items-start justify-between gap-3 md:gap-8'>
+                <div className='flex w-full flex-col justify-start gap-2 pt-[3rem] pb-[1.25rem] md:items-center md:justify-center lg:gap-4 2xl:gap-5'>
+                  <div className='text-justify text-[24px] font-bold text-[#ffffff] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Những lợi ích
+                  </div>
+                  <p className='mx-auto max-w-full text-justify leading-7 text-[#ffffff] md:text-center md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
+                    Tham gia lớp học, sinh viên sẽ nhận được rất nhiều lợi ích đi kèm mà chỉ Lớp Học
+                    Ôn Tập có thể mang lại được.
+                  </p>
+                </div>
+                <BenefitBoard />
+                <div className='absolute left-[-1.25rem] z-[-1] h-full w-screen bg-[#4285F4] md:left-[-3rem] lg:left-[-6rem] 2xl:left-[-8rem] 3xl:left-[-10rem]'></div>
               </div>
 
               <div className='flex w-full flex-col items-start justify-between gap-8'>
