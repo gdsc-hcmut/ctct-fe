@@ -36,7 +36,7 @@ const BenefitBoard = () => {
           </div>
         </div>
       ) : (
-        <div className='flex w-full flex-col items-center justify-center space-y-[0.75rem] pb-[6rem]'>
+        <div className='flex w-full flex-col items-center justify-center space-y-[0.75rem] pb-[3rem]'>
           <div className='flex h-full w-full flex-row items-center justify-center'>
             <BenefitBoardItem
               imgSrc={BenefitBoardData[0].imgSrc}
