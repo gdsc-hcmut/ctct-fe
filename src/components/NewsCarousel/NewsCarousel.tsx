@@ -10,10 +10,10 @@ const NewsCarousel = () => {
   return (
     <>
       {width > 768 ? (
-        <div className='flex w-full flex-row items-start justify-start md:gap-8 lg:gap-12 2xl:gap-[56px]'>
+        <div className='flex h-max w-full flex-row items-start justify-start md:gap-8 lg:gap-12 2xl:gap-[56px]'>
           {data.map((item, index) => (
             <a
-              className='flex w-[25%] cursor-pointer flex-col items-start justify-start gap-y-2 rounded-[20px] p-7 shadow-xl md:min-h-[500px] md:p-3 lg:min-h-[600px] lg:gap-y-3 lg:py-5 lg:px-4 xl:min-h-[550px] 2xl:min-h-[650px] 2xl:py-7 2xl:px-5'
+              className='flex h-full w-[25%] cursor-pointer flex-col items-start justify-start gap-y-2 rounded-[20px] p-7 shadow-xl md:p-3 lg:gap-y-3 lg:py-5 lg:px-4 2xl:py-7 2xl:px-5'
               key={`new_${index}`}
               target='_blank'
               href={item.linkTo}
@@ -51,7 +51,7 @@ const NewsCarousel = () => {
           ))}
         </div>
       ) : (
-        <div className='flex w-full items-center justify-center'>
+        <div className='flex h-max w-full items-center justify-center'>
           <Carousel
             showThumbs={false}
             showStatus={false}
@@ -65,14 +65,14 @@ const NewsCarousel = () => {
             showArrows={false}
             renderIndicator={CarouselIndicator}
             stopOnHover
-            className='flex w-full flex-col items-center justify-center gap-y-5 bg-transparent'
+            className='flex h-max w-full flex-col items-center justify-center gap-y-5 bg-transparent'
           >
             {data.map((item, index) => (
-              <div className='flex w-full justify-center pb-10' key={`new_${index}`}>
+              <div className='flex h-full w-full justify-center pb-10' key={`new_${index}`}>
                 <a
                   target='_blank'
                   href={item.linkTo}
-                  className='flex h-[35rem] w-[calc(100%-40px)] cursor-pointer flex-col items-start justify-center gap-y-2 rounded-[20px] p-3 shadow-xl sm:h-[40rem]'
+                  className='flex w-[calc(100%-40px)] cursor-pointer flex-col items-start justify-center gap-y-2 rounded-[20px] p-3 shadow-xl'
                   rel='noreferrer'
                 >
                   <div className='w-[100%]'>

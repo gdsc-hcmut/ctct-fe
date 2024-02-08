@@ -9,10 +9,10 @@ const SocialMediaCarousel = () => {
   return (
     <>
       {width > 768 ? (
-        <div className='flex w-full flex-row items-start justify-start md:gap-8 lg:gap-12 2xl:gap-[56px]'>
+        <div className='flex h-max w-full flex-row items-start justify-start md:gap-8 lg:gap-12 2xl:gap-[56px]'>
           {data.map((item, index) => (
             <a
-              className='flex min-h-[19rem] w-[33%] cursor-pointer flex-col items-start justify-start gap-y-2 rounded-[20px] p-7 shadow-xl md:min-h-[24rem] md:p-3 lg:min-h-[28rem] lg:gap-y-3 lg:py-5 lg:px-4 xl:min-h-[29rem] 2xl:py-7 2xl:px-5'
+              className='flex h-full w-[33%] cursor-pointer flex-col items-start justify-start gap-y-2 rounded-[20px] p-7 shadow-xl md:p-3 lg:gap-y-3 lg:py-5 lg:px-4 2xl:py-7 2xl:px-5'
               key={`new_${index}`}
               target='_blank'
               href={item.linkTo}
@@ -33,7 +33,7 @@ const SocialMediaCarousel = () => {
           ))}
         </div>
       ) : (
-        <div className='flex w-full items-center justify-center'>
+        <div className='flex h-max w-full items-center justify-center'>
           <Carousel
             showThumbs={false}
             showStatus={false}
@@ -47,14 +47,14 @@ const SocialMediaCarousel = () => {
             showArrows={false}
             renderIndicator={CarouselIndicator}
             stopOnHover
-            className='flex w-full flex-col items-center justify-center gap-y-5 bg-transparent'
+            className='flex h-max w-full flex-col items-center justify-center gap-y-5 bg-transparent'
           >
             {data.map((item, index) => (
-              <div className='flex w-full justify-center pb-10' key={`new_${index}`}>
+              <div className='flex h-full w-full justify-center pb-10' key={`new_${index}`}>
                 <a
                   target='_blank'
                   href={item.linkTo}
-                  className='flex h-[25rem] w-[calc(100%-40px)] cursor-pointer flex-col items-start justify-center gap-y-2 rounded-[20px] p-3 shadow-xl'
+                  className='flex w-[calc(100%-40px)] cursor-pointer flex-col items-start justify-center gap-y-2 rounded-[20px] p-3 shadow-xl'
                   rel='noreferrer'
                 >
                   <div className='z-[1] flex h-[12.5rem] w-[100%] flex-col items-center justify-center xl:h-[15rem]'>
