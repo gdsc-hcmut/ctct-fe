@@ -120,6 +120,16 @@ const UserRoute = () => {
             }
           />
         </Route>
+        <Route path='events'>
+          <Route
+            path='lop-hoc-on-tap'
+            element={
+              <Suspense fallback={<Loading />}>
+                <LHOTDKPage />
+              </Suspense>
+            }
+          />
+        </Route>
         <Route path='profile' element={<Protected />}>
           <Route
             path=''

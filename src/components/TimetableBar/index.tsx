@@ -1,6 +1,6 @@
 import TimetableCard from '../TimetableCard';
 
-const dayOfWeekVietnamese = [
+const DayOfWeekVietnamese = [
   'Chủ Nhật',
   'Thứ Hai',
   'Thứ Ba',
@@ -11,7 +11,7 @@ const dayOfWeekVietnamese = [
 ];
 
 const translateDayOfWeekVietnamese = (dayOfWeek: number) => {
-  return dayOfWeekVietnamese[dayOfWeek];
+  return DayOfWeekVietnamese[dayOfWeek];
 };
 
 interface TimetableBarProps {

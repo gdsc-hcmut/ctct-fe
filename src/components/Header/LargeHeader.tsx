@@ -14,11 +14,13 @@ const LargeHeader = () => {
   const roomRef = useRef<HTMLDivElement>(null);
   const aboutUsRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
+  const eventRef = useRef<HTMLDivElement>(null);
 
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [isRoomOpen, setIsRoomOpen] = useState(false);
   const [isAboutUsOpen, setIsAboutUsOpen] = useState(false);
   const [isProfileDrop, setIsProfileDrop] = useState(false);
+  const [isEventsOpen, setIsEventOpen] = useState(false);
 
   const isAuthenticated = useBoundStore.use.isAuthenticated();
   const user = useBoundStore.use.user();
@@ -39,9 +41,12 @@ const LargeHeader = () => {
         if (profileRef.current && !profileRef.current.contains(event.target)) {
           setIsProfileDrop(false);
         }
+        if (eventRef.current && !eventRef.current.contains(event.target)) {
+          setIsEventOpen(false);
+        }
       }
     });
-  }, [libraryRef, roomRef, aboutUsRef, profileRef]);
+  }, [libraryRef, roomRef, aboutUsRef, profileRef, eventRef]);
 
   const onLibraryClick = () => {
     setIsLibraryOpen(!isLibraryOpen);
@@ -55,6 +60,10 @@ const LargeHeader = () => {
     setIsAboutUsOpen(!isAboutUsOpen);
   };
 
+  const onEventClick = () => {
+    setIsEventOpen(!isEventsOpen);
+  };
+
   const onProfileClick = () => setIsProfileDrop(!isProfileDrop);
   const onLogout = () => {
     logout();
@@ -64,6 +73,7 @@ const LargeHeader = () => {
   const throttledLibraryClick = useThrottle(onLibraryClick);
   const throttledRoomClick = useThrottle(onRoomClick);
   const throttledAboutUsClick = useThrottle(onAboutUsClick);
+  const throttledEventsClick = useThrottle(onEventClick);
 
   return (
     <div
@@ -339,6 +349,74 @@ const LargeHeader = () => {
               </NavLink>
             </nav>
           </div>
+
+          <div className='relative' ref={eventRef}>
+            <button
+              type='button'
+              className={`flex h-[100%] items-center justify-start
+            border-b-[3px] px-[16px] py-4 hover:text-black 3xl:px-[32px] ${
+              pathname === '/events' ||
+              pathname.includes('/events/lop-hoc-on-tap') ||
+              pathname === '/events/lop-hoc-on-tap'
+                ? 'border-[#4285F4] text-black'
+                : 'border-transparent text-[#5B5B5B]'
+            }`}
+              onClick={throttledEventsClick}
+            >
+              <div
+                className={`flex flex-row items-center justify-start gap-x-1 p-0 px-2 py-1
+                text-inherit lg:gap-x-2 2xl:gap-x-3 3xl:px-3 3xl:py-2 `}
+              >
+                <p className='whitespace-nowrap bg-inherit text-inherit'>Sự kiện</p>
+
+                <Icon.ChevronUp
+                  fill={
+                    pathname === '/events' ||
+                    pathname.includes('/events/lop-hoc-on-tap') ||
+                    pathname === '/events/lop-hoc-on-tap'
+                      ? '#3b3b3b'
+                      : '#5B5B5B'
+                  }
+                  fillOpacity={0.87}
+                  className={`transform-all aspect-[10/7] h-auto w-[8px] duration-300 ${
+                    isEventsOpen ? 'rotate-0' : 'rotate-180'
+                  }`}
+                />
+              </div>
+            </button>
+            <nav
+              className='absolute z-10 mt-1 flex w-fit min-w-[120%] flex-col 
+            items-center justify-center rounded-lg bg-[#FBFCFF]
+            transition-all duration-300'
+              style={{
+                transform: isEventsOpen ? 'translateY(0%)' : 'translateY(10%)',
+                maxHeight: isEventsOpen ? '1000px' : '0px',
+                opacity: isEventsOpen ? 1 : 0,
+                overflow: 'hidden',
+                boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.1)',
+              }}
+            >
+              <NavLink
+                to='/events/lop-hoc-on-tap'
+                className='w-full bg-inherit'
+                onClick={throttledEventsClick}
+              >
+                <p
+                  className={`w-full whitespace-nowrap bg-inherit px-6 py-3 text-center transition-all duration-500
+                3xl:px-11 3xl:py-5 ${
+                  pathname.includes('/events/lop-hoc-on-tap') ? '' : 'hover:bg-[#F1F1F1]'
+                }`}
+                  style={{
+                    color: pathname.includes('/events/lop-hoc-on-tap') ? '#3b3b3b' : 'inherit',
+                    fontWeight: pathname.includes('/events/lop-hoc-on-tap') ? '700' : 'normal',
+                  }}
+                >
+                  Lớp học ôn tập
+                </p>
+              </NavLink>
+            </nav>
+          </div>
+
           {isAuthenticated &&
           (user.isManager ||
             _.some(user.accessLevels, (accessLevel) => accessLevel.name.includes('ADMIN'))) ? (

@@ -1,4 +1,4 @@
-import { LazyLoadImage } from '../../../../components';
+import { Footer, LazyLoadImage } from '../../../../components';
 import Achievement1 from '../../../../components/Achivement/Achievement1';
 import BenefitBoard from '../../../../components/BenefitBoard';
 import HeroSection from '../../../../components/HeroSection';
@@ -83,9 +83,12 @@ const LHOTDKPage = () => {
               </div>
 
               <div className='relative flex w-full flex-col items-center justify-between gap-5 md:flex-row md:gap-[1rem] lg:gap-[1.5rem] 2xl:gap-[2rem]'>
-                <div className='block text-justify text-[24px] font-bold text-[#000000] md:hidden lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
-                  Cách thức tham gia
+                <div className='flex w-full flex-col justify-start gap-2 md:hidden md:items-center md:justify-center lg:gap-4 2xl:gap-5'>
+                  <div className='text-justify text-[24px] font-bold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Cách thức tham gia
+                  </div>
                 </div>
+
                 <SignUpManual />
 
                 <div className='relative hidden h-full w-[35%] flex-row items-center justify-between lg:block'>
@@ -158,6 +161,7 @@ const LHOTDKPage = () => {
             </div>
           </div>
         </div>
+        <Footer />
       </main>
     </Page>
   );
