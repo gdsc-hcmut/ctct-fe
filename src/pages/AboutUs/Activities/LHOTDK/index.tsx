@@ -3,6 +3,7 @@ import Achievement1 from '../../../../components/Achivement/Achievement1';
 import BenefitBoard from '../../../../components/BenefitBoard';
 import HeroSection from '../../../../components/HeroSection';
 import NewsCarousel from '../../../../components/NewsCarousel/NewsCarousel';
+import SignUpManual from '../../../../components/SignUpManual';
 import SocialMediaCarousel from '../../../../components/SocialMediaCarousel/SocialMediaCarousel';
 import Timetable from '../../../../components/Timetable';
 import { Page } from '../../../../layout';
@@ -79,6 +80,25 @@ const LHOTDKPage = () => {
                   </p>
                 </div>
                 <Timetable />
+              </div>
+
+              <div className='relative flex w-full flex-col items-center justify-between gap-5 md:flex-row md:gap-[1rem] lg:gap-[1.5rem] 2xl:gap-[2rem]'>
+                <div className='block text-justify text-[24px] font-bold text-[#000000] md:hidden lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                  Cách thức tham gia
+                </div>
+                <SignUpManual />
+
+                <div className='relative hidden h-full w-[35%] flex-row items-center justify-between lg:block'>
+                  <LazyLoadImage
+                    className='z-[1] block aspect-[2/1] rounded-[20px] md:aspect-[5/2]'
+                    src={require('../../../../assets/images/LHOTDK_8.png')}
+                    placeHolderSrc={require('../../../../assets/images/LHOTDK_8.png')}
+                    alt='tstt_alt'
+                    objectFit='cover'
+                  />
+                  <div className='absolute bottom-0 right-0 z-0 hidden aspect-square w-[52px] rounded-lg bg-[#5B72EE] md:-bottom-4 md:-right-4 md:block md:w-24 md:rounded-xl lg:-bottom-5 lg:-right-5 lg:w-32 xl:-bottom-6 xl:-right-6 xl:w-40 xl:rounded-2xl 2xl:-bottom-8 2xl:-right-8 2xl:w-52 2xl:rounded-3xl' />
+                  {/* <div className='absolute top-0 left-0 z-0 hidden aspect-square w-[8rem] rounded-lg bg-[#23BDEE] md:-top-4 md:-left-4 md:block md:w-[9rem] md:rounded-xl lg:-top-5 lg:-left-5 lg:w-[10rem] xl:-top-6 xl:-left-6 xl:w-[12rem] xl:rounded-2xl 2xl:-top-8 2xl:-left-8 2xl:w-[16rem] 2xl:rounded-3xl' /> */}
+                </div>
               </div>
 
               <div className='relative flex flex-col items-start justify-between gap-3 md:gap-8'>

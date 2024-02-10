@@ -8,6 +8,7 @@ import { ReactComponent as ArrowRightFill } from '../../assets/svgs/ArrowRightFi
 import { ReactComponent as ArrowRight } from '../../assets/svgs/ArrowRightIcon.svg';
 import { ReactComponent as Book } from '../../assets/svgs/Book.svg';
 import { ReactComponent as CalendarIcon } from '../../assets/svgs/CalendarIcon.svg';
+import { ReactComponent as CalendarIconWhite } from '../../assets/svgs/CalendarWhite.svg';
 import { ReactComponent as Camera } from '../../assets/svgs/CameraIcon.svg';
 import { ReactComponent as CheckIcon } from '../../assets/svgs/CheckIcon.svg';
 import { ReactComponent as Checkmark } from '../../assets/svgs/CheckmarkIcon.svg';
@@ -38,12 +39,14 @@ import { ReactComponent as EqualizerIcon } from '../../assets/svgs/EqualizerIcon
 import { ReactComponent as Exercise } from '../../assets/svgs/ExerciseIcon.svg';
 import { ReactComponent as FacebookIcon } from '../../assets/svgs/FacebookIcon.svg';
 import { ReactComponent as LogoFessior } from '../../assets/svgs/FessiorLogo.svg';
+import { ReactComponent as FileInvoiceWhite } from '../../assets/svgs/FileInvoiceWhite.svg';
 import { ReactComponent as FilterIcon } from '../../assets/svgs/FilterIcon.svg';
 import { ReactComponent as FiveWingStarIcon } from '../../assets/svgs/FiveSwingStarIcon.svg';
 import { ReactComponent as LogoGoogle } from '../../assets/svgs/GoogleIcon.svg';
 import { ReactComponent as Help } from '../../assets/svgs/HelpIcon.svg';
 import { ReactComponent as Home } from '../../assets/svgs/HomeIcon.svg';
 import { ReactComponent as Introduction } from '../../assets/svgs/IntroductionIcon.svg';
+import { ReactComponent as IpodWhite } from '../../assets/svgs/IpodWhite.svg';
 import { ReactComponent as Library } from '../../assets/svgs/LibraryIcon.svg';
 import { ReactComponent as List } from '../../assets/svgs/ListIcon.svg';
 import { ReactComponent as LiveHelpIcon } from '../../assets/svgs/LiveHelpIcon.svg';
@@ -178,4 +181,7 @@ export default {
   ZoomOutIcon,
   UpRightArrowIcon,
   LiveHelpIcon,
+  FileInvoiceWhite,
+  CalendarIconWhite,
+  IpodWhite,
 };
