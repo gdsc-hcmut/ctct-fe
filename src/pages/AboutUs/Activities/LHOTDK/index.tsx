@@ -1,6 +1,7 @@
 import { Footer, LazyLoadImage } from '../../../../components';
 import Achievement1 from '../../../../components/Achivement/Achievement1';
 import BenefitBoard from '../../../../components/BenefitBoard';
+import Comments from '../../../../components/Comments';
 import HeroSection from '../../../../components/HeroSection';
 import NewsCarousel from '../../../../components/NewsCarousel/NewsCarousel';
 import SignUpManual from '../../../../components/SignUpManual';
@@ -100,7 +101,6 @@ const LHOTDKPage = () => {
                     objectFit='cover'
                   />
                   <div className='absolute bottom-0 right-0 z-0 hidden aspect-square w-[52px] rounded-lg bg-[#5B72EE] md:-bottom-4 md:-right-4 md:block md:w-24 md:rounded-xl lg:-bottom-5 lg:-right-5 lg:w-32 xl:-bottom-6 xl:-right-6 xl:w-40 xl:rounded-2xl 2xl:-bottom-8 2xl:-right-8 2xl:w-52 2xl:rounded-3xl' />
-                  {/* <div className='absolute top-0 left-0 z-0 hidden aspect-square w-[8rem] rounded-lg bg-[#23BDEE] md:-top-4 md:-left-4 md:block md:w-[9rem] md:rounded-xl lg:-top-5 lg:-left-5 lg:w-[10rem] xl:-top-6 xl:-left-6 xl:w-[12rem] xl:rounded-2xl 2xl:-top-8 2xl:-left-8 2xl:w-[16rem] 2xl:rounded-3xl' /> */}
                 </div>
               </div>
 
@@ -131,6 +131,19 @@ const LHOTDKPage = () => {
                   </p>
                 </div>
                 <Achievement1 />
+              </div>
+
+              <div className='flex w-full flex-col items-start justify-between gap-8'>
+                <div className='flex w-full flex-col justify-start gap-2 md:items-center md:justify-center lg:gap-4 2xl:gap-5'>
+                  <div className='text-justify text-[24px] font-bold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Đánh giá của sinh viên
+                  </div>
+                  <p className='mx-auto max-w-full text-justify leading-7 text-[#696984] md:text-center md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
+                    Trên hết, sinh viên tham gia lớp học chính là những người cảm nhận rõ nhất những
+                    giá trị mà Lớp Học Ôn Tập mang lại.
+                  </p>
+                </div>
+                <Comments />
               </div>
 
               <div className='flex w-full flex-col items-start justify-between gap-8'>
