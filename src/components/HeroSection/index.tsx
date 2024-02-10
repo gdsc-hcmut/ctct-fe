@@ -38,7 +38,7 @@ const HeroSection = () => {
               )}
 
               <div className='mb-[2rem] flex flex-row items-center justify-between rounded-full bg-[#4285F4]'>
-                <p className='py-4 px-[3rem] font-bold text-white'>Đăng ký ngay!</p>
+                <p className='cursor-pointer py-4 px-[3rem] font-bold text-white'>Đăng ký ngay!</p>
               </div>
             </div>
           </div>
@@ -66,7 +66,7 @@ const HeroSection = () => {
             </p>
 
             <div className='mb-[2rem] flex flex-row items-center justify-between rounded-full bg-[#4285F4]'>
-              <p className='py-4 px-[3rem] font-bold text-white'>Đăng ký ngay!</p>
+              <p className='cursor-pointer py-4 px-[3rem] font-bold text-white'>Đăng ký ngay!</p>
             </div>
           </div>
           <div className='relative block h-full overflow-hidden'>
