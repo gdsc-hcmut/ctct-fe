@@ -38,8 +38,8 @@ const LHOTDKPage = () => {
                 <div className='relative block h-full w-[100%] overflow-hidden md:w-[50%]'>
                   <LazyLoadImage
                     className='z-[1] block aspect-[2/1] rounded-[20px] md:aspect-[5/2]'
-                    src={require('../../../../assets/images/LHOTDK_1.jpg')}
-                    placeHolderSrc={require('../../../../assets/images/LHOTDK_1.jpg')}
+                    src={require('../../../assets/images/LHOTDK_1.jpg')}
+                    placeHolderSrc={require('../../../assets/images/LHOTDK_1.jpg')}
                     alt='tstt_alt'
                     objectFit='cover'
                   />
@@ -51,8 +51,8 @@ const LHOTDKPage = () => {
                 <div className='relative block h-full w-[100%] overflow-hidden md:w-[50%]'>
                   <LazyLoadImage
                     className='z-[1] block aspect-[3/1] rounded-[20px]'
-                    src={require('../../../../assets/images/LHOTDK_2.jpg')}
-                    placeHolderSrc={require('../../../../assets/images/LHOTDK_2.jpg')}
+                    src={require('../../../assets/images/LHOTDK_2.jpg')}
+                    placeHolderSrc={require('../../../assets/images/LHOTDK_2.jpg')}
                     alt='tstt_alt'
                     objectFit='cover'
                   />
@@ -95,8 +95,8 @@ const LHOTDKPage = () => {
                 <div className='relative hidden h-full w-[35%] flex-row items-center justify-between lg:block'>
                   <LazyLoadImage
                     className='z-[1] block aspect-[2/1] rounded-[20px] md:aspect-[5/2]'
-                    src={require('../../../../assets/images/LHOTDK_8.png')}
-                    placeHolderSrc={require('../../../../assets/images/LHOTDK_8.png')}
+                    src={require('../../../assets/images/LHOTDK_8.png')}
+                    placeHolderSrc={require('../../../assets/images/LHOTDK_8.png')}
                     alt='tstt_alt'
                     objectFit='cover'
                   />

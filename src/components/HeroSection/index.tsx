@@ -37,7 +37,7 @@ const HeroSection = () => {
                 </div>
               )}
 
-              <div className='mb-[2rem] flex flex-row items-center justify-between rounded-full bg-[#4285F4]'>
+              <div className='mb-[2rem] flex flex-row items-center justify-between rounded-full bg-[#3465E1] hover:bg-[#3465E1]/80'>
                 <p className='cursor-pointer py-4 px-[3rem] font-bold text-white'>Đăng ký ngay!</p>
               </div>
             </div>
