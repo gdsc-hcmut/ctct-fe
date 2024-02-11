@@ -1,0 +1,32 @@
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-center;
+  border-radius: 1.25rem;
+  background-color: white;
+  padding: 0.75rem;
+  padding-bottom: 0;
+  margin-left: 0.75rem;
+  flex-wrap: wrap;
+  min-width: 50%;
+  width: calc(50% - 0.5rem);
+  min-height: 18rem;
+}
+
+@media (min-width: 768px) {
+  .item {
+    padding: 1.25rem;
+    gap: 1rem;
+    border-radius: 2rem;
+    min-width: 33%;
+    width: calc(33% - 0.75rem);
+  }
+}
+
+@media (min-width: 1280px) {
+  .item {
+    min-height: 20rem;
+    gap: 1.25rem;
+  }
+}

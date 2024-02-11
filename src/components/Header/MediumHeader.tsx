@@ -35,6 +35,9 @@ const MediumHeader = () => {
       pathname.includes('/about-us/activities') ||
       pathname === '/about-us/partners'
   );
+  const [isEventsOpen, setIsEventsOpen] = useState(
+    pathname === '/events' || pathname.includes('/events/lop-hoc-on-tap')
+  );
 
   const isAuthenticated = useBoundStore.use.isAuthenticated();
   const user = useBoundStore.use.user();
@@ -64,6 +67,10 @@ const MediumHeader = () => {
     setIsAboutUsOpen(!isAboutUsOpen);
   };
 
+  const onEventsClick = () => {
+    setIsEventsOpen(!isEventsOpen);
+  };
+
   const onLogout = () => {
     logout();
     setIsOverlayOpen(false);
@@ -77,6 +84,7 @@ const MediumHeader = () => {
   const throttledLibraryClick = useThrottle(onLibraryClick);
   const throttledRoomClick = useThrottle(onRoomClick);
   const throttledAboutUsClick = useThrottle(onAboutUsClick);
+  const throttledEventsClick = useThrottle(onEventsClick);
   const debouncedLogout = useDebounce(onLogout);
 
   return (
@@ -497,6 +505,95 @@ const MediumHeader = () => {
                       <Icon.Partner fill={isActive || isPending ? '#4285F4' : '#696969'} />
                       <p style={{ color: isActive || isPending ? '#4285F4' : '#696969' }}>
                         Đơn vị hợp tác
+                      </p>
+                    </>
+                  )}
+                </NavLink>
+              </nav>
+            </div>
+            <div className='flex h-[fit-content] w-full flex-col bg-white'>
+              <button
+                className='z-20 flex w-full flex-row
+              items-center justify-between rounded-[12px] bg-white px-[20px] py-[16px]'
+                onClick={throttledEventsClick}
+              >
+                <div className='flex flex-row items-center justify-start gap-x-[16px]'>
+                  <Icon.CalendarIcon
+                    fill={
+                      pathname === '/events' ||
+                      pathname.includes('/events/lop-hoc-on-tap') ||
+                      pathname === '/events/lop-hoc-on-tap'
+                        ? '#4285F4'
+                        : '#696969'
+                    }
+                  />
+                  <p
+                    style={{
+                      color:
+                        pathname === '/events' ||
+                        pathname.includes('/events/lop-hoc-on-tap') ||
+                        pathname === '/events/lop-hoc-on-tap'
+                          ? '#4285F4'
+                          : '#696969',
+                    }}
+                  >
+                    Sự kiện
+                  </p>
+                </div>
+                {isAboutUsOpen ? (
+                  <Icon.ChevronUp
+                    fill={
+                      pathname === '/events' ||
+                      pathname.includes('/events/lop-hoc-on-tap') ||
+                      pathname === '/events/lop-hoc-on-tap'
+                        ? '#4285F4'
+                        : '#696969'
+                    }
+                    fillOpacity={0.87}
+                    width={'20px'}
+                  />
+                ) : (
+                  <Icon.ChevronDown
+                    fill={
+                      pathname === '/events' ||
+                      pathname.includes('/events/lop-hoc-on-tap') ||
+                      pathname === '/events/lop-hoc-on-tap'
+                        ? '#4285F4'
+                        : '#696969'
+                    }
+                    fillOpacity={0.87}
+                    width={'20px'}
+                  />
+                )}
+              </button>
+              <nav
+                className='flex flex-col pl-[40px] transition-all ease-in-out'
+                style={{
+                  maxHeight: isEventsOpen ? '300px' : '0px',
+                  overflow: 'hidden',
+                  transitionDuration: isEventsOpen ? '1.2s' : '0.8s',
+                }}
+              >
+                <NavLink
+                  to='/events/lop-hoc-on-tap'
+                  end
+                  className='flex w-full flex-row items-center justify-start
+                gap-x-[16px] rounded-[12px] px-[20px] py-[16px]'
+                  style={({ isActive, isPending }) => ({
+                    backgroundColor:
+                      isActive || isPending ? 'rgba(118, 167, 243, 0.1)' : 'transparent',
+                  })}
+                  onClick={useDebounce(() => {
+                    setIsOverlayOpen(false);
+                    setIsAboutUsOpen(!isEventsOpen);
+                    playSegments([60, 30], true);
+                  })}
+                >
+                  {({ isActive, isPending }) => (
+                    <>
+                      <Icon.Book fill={isActive || isPending ? '#4285F4' : '#696969'} />
+                      <p style={{ color: isActive || isPending ? '#4285F4' : '#696969' }}>
+                        Lớp học ôn tập
                       </p>
                     </>
                   )}

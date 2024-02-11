@@ -11,7 +11,9 @@ import MockTestStatistic from '../../pages/Profile/Statistic/MockTestStatistic';
 const AboutUsPage = lazy(() => import('../../pages/AboutUs'));
 const ActivitiesPage = lazy(() => import('../../pages/AboutUs/Activities'));
 const TSTTPage = lazy(() => import('../../pages/AboutUs/Activities/TSTT'));
+
 const LHOTTCPage = lazy(() => import('../../pages/AboutUs/Activities/LHOTTC'));
+const LHOTDKPage = lazy(() => import('../../pages/Events/LHOTDK'));
 const SCTTMPage = lazy(() => import('../../pages/AboutUs/Activities/SCTTM'));
 const PartnersPage = lazy(() => import('../../pages/AboutUs/Partners'));
 const ActivityHistoryPage = lazy(() => import('../../pages/Profile/ActivityHistory'));
@@ -85,6 +87,14 @@ const UserRoute = () => {
               }
             />
             <Route
+              path='lop-hoc-on-tap-dang-ky'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <LHOTDKPage />
+                </Suspense>
+              }
+            />
+            <Route
               path='sach-cu-tri-thuc-moi'
               element={
                 <Suspense fallback={<Loading />}>
@@ -106,6 +116,16 @@ const UserRoute = () => {
             element={
               <Suspense fallback={<Loading />}>
                 <PartnersPage />
+              </Suspense>
+            }
+          />
+        </Route>
+        <Route path='events'>
+          <Route
+            path='lop-hoc-on-tap'
+            element={
+              <Suspense fallback={<Loading />}>
+                <LHOTDKPage />
               </Suspense>
             }
           />

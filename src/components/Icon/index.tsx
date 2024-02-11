@@ -1,12 +1,14 @@
 import { ReactComponent as AboutUs } from '../../assets/svgs/AboutUsIcon.svg';
 import { ReactComponent as Activity } from '../../assets/svgs/ActivityIcon.svg';
 import { ReactComponent as Admin } from '../../assets/svgs/AdminIcon.svg';
+import { ReactComponent as AlarmClock } from '../../assets/svgs/AlarmClock.svg';
 import { ReactComponent as Answer } from '../../assets/svgs/AnswerIcon.svg';
 import { ReactComponent as ArrowLeft } from '../../assets/svgs/ArrowLeftIcon.svg';
 import { ReactComponent as ArrowRightFill } from '../../assets/svgs/ArrowRightFillIcon.svg';
 import { ReactComponent as ArrowRight } from '../../assets/svgs/ArrowRightIcon.svg';
 import { ReactComponent as Book } from '../../assets/svgs/Book.svg';
 import { ReactComponent as CalendarIcon } from '../../assets/svgs/CalendarIcon.svg';
+import { ReactComponent as CalendarIconWhite } from '../../assets/svgs/CalendarWhite.svg';
 import { ReactComponent as Camera } from '../../assets/svgs/CameraIcon.svg';
 import { ReactComponent as CheckIcon } from '../../assets/svgs/CheckIcon.svg';
 import { ReactComponent as Checkmark } from '../../assets/svgs/CheckmarkIcon.svg';
@@ -37,23 +39,29 @@ import { ReactComponent as EqualizerIcon } from '../../assets/svgs/EqualizerIcon
 import { ReactComponent as Exercise } from '../../assets/svgs/ExerciseIcon.svg';
 import { ReactComponent as FacebookIcon } from '../../assets/svgs/FacebookIcon.svg';
 import { ReactComponent as LogoFessior } from '../../assets/svgs/FessiorLogo.svg';
+import { ReactComponent as FileInvoiceWhite } from '../../assets/svgs/FileInvoiceWhite.svg';
 import { ReactComponent as FilterIcon } from '../../assets/svgs/FilterIcon.svg';
 import { ReactComponent as FiveWingStarIcon } from '../../assets/svgs/FiveSwingStarIcon.svg';
 import { ReactComponent as LogoGoogle } from '../../assets/svgs/GoogleIcon.svg';
 import { ReactComponent as Help } from '../../assets/svgs/HelpIcon.svg';
 import { ReactComponent as Home } from '../../assets/svgs/HomeIcon.svg';
 import { ReactComponent as Introduction } from '../../assets/svgs/IntroductionIcon.svg';
+import { ReactComponent as IpodWhite } from '../../assets/svgs/IpodWhite.svg';
 import { ReactComponent as Library } from '../../assets/svgs/LibraryIcon.svg';
 import { ReactComponent as List } from '../../assets/svgs/ListIcon.svg';
 import { ReactComponent as LiveHelpIcon } from '../../assets/svgs/LiveHelpIcon.svg';
 import { ReactComponent as LocationIcon } from '../../assets/svgs/LocationIcon.svg';
+import { ReactComponent as LocationTransparent } from '../../assets/svgs/LocationTransparent.svg';
 import { ReactComponent as LogoCTCT } from '../../assets/svgs/LogoCTCT.svg';
+import { ReactComponent as LogoCTCTNoText } from '../../assets/svgs/LogoCTCTNoText.svg';
 import { ReactComponent as LogoDiscord } from '../../assets/svgs/LogoDiscord.svg';
 import { ReactComponent as LogoFacebook } from '../../assets/svgs/LogoFacebook.svg';
+import { ReactComponent as LogoFacebookBlue } from '../../assets/svgs/LogoFacebookBlue.svg';
 import { ReactComponent as LogoGDSC } from '../../assets/svgs/LogoGDSC.svg';
 import { ReactComponent as LogoGmail } from '../../assets/svgs/LogoGmail.svg';
 import { ReactComponent as LogoLinkedin } from '../../assets/svgs/LogoLinkedin.svg';
 import { ReactComponent as Logout } from '../../assets/svgs/LogoutIcon.svg';
+import { ReactComponent as LogoYoutube } from '../../assets/svgs/LogoYoutube.svg';
 import { ReactComponent as MailIcon } from '../../assets/svgs/MailIcon.svg';
 import { ReactComponent as MockTestIcon } from '../../assets/svgs/MockTestIcon.svg';
 import { ReactComponent as OpenAside } from '../../assets/svgs/OpenAsideIcon.svg';
@@ -87,6 +95,7 @@ export default {
   AboutUs,
   Activity,
   Admin,
+  AlarmClock,
   Answer,
   ArrowLeft,
   ArrowRightFill,
@@ -122,10 +131,14 @@ export default {
   FilterIcon,
   FiveWingStarIcon,
   LocationIcon,
+  LocationTransparent,
   LogoCTCT,
+  LogoCTCTNoText,
+  LogoFacebookBlue,
   LogoGDSC,
   LogoGoogle,
   LogoFessior,
+  LogoYoutube,
   Exercise,
   PhoneIcon,
   List,
@@ -168,4 +181,7 @@ export default {
   ZoomOutIcon,
   UpRightArrowIcon,
   LiveHelpIcon,
+  FileInvoiceWhite,
+  CalendarIconWhite,
+  IpodWhite,
 };

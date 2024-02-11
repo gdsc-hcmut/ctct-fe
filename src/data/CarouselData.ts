@@ -1,3 +1,5 @@
+import Icon from '../components/Icon';
+
 const CarouselData = [
   {
     id: 1,
@@ -60,16 +62,100 @@ const EventsAndActivities = [
   },
 ];
 
-const RevisionClassData = [
+const CommentsData = [
+  {
+    id: '1',
+    name: 'Nguyễn Văn A',
+    comment:
+      'Thật sự, chương trình đã giúp đỡ em rất nhiều trong việc cải thiện học tập. Không những thế, các anh chị và các bạn trong clb cũng rất nhiệt tình và dễ thương. Em nhìn ai em cũng thích hết trơn á. Em cảm ơn mọi người rất nhiều vì đã bỏ ra nhiều công sức cũng như thời gian như vậy để giúp đỡ tụi em tiến bộ hơn trong học tập.',
+    profileImg: require('../assets/images/DieuMyProfile.png'),
+  },
+  {
+    id: '2',
+    name: 'Nguyễn Văn A',
+    comment:
+      'Em chỉ nói 1 câu hoy: ước học năm nhất hoài để được học lớp CTCT và giải đáp các thắc mắc trên cộng đồng CTCT á. Em siêu thích luôn <3',
+    profileImg: require('../assets/images/DieuMyProfile.png'),
+  },
+  {
+    id: '3',
+    name: 'Nguyễn Văn A',
+    comment:
+      'Thật sự rất cần thiết với nhiều bạn như em ạ. Em xin chân thành cảm ơn anh chị nhiều!',
+    profileImg: require('../assets/images/DieuMyProfile.png'),
+  },
+];
+
+const NewsData = [
   {
     id: '1',
     name: 'NÀO CHÚNG TA CÙNG TIẾN!',
+    source: 'Đại học Quốc Gia TP.HCM',
     description:
       'Vào thứ Bảy và Chủ nhật hằng tuần, tại nhà H6 Trường ĐH Bách Khoa ĐHQG-HCM (Cơ sở Dĩ An) có hàng trăm sinh viên đến tham gia lớp học mang tên Chúng ta cùng tiến.',
     date: '9 tháng 4, năm 2019',
     imgSrc: require('../assets/images/LHOTTTNews.png'),
-    hRef: 'https://vnuhcm.edu.vn/sinh-vien_33386864/nao-chung-ta-cung-tien-/313930366864.html',
+    linkTo: 'https://vnuhcm.edu.vn/sinh-vien_33386864/nao-chung-ta-cung-tien-/313930366864.html',
+  },
+  {
+    id: '2',
+    name: 'TRỢ GIẢNG KHI CÒN NGỒI TRÊN GIẢNG ĐƯỜNG',
+    source: 'Báo Tuổi Trẻ',
+    description:
+      'Hiện nay những buổi học đại trà thường thu hút 100-200 SV tham gia, không chỉ SV học yếu mà có cả SV khá giỏi” - ThS Trần Tấn Phúc, giám đốc Trung tâm Hỗ trợ SV và việc làm, cho biết.',
+    date: '5 tháng 6, năm 2015',
+    imgSrc: require('../assets/images/Mission.jpg'),
+    linkTo: 'https://tuoitre.vn/tro-giang-khi-con-ngoi-tren-giang-duong-757152.htm',
+  },
+  {
+    id: '3',
+    name: 'LỚP HỌC ĐỘC ĐÁO GIỮA GIẢNG ĐƯỜNG',
+    source: 'Báo Thanh Niên',
+    description:
+      '"Chúng ta cùng tiến" là tên một lớp học độc đáo được tổ chức định kỳ vào cuối tuần tại Trường ĐH Bách Khoa TP.HCM. Ở đó người dạy và học đều là sinh viên.',
+    date: '7 tháng 7, năm 2020',
+    imgSrc: require('../assets/images/CTCT-TN.png'),
+    linkTo: 'https://thanhnien.vn/lop-hoc-doc-dao-giua-giang-duong-185971999.htm',
+  },
+  {
+    id: '4',
+    name: 'ĐỘC ĐÁO LỚP HỌC CÙNG TIẾN, GIÚP BẠN HỌC TỐT HƠN',
+    source: 'Truyền Hình Vĩnh Long',
+    description:
+      'Lớp học là hoạt động mỗi tuần của Câu lạc bộ Chúng Ta Cùng Tiến nhằm tạo cầu nối để các bạn sinh viên giúp đỡ lẫn nhau trong học tập',
+    date: '6 tháng 6, năm 2020',
+    imgSrc: require('../assets/images/CTCT-THVL.png'),
+    linkTo: 'https://www.youtube.com/watch?v=7YPnrVjdjQg&ab_channel=THVLT%E1%BB%95ngH%E1%BB%A3p',
   },
 ];
 
-export { CarouselData, EventsAndActivities, RevisionClassData };
+const SocialMediaData = [
+  {
+    id: '1',
+    name: 'Website',
+    logo: Icon.LogoCTCTNoText,
+    title: 'Website Chúng Ta Cùng Tiến',
+    description: 'Kho tài liệu học tập, bài tập rèn luyện trên website chungtacungtien.com',
+    linkTo: 'https://chungtacungtien.com/',
+  },
+  {
+    id: '2',
+    name: 'Facebook',
+    logo: Icon.LogoFacebookBlue,
+    title: 'Cộng đồng Chúng Ta Cùng Tiến',
+    description:
+      'Nhóm “Cộng đồng Chúng Ta Cùng Tiến” hỗ trợ hỏi đáp, giải bài tập các môn đại cương và một số môn chuyên ngành',
+    linkTo: 'https://m.facebook.com/groups/chungtacungtien.group/?ref=share',
+  },
+  {
+    id: '3',
+    name: 'YouTube',
+    logo: Icon.LogoYoutube,
+    title: 'CLB Chúng Ta Cùng Tiến - ĐHBK',
+    description:
+      'Kênh YouTube CLB Chúng Ta Cùng Tiến - ĐHBK với các video bài giảng, talkshow kinh nghiệm học tập',
+    linkTo: 'https://www.youtube.com/@CLBChungtacungtienHBK',
+  },
+];
+
+export { CarouselData, EventsAndActivities, CommentsData, NewsData, SocialMediaData };

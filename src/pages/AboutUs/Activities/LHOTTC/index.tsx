@@ -1,14 +1,10 @@
-import { Carousel } from 'react-responsive-carousel';
-
-import { CarouselIndicator, Footer, Icon, LazyLoadImage } from '../../../../components';
-import { RevisionClassData as data } from '../../../../data/CarouselData';
-import { useWindowDimensions } from '../../../../hooks';
+import { Footer, LazyLoadImage } from '../../../../components';
+import Achievement2 from '../../../../components/Achivement/Achievement2';
+import Comments from '../../../../components/Comments';
 import { Page } from '../../../../layout';
 import './index.css';
 
 const LHOTTCPage = () => {
-  const { width } = useWindowDimensions();
-
   return (
     <Page title='Lớp học ôn tập'>
       <main className='with-nav-height flex flex-col gap-y-5 overflow-y-auto text-[16px] md:text-[14px] lg:gap-y-10 lg:text-[18px] xl:text-[20px] 2xl:gap-y-[54px] 3xl:gap-y-[60px]'>
@@ -108,17 +104,63 @@ const LHOTTCPage = () => {
             </div>
 
             <div className='mb-7 flex w-[calc(100%+40px)] flex-col gap-6 rounded-[20px] bg-[#9DCCFF]/20 px-5 py-6 md:mb-12 md:w-[108%] md:py-8 md:px-[4%] lg:mb-16 lg:gap-8 lg:py-12 2xl:mb-20 2xl:gap-10 2xl:py-16'>
-              <div className='flex w-full flex-col items-start justify-between gap-5 md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
+              <div className='flex w-full flex-col items-center justify-between gap-5 md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
                 <div className='flex flex-col justify-center gap-2 md:max-w-[46%] lg:gap-4 2xl:gap-5'>
-                  <h2 className='text-start text-[24px] font-semibold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
-                    Năm 2022
+                  <h2 className='text-start text-[24px] font-semibold text-[#696984] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Tháng 5/2013
                   </h2>
                   <p className='text-start leading-7 text-[#696984] md:leading-7 lg:leading-9 2xl:leading-10'>
-                    Trở lại sau Đại dịch Covid-19,{' '}
-                    <span className='font-semibold'>Lớp học ôn tập</span> được tổ chức trực tiếp từ
-                    tháng 10/2022 vừa qua. Tính đến nay, CLB đã thành công tổ chức gần 50 lớp học và
-                    15 lần thi thử, giúp hàng trăm bạn sinh viên K22 vượt qua các môn đại cương khó
-                    nhằn.
+                    Xuất phát từ thực trạng có hàng trăm sinh viên bị cảnh cáo học vụ, chương trình{' '}
+                    <span className='font-semibold'>Chúng ta cùng tiến</span> ra đời với các nhóm hỗ
+                    trợ học tập nhỏ ở các phòng tự học của trường và ký túc xá ĐHQG-HCM.
+                  </p>
+                </div>
+                <div className='w-[100%] md:w-[50%]'>
+                  <LazyLoadImage
+                    className='z-[1] block aspect-[5/2] rounded-[20px]'
+                    src={require('../../../../assets/images/LHOTDK_5.png')}
+                    placeHolderSrc={require('../../../../assets/images/LHOTDK_5.png')}
+                    alt='tstt_alt'
+                    objectFit='cover'
+                  />
+                </div>
+              </div>
+              <div className='flex w-full flex-col-reverse items-center justify-between gap-5 md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
+                <div className='w-[100%] md:w-[50%]'>
+                  <LazyLoadImage
+                    className='z-[1] block aspect-[5/2] rounded-[20px]'
+                    src={require('../../../../assets/images/LHOT_5.jpg')}
+                    placeHolderSrc={require('../../../../assets/images/LHOT_5-placeholder.jpg')}
+                    alt='tstt_alt'
+                    objectFit='cover'
+                  />
+                </div>
+                <div className='flex flex-col justify-center gap-2 md:max-w-[46%] lg:gap-4 2xl:gap-5'>
+                  <h2 className='text-start text-[24px] font-semibold text-[#696984] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Tháng 4/2014
+                  </h2>
+                  <p className='text-start leading-7 text-[#696984] md:leading-7 lg:leading-9 2xl:leading-10'>
+                    Đội <span className='font-semibold'>Chúng ta cùng tiến</span> được thành lập,
+                    tham gia hỗ trợ hướng dẫn ôn tập, hệ thống kiến thức cho sinh viên. Hoạt động
+                    chính tại giảng đường H1, H6.
+                  </p>
+                </div>
+              </div>
+              <div className='flex w-full flex-col items-center justify-between gap-5 md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
+                <div className='flex flex-col justify-center gap-2 md:max-w-[46%] lg:gap-4 2xl:gap-5'>
+                  <h2 className='text-start text-[24px] font-semibold text-[#696984] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Tháng 5/2015
+                  </h2>
+                  <p className='text-start leading-7 text-[#696984] md:leading-7 lg:leading-9 2xl:leading-10'>
+                    Chương trình được xuất hiện trên báo Tuổi trẻ với bài đăng{' '}
+                    <a
+                      className='underline underline-offset-2'
+                      href='https://tuoitre.vn/tro-giang-khi-con-ngoi-tren-giang-duong-757152.htm'
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      Trợ giảng khi còn ngồi trên giảng đường - Báo Tuổi trẻ.
+                    </a>
                   </p>
                 </div>
                 <div className='w-[100%] md:w-[50%]'>
@@ -135,119 +177,146 @@ const LHOTTCPage = () => {
                 <div className='w-[100%] md:w-[50%]'>
                   <LazyLoadImage
                     className='z-[1] block aspect-[5/2] rounded-[20px]'
-                    src={require('../../../../assets/images/LHOT_5.jpg')}
-                    placeHolderSrc={require('../../../../assets/images/LHOT_5-placeholder.jpg')}
+                    src={require('../../../../assets/images/LHOT_2017_1.jpg')}
+                    placeHolderSrc={require('../../../../assets/images/LHOT_2017_1.jpg')}
                     alt='tstt_alt'
                     objectFit='cover'
                   />
                 </div>
-                <div className='flex items-center justify-center md:max-w-[46%]'>
+                <div className='flex flex-col justify-center gap-2 md:max-w-[46%] lg:gap-4 2xl:gap-5'>
+                  <h2 className='text-start text-[24px] font-semibold text-[#696984] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Năm 2017
+                  </h2>
                   <p className='text-start leading-7 text-[#696984] md:leading-7 lg:leading-9 2xl:leading-10'>
-                    <span className='font-semibold'>Lớp học ôn tập</span> là thành quả của sự nỗ lực
-                    và tâm huyết không hề nhỏ của Trung tâm Hỗ trợ Sinh viên và Việc làm và các
-                    thành viên của CLB Chúng Ta Cùng Tiến. Trong tương lai, CLB hy vọng sẽ nhận được
-                    sự quan tâm hơn nữa từ các bạn sinh viên Bách khoa, cũng như từ phía nhà trường,
-                    đó là động lực to lớn để chúng mình tiếp tục tổ chức các hoạt động ý nghĩa, giúp
-                    đỡ các bạn trong học tập cũng như trong cuộc sống.
+                    Phát triển thành <span className='font-semibold'>CLB Chúng Ta Cùng Tiến</span>{' '}
+                    với nhiều hoạt động hơn. Lấy tên chương trình là{' '}
+                    <span className='font-semibold'>Lớp học ôn tập</span> làm hoạt động cốt lõi.
                   </p>
+                </div>
+              </div>
+              <div className='flex w-full flex-col items-center justify-between gap-5 md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
+                <div className='flex flex-col justify-center gap-2 md:max-w-[46%] lg:gap-4 2xl:gap-5'>
+                  <h2 className='text-start text-[24px] font-semibold text-[#696984] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Năm 2018
+                  </h2>
+                  <p className='text-start leading-7 text-[#696984] md:leading-7 lg:leading-9 2xl:leading-10'>
+                    Fanpage <span className='font-semibold'>Chúng Ta Cùng Tiến</span> và Group{' '}
+                    <span className='font-semibold'>Cộng đồng Chúng Ta Cùng Tiến</span> được thành
+                    lập. Group đến nay trở thành nơi uy tín để sinh viên trao đổi thắc mắc và được
+                    hỗ trợ học tập
+                  </p>
+                </div>
+                <div className='w-[100%] md:w-[50%]'>
+                  <LazyLoadImage
+                    className='z-[1] block aspect-[5/2] rounded-[20px]'
+                    src={require('../../../../assets/images/LHOT_2018_1.jpg')}
+                    placeHolderSrc={require('../../../../assets/images/LHOT_2018_1.jpg')}
+                    alt='tstt_alt'
+                    objectFit='cover'
+                  />
+                </div>
+              </div>
+              <div className='flex w-full flex-col-reverse items-center justify-between gap-5 md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
+                <div className='w-[100%] md:w-[50%]'>
+                  <LazyLoadImage
+                    className='z-[1] block aspect-[5/2] rounded-[20px]'
+                    src={require('../../../../assets/images/LHOT_2021_2.JPG')}
+                    placeHolderSrc={require('../../../../assets/images/LHOT_2021_2.JPG')}
+                    alt='tstt_alt'
+                    objectFit='cover'
+                  />
+                </div>
+                <div className='flex flex-col justify-center gap-2 md:max-w-[46%] lg:gap-4 2xl:gap-5'>
+                  <h2 className='text-start text-[24px] font-semibold text-[#696984] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Năm 2020-2021
+                  </h2>
+                  <p className='text-start leading-7 text-[#696984] md:leading-7 lg:leading-9 2xl:leading-10'>
+                    Tạm hoãn do đại dịch Covid-19. Hoạt động online được đẩy mạnh, thành lập kênh
+                    YouTube với hơn 40 video bài giảng. Group trao đổi cũng từ đó phát triển mạnh
+                    mẽ.
+                  </p>
+                </div>
+              </div>
+              <div className='flex w-full flex-col items-center justify-between gap-5 md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
+                <div className='flex flex-col justify-center gap-2 md:max-w-[46%] lg:gap-4 2xl:gap-5'>
+                  <h2 className='text-start text-[24px] font-semibold text-[#696984] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Năm 2022-nay
+                  </h2>
+                  <p className='text-start leading-7 text-[#696984] md:leading-7 lg:leading-9 2xl:leading-10'>
+                    Xây dựng, bổ sung, phát triển chương trình trở lại sau đại dịch. HK231 ra mắt{' '}
+                    <span className='font-semibold'>website Chúng Ta Cùng Tiến</span> với phòng ôn
+                    luyện cho hỗ trợ sinh viên học tập.
+                  </p>
+                </div>
+                <div className='w-[100%] md:w-[50%]'>
+                  <LazyLoadImage
+                    className='z-[1] block aspect-[5/2] rounded-[20px]'
+                    src={require('../../../../assets/images/LHOT_2022_2.jpg')}
+                    placeHolderSrc={require('../../../../assets/images/LHOT_2022_2.jpg')}
+                    alt='tstt_alt'
+                    objectFit='cover'
+                  />
                 </div>
               </div>
             </div>
 
-            <div className='flex w-full flex-col items-start gap-5 md:w-[108%] md:gap-4 lg:gap-6 2xl:gap-8'>
-              <h2 className='text-start text-[24px] font-semibold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
-                Tin tức
-              </h2>
-              {width > 768 ? (
-                <div className='flex w-full flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
-                  {data.map((item, index) => (
-                    <a
-                      className='flex w-[25%] cursor-pointer flex-col items-start justify-center gap-y-2 rounded-[20px] py-7 px-5 shadow-xl md:p-3 lg:gap-y-3 lg:py-5 lg:px-4 2xl:py-7 2xl:px-5'
-                      key={`new_${index}`}
-                      target='_blank'
-                      href={item.hRef}
-                      rel='noreferrer'
-                    >
-                      <div className='w-[100%]'>
-                        <LazyLoadImage
-                          className='z-[1] block aspect-[3/2] rounded-[20px]'
-                          src={item.imgSrc}
-                          placeHolderSrc={item.imgSrc}
-                          alt={`img_${index}`}
-                          objectFit='cover'
-                        />
-                      </div>
-                      <p className='text-start text-[12px] text-[#00CBB8] lg:text-[16px] 2xl:text-lg'>
-                        Tin tức của ĐHQG-HCM
-                      </p>
-                      <p className='text-start font-medium leading-6 text-[#252641] lg:leading-8 2xl:leading-9'>
-                        {item.name}
-                      </p>
-                      <div className='flex flex-row gap-x-1'>
-                        <Icon.Clock className='aspect-square w-4 fill-[#696984] p-0 lg:w-5 2xl:w-6' />
-                        <p className='text-[12px] font-medium text-[#696984] lg:text-[14px] 2xl:text-[16px]'>
-                          {item.date}
-                        </p>
-                      </div>
-                      <p className='text-[14px] font-normal leading-6 lg:text-[16px] lg:leading-7 2xl:text-[18px] 2xl:leading-8'>
-                        {item.description}
-                      </p>
-                    </a>
-                  ))}
+            <div className='mb-[3.5rem] flex w-full flex-col-reverse items-center justify-between gap-5 md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
+              <div className='w-[100%] md:w-[50%]'>
+                <Achievement2 />
+              </div>
+              <div className='flex flex-col justify-center gap-2 md:max-w-[46%] lg:gap-4 2xl:gap-5'>
+                <h2 className='text-start text-[24px] font-semibold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                  Thành tựu
+                </h2>
+                <p className='text-start leading-7 text-[#696984] md:leading-7 lg:leading-9 2xl:leading-10'>
+                  Lớp Học Ôn Tập tự hào đạt được những kết quả cùng thành tựu xuất sắc sau hơn 10
+                  năm hoạt động. Những con số cũng đồng thời là những cột mốc, những mục tiêu mà Câu
+                  lạc bộ Chúng Ta Cùng Tiến muốn duy trì và phát triển hơn cả về số lượng và chất
+                  lượng.*
+                </p>
+              </div>
+            </div>
+
+            <div className='mb-[3.5rem] flex w-full flex-col items-start justify-between gap-8'>
+              <div className='flex flex-col justify-start gap-2 md:max-w-[46%] lg:gap-4 2xl:gap-5'>
+                <div className='text-[24px] font-bold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                  Đánh giá của sinh viên
                 </div>
-              ) : (
-                <div className='flex w-full items-center justify-center'>
-                  <Carousel
-                    showThumbs={false}
-                    showStatus={false}
-                    preventMovementUntilSwipeScrollTolerance={true}
-                    swipeScrollTolerance={50}
-                    swipeable
-                    autoPlay
-                    infiniteLoop
-                    interval={10000}
-                    transitionTime={1000}
-                    showArrows={false}
-                    renderIndicator={CarouselIndicator}
-                    stopOnHover
-                    className='w-[calc(100%+40px])] flex flex-col items-center justify-center gap-y-5 bg-transparent'
-                  >
-                    {data.map((item, index) => (
-                      <div className='flex w-full justify-center pb-10' key={`new_${index}`}>
-                        <a
-                          target='_blank'
-                          href={item.hRef}
-                          className='flex w-[calc(100%-40px)] cursor-pointer flex-col items-start justify-center gap-y-2 rounded-[20px] p-3 shadow-xl'
-                          rel='noreferrer'
-                        >
-                          <div className='w-[100%]'>
-                            <LazyLoadImage
-                              className='z-[1] block aspect-[3/2] rounded-[20px]'
-                              src={item.imgSrc}
-                              placeHolderSrc={item.imgSrc}
-                              alt={`img_${index}`}
-                              objectFit='cover'
-                            />
-                          </div>
-                          <p className='text-start text-[20px] text-[#00CBB8]'>
-                            Tin tức của ĐHQG-HCM
-                          </p>
-                          <p className='text-start text-[24px] font-medium leading-7 text-[#252641]'>
-                            {item.name}
-                          </p>
-                          <div className='flex flex-row gap-x-1'>
-                            <Icon.Clock className='aspect-square w-4 fill-[#696984] p-0 lg:w-5 2xl:w-6' />
-                            <p className='text-[16px] font-medium text-[#696984]'>{item.date}</p>
-                          </div>
-                          <p className='text-start text-[16px] font-normal leading-7 text-[#696984]'>
-                            {item.description}
-                          </p>
-                        </a>
-                      </div>
-                    ))}
-                  </Carousel>
+                <p className='mx-auto max-w-full leading-7 text-[#696984] md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
+                  Trên hết, sinh viên tham gia lớp học chính là những người cảm nhận rõ nhất những
+                  giá trị mà Lớp Học Ôn Tập mang lại.*
+                </p>
+              </div>
+              <Comments />
+            </div>
+
+            <div className='flex w-[calc(100%+40px)] flex-col gap-6 rounded-[20px] bg-[#9DCCFF]/20 px-5 py-6 md:mb-12 md:w-[108%] md:py-8 md:px-[4%] lg:mb-16 lg:gap-8 lg:py-12 2xl:mb-20 2xl:gap-10 2xl:py-16'>
+              <div className='flex w-full flex-col items-start justify-start gap-5 md:h-min md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
+                <div className='flex min-h-min flex-col justify-start space-y-[1.5rem] md:max-w-[46%] lg:space-y-[2.5rem] '>
+                  <h2 className='text-start text-[24px] font-semibold text-[#010514] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
+                    Feedback cho chúng tôi
+                  </h2>
+                  <p className='text-start leading-7 text-[#010514] md:leading-7 lg:leading-9 2xl:leading-10'>
+                    Lớp học ôn tập là thành quả của sự nỗ lực và tâm huyết không hề nhỏ của Trung
+                    tâm Hỗ trợ Sinh viên và Việc làm và các thành viên của CLB Chúng Ta Cùng Tiến,
+                    tuy nhiên, không tránh khỏi những sai sót trong quá trình tổ chức. CLB rất hy
+                    vọng nhận được những ý kiến đóng góp để ngày càng hoàn thiện hơn, tạo ra được
+                    giá trị hơn nữa cho cộng đồng sinh viên.
+                  </p>
+                  <div className='flex h-[3rem] w-[10rem] flex-row items-center justify-center rounded-full bg-[#4285F4] lg:h-[3.5rem] lg:w-[12erm] xl:h-[4rem] xl:w-[15rem]'>
+                    <p className='cursor-pointer font-semibold text-white'>Feedback tại đây</p>
+                  </div>
                 </div>
-              )}
+                <div className='w-[100%] md:w-[50%]'>
+                  <LazyLoadImage
+                    className='z-[1] block aspect-auto rounded-[20px]'
+                    src={require('../../../../assets/images/IntroductionPic.jpg')}
+                    placeHolderSrc={require('../../../../assets/images/IntroductionPic.jpg')}
+                    alt='tstt_alt'
+                    objectFit='cover'
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
