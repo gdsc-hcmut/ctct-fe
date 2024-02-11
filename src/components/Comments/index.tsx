@@ -17,7 +17,7 @@ const Comments = () => {
               comment={data[0].comment}
               profileImg={data[0].profileImg}
             />
-            <div className='absolute top-0 left-0 z-[-1] hidden aspect-square w-[52px] rounded-full bg-[#23BDEE] lg:-top-6 lg:-left-6 lg:block lg:w-32 xl:-top-8 xl:-left-8 xl:w-40 2xl:-top-14 2xl:-left-14 2xl:w-52' />
+            <div className='absolute bottom-0 left-0 z-[-1] hidden aspect-square w-[52px] rounded-full bg-[#23BDEE] lg:-bottom-6 lg:-left-6 lg:block lg:w-32 xl:-bottom-8 xl:-left-8 xl:w-40 2xl:-bottom-14 2xl:-left-14 2xl:w-52' />
           </div>
           <div className='relative flex w-full justify-end'>
             <CommentsItem
