@@ -1,13 +1,13 @@
-import { Footer, LazyLoadImage } from '../../../../components';
-import Achievement1 from '../../../../components/Achivement/Achievement1';
-import BenefitBoard from '../../../../components/BenefitBoard';
-import Comments from '../../../../components/Comments';
-import HeroSection from '../../../../components/HeroSection';
-import NewsCarousel from '../../../../components/NewsCarousel/NewsCarousel';
-import SignUpManual from '../../../../components/SignUpManual';
-import SocialMediaCarousel from '../../../../components/SocialMediaCarousel/SocialMediaCarousel';
-import Timetable from '../../../../components/Timetable';
-import { Page } from '../../../../layout';
+import { Footer, LazyLoadImage } from '../../../components';
+import Achievement1 from '../../../components/Achivement/Achievement1';
+import BenefitBoard from '../../../components/BenefitBoard';
+import Comments from '../../../components/Comments';
+import HeroSection from '../../../components/HeroSection';
+import NewsCarousel from '../../../components/NewsCarousel/NewsCarousel';
+import SignUpManual from '../../../components/SignUpManual';
+import SocialMediaCarousel from '../../../components/SocialMediaCarousel/SocialMediaCarousel';
+import Timetable from '../../../components/Timetable';
+import { Page } from '../../../layout';
 
 const LHOTDKPage = () => {
   return (
