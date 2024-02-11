@@ -104,7 +104,7 @@ const NewsData = [
     description:
       'Hiện nay những buổi học đại trà thường thu hút 100-200 SV tham gia, không chỉ SV học yếu mà có cả SV khá giỏi” - ThS Trần Tấn Phúc, giám đốc Trung tâm Hỗ trợ SV và việc làm, cho biết.',
     date: '5 tháng 6, năm 2015',
-    imgSrc: require('../assets/images/LHOTTTNews.png'),
+    imgSrc: require('../assets/images/Mission.jpg'),
     linkTo: 'https://tuoitre.vn/tro-giang-khi-con-ngoi-tren-giang-duong-757152.htm',
   },
   {
@@ -114,7 +114,7 @@ const NewsData = [
     description:
       '"Chúng ta cùng tiến" là tên một lớp học độc đáo được tổ chức định kỳ vào cuối tuần tại Trường ĐH Bách Khoa TP.HCM. Ở đó người dạy và học đều là sinh viên.',
     date: '7 tháng 7, năm 2020',
-    imgSrc: require('../assets/images/LHOTTTNews.png'),
+    imgSrc: require('../assets/images/CTCT-TN.png'),
     linkTo: 'https://thanhnien.vn/lop-hoc-doc-dao-giua-giang-duong-185971999.htm',
   },
   {
@@ -124,7 +124,7 @@ const NewsData = [
     description:
       'Lớp học là hoạt động mỗi tuần của Câu lạc bộ Chúng Ta Cùng Tiến nhằm tạo cầu nối để các bạn sinh viên giúp đỡ lẫn nhau trong học tập',
     date: '6 tháng 6, năm 2020',
-    imgSrc: require('../assets/images/LHOTTTNews.png'),
+    imgSrc: require('../assets/images/CTCT-THVL.png'),
     linkTo: 'https://www.youtube.com/watch?v=7YPnrVjdjQg&ab_channel=THVLT%E1%BB%95ngH%E1%BB%A3p',
   },
 ];

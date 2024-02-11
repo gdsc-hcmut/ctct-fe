@@ -118,8 +118,8 @@ const LHOTTCPage = () => {
                 <div className='w-[100%] md:w-[50%]'>
                   <LazyLoadImage
                     className='z-[1] block aspect-[5/2] rounded-[20px]'
-                    src={require('../../../../assets/images/LHOT_1.jpg')}
-                    placeHolderSrc={require('../../../../assets/images/LHOT_1-placeholder.jpg')}
+                    src={require('../../../../assets/images/LHOTDK_5.png')}
+                    placeHolderSrc={require('../../../../assets/images/LHOTDK_5.png')}
                     alt='tstt_alt'
                     objectFit='cover'
                   />
@@ -177,8 +177,8 @@ const LHOTTCPage = () => {
                 <div className='w-[100%] md:w-[50%]'>
                   <LazyLoadImage
                     className='z-[1] block aspect-[5/2] rounded-[20px]'
-                    src={require('../../../../assets/images/LHOT_5.jpg')}
-                    placeHolderSrc={require('../../../../assets/images/LHOT_5-placeholder.jpg')}
+                    src={require('../../../../assets/images/LHOT_2017_1.jpg')}
+                    placeHolderSrc={require('../../../../assets/images/LHOT_2017_1.jpg')}
                     alt='tstt_alt'
                     objectFit='cover'
                   />
@@ -209,8 +209,8 @@ const LHOTTCPage = () => {
                 <div className='w-[100%] md:w-[50%]'>
                   <LazyLoadImage
                     className='z-[1] block aspect-[5/2] rounded-[20px]'
-                    src={require('../../../../assets/images/LHOT_1.jpg')}
-                    placeHolderSrc={require('../../../../assets/images/LHOT_1-placeholder.jpg')}
+                    src={require('../../../../assets/images/LHOT_2018_1.jpg')}
+                    placeHolderSrc={require('../../../../assets/images/LHOT_2018_1.jpg')}
                     alt='tstt_alt'
                     objectFit='cover'
                   />
@@ -220,8 +220,8 @@ const LHOTTCPage = () => {
                 <div className='w-[100%] md:w-[50%]'>
                   <LazyLoadImage
                     className='z-[1] block aspect-[5/2] rounded-[20px]'
-                    src={require('../../../../assets/images/LHOT_5.jpg')}
-                    placeHolderSrc={require('../../../../assets/images/LHOT_5-placeholder.jpg')}
+                    src={require('../../../../assets/images/LHOT_2021_2.JPG')}
+                    placeHolderSrc={require('../../../../assets/images/LHOT_2021_2.JPG')}
                     alt='tstt_alt'
                     objectFit='cover'
                   />
@@ -251,8 +251,8 @@ const LHOTTCPage = () => {
                 <div className='w-[100%] md:w-[50%]'>
                   <LazyLoadImage
                     className='z-[1] block aspect-[5/2] rounded-[20px]'
-                    src={require('../../../../assets/images/LHOT_1.jpg')}
-                    placeHolderSrc={require('../../../../assets/images/LHOT_1-placeholder.jpg')}
+                    src={require('../../../../assets/images/LHOT_2022_2.jpg')}
+                    placeHolderSrc={require('../../../../assets/images/LHOT_2022_2.jpg')}
                     alt='tstt_alt'
                     objectFit='cover'
                   />
@@ -272,7 +272,7 @@ const LHOTTCPage = () => {
                   Lớp Học Ôn Tập tự hào đạt được những kết quả cùng thành tựu xuất sắc sau hơn 10
                   năm hoạt động. Những con số cũng đồng thời là những cột mốc, những mục tiêu mà Câu
                   lạc bộ Chúng Ta Cùng Tiến muốn duy trì và phát triển hơn cả về số lượng và chất
-                  lượng.
+                  lượng.*
                 </p>
               </div>
             </div>
@@ -284,13 +284,13 @@ const LHOTTCPage = () => {
                 </div>
                 <p className='mx-auto max-w-full leading-7 text-[#696984] md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
                   Trên hết, sinh viên tham gia lớp học chính là những người cảm nhận rõ nhất những
-                  giá trị mà Lớp Học Ôn Tập mang lại.
+                  giá trị mà Lớp Học Ôn Tập mang lại.*
                 </p>
               </div>
               <Comments />
             </div>
 
-            <div className='mb-7 flex w-[calc(100%+40px)] flex-col gap-6 rounded-[20px] bg-[#9DCCFF]/20 px-5 py-6 md:mb-12 md:w-[108%] md:py-8 md:px-[4%] lg:mb-16 lg:gap-8 lg:py-12 2xl:mb-20 2xl:gap-10 2xl:py-16'>
+            <div className='flex w-[calc(100%+40px)] flex-col gap-6 rounded-[20px] bg-[#9DCCFF]/20 px-5 py-6 md:mb-12 md:w-[108%] md:py-8 md:px-[4%] lg:mb-16 lg:gap-8 lg:py-12 2xl:mb-20 2xl:gap-10 2xl:py-16'>
               <div className='flex w-full flex-col items-start justify-start gap-5 md:h-min md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
                 <div className='flex min-h-min flex-col justify-start space-y-[1.5rem] md:max-w-[46%] lg:space-y-[2.5rem] '>
                   <h2 className='text-start text-[24px] font-semibold text-[#010514] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
@@ -310,8 +310,8 @@ const LHOTTCPage = () => {
                 <div className='w-[100%] md:w-[50%]'>
                   <LazyLoadImage
                     className='z-[1] block aspect-auto rounded-[20px]'
-                    src={require('../../../../assets/images/LHOT_1.jpg')}
-                    placeHolderSrc={require('../../../../assets/images/LHOT_1-placeholder.jpg')}
+                    src={require('../../../../assets/images/IntroductionPic.jpg')}
+                    placeHolderSrc={require('../../../../assets/images/IntroductionPic.jpg')}
                     alt='tstt_alt'
                     objectFit='cover'
                   />
