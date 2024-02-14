@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import { Icon, Select } from '../../../components';
-import { Option } from '../../../components/Select';
 import { Page, Wrapper } from '../../../layout';
-// import { EventType as allTypes } from '../../../types/events';
+import { EVENT_TYPE_OPTIONS } from '../../../types/events';
+
 // import EventService from '../../../service/event.service';
 
 interface CustomTimeInputProps {
@@ -40,10 +40,6 @@ const EventCreate = () => {
   const [loading, setLoading] = useState(false);
   const [duration, setDuration] = useState<{ start: number; end: number }>({ start: 0, end: 0 });
 
-  const [eventTypeOptions, setEventTypeOptions] = useState<Option[]>([]);
-
-  setEventTypeOptions('' as unknown as Option[]);
-
   const submitDisabled =
     name === '' ||
     venue === '' ||
@@ -51,24 +47,6 @@ const EventCreate = () => {
     loading ||
     duration.start === 0 ||
     duration.end === 0;
-
-  // useEffect(() => {
-  //   SubjectService.getAll({}, true)
-  //     .then((res) => {
-  //       const { result: allSubjects } = res.data.payload;
-  //       setSubjectOptions(
-  //         allSubjects.map((sub) => {
-  //           return {
-  //             value: sub._id,
-  //             label: sub.name,
-  //           };
-  //         })
-  //       );
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // }, []);
 
   const handleChangeTime = (date: Date | null, time: string, isStartDate: boolean) => {
     const [hh, mm, ss] = time.split(':');
@@ -140,8 +118,8 @@ const EventCreate = () => {
                 <div className='flex w-full flex-1 flex-col'>
                   <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>Danh mục</p>
                   <Select
-                    options={eventTypeOptions}
-                    value={eventTypeOptions.find((x) => x.value === type) ?? null}
+                    options={EVENT_TYPE_OPTIONS}
+                    value={EVENT_TYPE_OPTIONS.find((x) => x.value === type) ?? null}
                     onChange={(v) => {
                       if (v !== null) {
                         setType(v.value);
@@ -241,6 +219,7 @@ const EventCreate = () => {
                 >
                   <p className='font-medium text-white'>Lưu</p>
                 </button>
+
                 <button
                   type='button'
                   className='flex items-center rounded-lg px-6 py-1 text-[#DB4437]
