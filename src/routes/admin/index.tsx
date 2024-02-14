@@ -7,7 +7,9 @@ import AdminAside from '../../pages/Admin/AdminAside';
 import ChapterEdit from '../../pages/Admin/Chapter/Edit';
 import ChapterView from '../../pages/Admin/Chapter/View';
 import EventCreate from '../../pages/Admin/Event/Create';
+import EventEdit from '../../pages/Admin/Event/Edit';
 import EventList from '../../pages/Admin/Event/List';
+import EventView from '../../pages/Admin/Event/View';
 import ExamEdit from '../../pages/Admin/Exam/Edit';
 import ExamView from '../../pages/Admin/Exam/View';
 import EditExercisePage from '../../pages/Admin/Exercise/Edit';
@@ -343,6 +345,22 @@ const AdministratorRoute = () => {
               element={
                 <Suspense fallback={<Loading />}>
                   <EventCreate />
+                </Suspense>
+              }
+            />
+            <Route
+              path='view/:id'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <EventView />
+                </Suspense>
+              }
+            />
+            <Route
+              path='edit/:id'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <EventEdit />
                 </Suspense>
               }
             />

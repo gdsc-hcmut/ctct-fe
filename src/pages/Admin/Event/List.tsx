@@ -38,13 +38,13 @@ const EventList = () => {
 
   const tableRef = useRef<HTMLDivElement>(null);
 
-  const mocktestToDelete = useRef<string | null>(null);
+  const eventToDelete = useRef<string | null>(null);
   const [deleteModal, setDeleteModal] = useState(false);
 
-  const onDeleteMockTest = () => {
-    const mockTestId = mocktestToDelete.current;
-    if (mockTestId !== null) {
-      MockTestService.deleteById(mockTestId)
+  const onDeleteEvent = () => {
+    const eventId = eventToDelete.current;
+    if (eventId !== null) {
+      MockTestService.deleteById(eventId)
         .then((_res) => {
           toast.success('Xóa đợt thi thử thành công');
           setPage(1);
@@ -54,7 +54,7 @@ const EventList = () => {
           toast.error(err.response.data.message);
         });
     }
-    mocktestToDelete.current = null;
+    eventToDelete.current = null;
   };
 
   useEffect(() => {
@@ -126,7 +126,7 @@ const EventList = () => {
         text='Bạn có chắc chắn muốn xóa sự kiện này?'
         onClose={() => setDeleteModal(false)}
         show={deleteModal}
-        onDelete={() => onDeleteMockTest()}
+        onDelete={() => onDeleteEvent()}
       />
       <Wrapper className='flex flex-1 flex-col'>
         <div className='w-full bg-[#4285F4]/90 py-4'>
@@ -244,7 +244,7 @@ const EventList = () => {
                             <tr
                               key={`exam-${exam._id}`}
                               className='flex w-full flex-1 items-center justify-start gap-x-4 border-b border-b-[#CCC] p-2 px-6 hover:cursor-pointer hover:bg-[#F1F1F1] lg:p-4 lg:px-8 3xl:p-6 3xl:px-10'
-                              onClick={() => navigate(`/admin/mock-test/view/${exam._id}`)}
+                              onClick={() => navigate(`/admin/event/view/${exam._id}`)}
                             >
                               <td className='flex flex-[1.5] items-center justify-start text-xs font-medium lg:text-sm 3xl:text-base'>
                                 {/* {exam.name} */}
@@ -267,7 +267,7 @@ const EventList = () => {
                                   type='button'
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    navigate(`/admin/mock-test/edit/${exam._id}`);
+                                    navigate(`/admin/event/edit/${exam._id}`);
                                   }}
                                   className='flex items-center justify-center rounded-full bg-[#4285F4]/90 p-2 hover:bg-[#4285F4]'
                                 >
@@ -280,7 +280,7 @@ const EventList = () => {
                                   className='flex items-center justify-center rounded-full bg-[#DB4437]/90 p-2 hover:bg-[#DB4437]'
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    mocktestToDelete.current = exam._id;
+                                    eventToDelete.current = exam._id;
                                     setDeleteModal(true);
                                   }}
                                 >
