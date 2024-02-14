@@ -4,11 +4,27 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Icon } from '../../../components';
 
 type AdminAsideLinkProps = {
-  path: 'material' | 'exam' | 'exercise' | 'question' | 'subject' | 'chapter' | 'mockTest';
+  path:
+    | 'material'
+    | 'exam'
+    | 'exercise'
+    | 'question'
+    | 'subject'
+    | 'chapter'
+    | 'mockTest'
+    | 'event';
   titleName: string;
   isOpen: boolean;
   handleClick: (
-    type: 'material' | 'exam' | 'exercise' | 'question' | 'subject' | 'chapter' | 'mockTest'
+    type:
+      | 'material'
+      | 'exam'
+      | 'exercise'
+      | 'question'
+      | 'subject'
+      | 'chapter'
+      | 'mockTest'
+      | 'event'
   ) => void;
   IconProp: React.FC<SVGProps<SVGSVGElement>>;
 };

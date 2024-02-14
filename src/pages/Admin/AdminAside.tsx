@@ -16,6 +16,7 @@ type AdminAsideState = {
     | 'subject'
     | 'chapter'
     | 'mockTest'
+    | 'event'
     | null;
   material: boolean;
   exam: boolean;
@@ -24,6 +25,7 @@ type AdminAsideState = {
   subject: boolean;
   chapter: boolean;
   mockTest: boolean;
+  event: boolean;
 };
 
 const AdminAside: FC = () => {
@@ -36,6 +38,7 @@ const AdminAside: FC = () => {
     subject: false,
     chapter: false,
     mockTest: false,
+    event: false,
   });
   const { pathname } = useLocation();
   const pathState = useBoundStore.use.pathState();
@@ -47,7 +50,15 @@ const AdminAside: FC = () => {
   const setPage = useBoundStore.use.setPage();
 
   const handleClick = (
-    type: 'material' | 'exam' | 'exercise' | 'question' | 'subject' | 'chapter' | 'mockTest'
+    type:
+      | 'material'
+      | 'exam'
+      | 'exercise'
+      | 'question'
+      | 'subject'
+      | 'chapter'
+      | 'mockTest'
+      | 'event'
   ) => {
     setMenuState((prevState) => {
       const newState = { ...prevState };
@@ -152,6 +163,13 @@ const AdminAside: FC = () => {
           isOpen={menuState.mockTest}
           handleClick={handleClick}
           IconProp={Icon.MockTestIcon}
+        />
+        <AdminAsideLink
+          path='event'
+          titleName='sự kiện'
+          isOpen={menuState.event}
+          handleClick={handleClick}
+          IconProp={Icon.CalendarIcon}
         />
       </div>
     </Aside>

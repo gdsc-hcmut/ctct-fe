@@ -6,6 +6,8 @@ import { Protected } from '../../layout';
 import AdminAside from '../../pages/Admin/AdminAside';
 import ChapterEdit from '../../pages/Admin/Chapter/Edit';
 import ChapterView from '../../pages/Admin/Chapter/View';
+import EventCreate from '../../pages/Admin/Event/Create';
+import EventList from '../../pages/Admin/Event/List';
 import ExamEdit from '../../pages/Admin/Exam/Edit';
 import ExamView from '../../pages/Admin/Exam/View';
 import EditExercisePage from '../../pages/Admin/Exercise/Edit';
@@ -326,6 +328,24 @@ const AdministratorRoute = () => {
                 }
               />
             </Route>
+          </Route>
+          <Route path='event'>
+            <Route
+              path='manage'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <EventList />
+                </Suspense>
+              }
+            />
+            <Route
+              path='create'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <EventCreate />
+                </Suspense>
+              }
+            />
           </Route>
         </Route>
       </Routes>
