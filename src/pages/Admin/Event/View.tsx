@@ -1,46 +1,47 @@
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { Icon } from '../../../components';
 import { Page, Wrapper } from '../../../layout';
-import { Event } from '../../../types/events';
+import MockTestService from '../../../service/mockTest.service';
+// import { Event } from '../../../types/events';
+// import { MockTest } from '../../../types/mockTest';
 
 const EventView = () => {
   const params = useParams();
   const id = params?.id ?? '';
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [event, setEvent] = useState<Event>();
-
-  setEvent({} as Event);
+  // const [event, setEvent] = useState<Event>();
+  // const [mockTest, setMockTest] = useState<MockTest>();
 
   useEffect(() => {
     setLoading(true);
-    // MockTestService.getById(id, true)
-    //   .then((res) => {
-    //     const result = res.data.payload;
-    //     console.log(result);
-    //     setEvent(result);
-    //   })
-    //   .catch((err) => {
-    //     toast.error(err.response.data.message);
-    //   })
-    //   .finally(() => {
-    //     setLoading(false);
-    //   });
+    MockTestService.getById(id, true)
+      .then((res) => {
+        const result = res.data.payload;
+        console.log(result);
+        // setMockTest(result);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [id]);
 
-  const formattedDate = (date: number) => {
-    const d = new Date(date);
-    const dateString = d.getDate() < 10 ? `0${d.getDate()}` : `${d.getDate()}`;
-    const monthString = d.getMonth() + 1 < 10 ? `0${d.getMonth() + 1}` : `${d.getMonth() + 1}`;
-    const hourString = d.getHours() < 10 ? `0${d.getHours()}` : `${d.getHours()}`;
-    const minuteString = d.getMinutes() < 10 ? `0${d.getMinutes()}` : `${d.getMinutes()}`;
-    const secondString = d.getSeconds() < 10 ? `0${d.getSeconds()}` : `${d.getSeconds()}`;
-    return `${dateString}/${monthString}/${d.getFullYear()} ${hourString}:${minuteString}:${secondString}`;
-  };
+  // const formattedDate = (date: number) => {
+  //   const d = new Date(date);
+  //   const dateString = d.getDate() < 10 ? `0${d.getDate()}` : `${d.getDate()}`;
+  //   const monthString = d.getMonth() + 1 < 10 ? `0${d.getMonth() + 1}` : `${d.getMonth() + 1}`;
+  //   const hourString = d.getHours() < 10 ? `0${d.getHours()}` : `${d.getHours()}`;
+  //   const minuteString = d.getMinutes() < 10 ? `0${d.getMinutes()}` : `${d.getMinutes()}`;
+  //   const secondString = d.getSeconds() < 10 ? `0${d.getSeconds()}` : `${d.getSeconds()}`;
+  //   return `${dateString}/${monthString}/${d.getFullYear()} ${hourString}:${minuteString}:${secondString}`;
+  // };
 
   return (
     <Page>
@@ -90,7 +91,7 @@ const EventView = () => {
                     className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
                   lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
                   >
-                    {event?.name}
+                    {/* {event?.name} */} Vật lý 2
                   </div>
                 </div>
 
@@ -100,7 +101,8 @@ const EventView = () => {
                       Danh mục
                     </p>
                     <div className='flex h-full w-full flex-1 rounded-lg border border-[#CCC] p-1 text-xs font-medium lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'>
-                      <span>{event?.type}</span>
+                      {/* <span>{event?.type}</span> */}
+                      <span>tmp</span>
                     </div>
                   </div>
 
@@ -113,7 +115,8 @@ const EventView = () => {
                       className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
                   lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
                     >
-                      {event?.venue}
+                      {/* {event?.venue} */}
+                      tmp
                     </div>
                   </div>
 
@@ -122,7 +125,7 @@ const EventView = () => {
                       Thời gian bắt đầu
                     </p>
                     <div className='flex w-full flex-1 items-center rounded-lg border border-[#CCC] bg-[#efefef4d]  p-1 text-xs font-medium text-[#252641] lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'>
-                      {formattedDate(event?.startedAt || 0) || 'Chưa có thời gian'}
+                      {/* {formattedDate(event?.startedAt || 0) || 'Chưa có thời gian'} */} 0
                     </div>
                   </div>
 
@@ -131,7 +134,7 @@ const EventView = () => {
                       Thời gian kết thúc
                     </p>
                     <div className='flex w-full flex-1 items-center rounded-lg border border-[#CCC] bg-[#efefef4d]  p-1 text-xs font-medium text-[#252641] lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'>
-                      {formattedDate(event?.endedAt || 0) || 'Chưa có thời gian'}
+                      {/* {formattedDate(event?.endedAt || 0) || 'Chưa có thời gian'} */} 0
                     </div>
                   </div>
                 </div>
@@ -144,7 +147,7 @@ const EventView = () => {
                   </label>
                   <textarea
                     id='exam-description'
-                    value={event?.description}
+                    value={'tmp'}
                     placeholder='Không có chú thích'
                     rows={5}
                     className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs
@@ -160,7 +163,7 @@ const EventView = () => {
                   <input
                     type='checkbox'
                     className='allow-checked h-7 w-7 cursor-not-allowed'
-                    checked={!event?.isHidden}
+                    checked={true}
                     disabled
                   />
                 </div>
