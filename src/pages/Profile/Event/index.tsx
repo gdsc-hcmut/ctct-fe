@@ -29,14 +29,14 @@ const UserEvent = () => {
     <Page title='Thông tin người dùng - Xem và cập nhật thông tin'>
       <main className='with-nav-height w-full overflow-y-auto'>
         <ProfileOption option={4} editAvatar={false} setAvatar={() => {}} updatedName='' />
-        <div className='relative bg-white px-5 pt-4 pb-[64px] md:flex md:flex-col md:rounded-[20px] md:px-10 md:pt-10 lg:px-[120px] xl:px-[240px] 2xl:px-[360px] 3xl:px-[460px]'>
-          <div className='flex flex-col items-center justify-center py-[2rem] shadow-[0px_19px_47px_0px_rgba(47,50,125,0.1)] md:rounded-[20px] md:px-5 md:py-8 lg:px-8 xl:px-10'>
+        <div className='relative mt-[0.5rem] flex flex-col items-center gap-y-0 space-x-4 bg-white px-5 md:mt-[1rem] md:flex-row md:items-start md:rounded-[20px] md:px-12 lg:mb-24 lg:px-24 xl:mt-[1.5rem] 2xl:px-32 3xl:px-40'>
+          <div className='flex w-max flex-col items-center justify-center px-[1rem] py-[2rem] shadow-[0px_19px_47px_0px_rgba(47,50,125,0.1)] md:rounded-[20px] md:px-5 md:py-8 lg:px-8 xl:px-10'>
             <div className='w-full items-center justify-center'>
               <h1 className='mx-auto max-h-[32px] max-w-[80vw] overflow-hidden text-ellipsis text-center text-xl font-semibold 2xl:text-2xl 3xl:text-[28px]'>
                 Mã QR check-in của bạn
               </h1>
             </div>
-            <div className='w-full items-center justify-center bg-white px-[5%] py-[1rem]'>
+            <div className='w-max items-center justify-center bg-white px-[2rem] py-[1rem]'>
               <QRCode
                 renderAs='svg'
                 bgColor='#FFFFFF'
@@ -56,7 +56,7 @@ const UserEvent = () => {
               </h1>
             </div>
           </div>
-          <div className='mt-[1rem] flex flex-col items-center justify-center py-[2rem] md:mt-[2rem] md:rounded-[20px] md:px-5 md:py-8 md:shadow-[0px_19px_47px_0px_rgba(47,50,125,0.1)] lg:px-8 xl:px-10'>
+          <div className='flex w-full flex-col items-center justify-center py-[2rem] md:w-full md:rounded-[20px] md:px-5 md:py-8 md:shadow-[0px_19px_47px_0px_rgba(47,50,125,0.1)] lg:px-8 xl:px-10'>
             <div className='w-full items-center justify-center'>
               <h1 className='max-h-[32px] max-w-[80vw] overflow-hidden text-ellipsis px-4 text-xl font-semibold 2xl:text-2xl 3xl:text-[28px]'>
                 Lịch sử đăng ký

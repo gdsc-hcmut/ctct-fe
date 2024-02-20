@@ -62,7 +62,7 @@ const ProfileOption = ({ option, editAvatar = false, setAvatar, updatedName }: O
       <div className='mt-8 grid w-full max-w-[496px] grid-cols-2 items-center gap-x-2 gap-y-2 px-5 md:mt-0 md:flex md:max-w-full md:grid-cols-3 md:justify-end md:bg-[#E3F2FD] md:py-5 md:pr-10 xl:justify-center'>
         <Link
           to='/profile'
-          className={`w-full max-w-[100%] rounded-[12px] md:max-w-[160px] 3xl:max-w-[200px] ${
+          className={`w-full max-w-[100%] rounded-[12px] md:max-w-[120px] lg:max-w-[160px] 3xl:max-w-[200px] ${
             option === 1 ? 'bg-[#4285f4] text-white' : 'bg-white text-[#696969] hover:bg-[#9DCCFF]'
           } py-3 text-center font-medium md:text-[16px] 3xl:text-xl`}
         >
@@ -71,7 +71,7 @@ const ProfileOption = ({ option, editAvatar = false, setAvatar, updatedName }: O
         </Link>
         <Link
           to='/profile/history'
-          className={`w-full max-w-[100%] rounded-[12px] md:max-w-[160px] 3xl:max-w-[200px] ${
+          className={`w-full max-w-[100%] rounded-[12px] md:max-w-[120px] lg:max-w-[160px] 3xl:max-w-[200px] ${
             option === 2 ? 'bg-[#4285f4] text-white' : 'bg-white hover:bg-[#9DCCFF]'
           } py-3 text-center font-medium md:text-[16px] 3xl:text-xl`}
         >
@@ -80,7 +80,7 @@ const ProfileOption = ({ option, editAvatar = false, setAvatar, updatedName }: O
         </Link>
         <Link
           to='/profile/statistic'
-          className={`w-full max-w-[100%] rounded-[12px] md:max-w-[160px] 3xl:max-w-[200px] ${
+          className={`w-full max-w-[100%] rounded-[12px] md:max-w-[120px] lg:max-w-[160px] 3xl:max-w-[200px] ${
             option === 3 ? 'bg-[#4285f4] text-white' : 'bg-white hover:bg-[#9DCCFF]'
           } py-3 text-center font-medium md:text-[16px] 3xl:text-xl`}
         >
@@ -88,7 +88,7 @@ const ProfileOption = ({ option, editAvatar = false, setAvatar, updatedName }: O
         </Link>
         <Link
           to='/profile/event'
-          className={`w-full max-w-[100%] rounded-[12px] md:max-w-[160px] 3xl:max-w-[200px] ${
+          className={`w-full max-w-[100%] rounded-[12px] md:max-w-[120px] lg:max-w-[160px] 3xl:max-w-[200px] ${
             option === 4 ? 'bg-[#4285f4] text-white' : 'bg-white hover:bg-[#9DCCFF]'
           } py-3 text-center font-medium md:text-[16px] 3xl:text-xl`}
         >
