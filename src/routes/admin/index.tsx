@@ -6,6 +6,7 @@ import { Protected } from '../../layout';
 import AdminAside from '../../pages/Admin/AdminAside';
 import ChapterEdit from '../../pages/Admin/Chapter/Edit';
 import ChapterView from '../../pages/Admin/Chapter/View';
+import EventCheckIn from '../../pages/Admin/Event/CheckIn';
 import EventCreate from '../../pages/Admin/Event/Create';
 import EventEdit from '../../pages/Admin/Event/Edit';
 import EventList from '../../pages/Admin/Event/List';
@@ -26,7 +27,6 @@ import EditQuestionPage from '../../pages/Admin/Question/Edit';
 import ViewQuestionPage from '../../pages/Admin/Question/View';
 import SubjectEdit from '../../pages/Admin/Subject/Edit';
 import SubjectView from '../../pages/Admin/Subject/View';
-
 const CreateExercisePage = lazy(() => import('../../pages/Admin/Exercise/Create'));
 const CreateQuestionPage = lazy(() => import('../../pages/Admin/Question/Create'));
 const CreateSubjectPage = lazy(() => import('../../pages/Admin/Subject/Create'));
@@ -361,6 +361,14 @@ const AdministratorRoute = () => {
               element={
                 <Suspense fallback={<Loading />}>
                   <EventEdit />
+                </Suspense>
+              }
+            />
+            <Route
+              path='check-in'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <EventCheckIn />
                 </Suspense>
               }
             />
