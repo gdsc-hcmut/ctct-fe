@@ -19,6 +19,7 @@ const PartnersPage = lazy(() => import('../../pages/AboutUs/Partners'));
 const ActivityHistoryPage = lazy(() => import('../../pages/Profile/ActivityHistory'));
 const UserInformationPage = lazy(() => import('../../pages/Profile/Information'));
 const StatisticPage = lazy(() => import('../../pages/Profile/Statistic'));
+const EventPage = lazy(() => import('../../pages/Profile/Event'));
 const SubjectStatisticPage = lazy(() => import('../../pages/Profile/Statistic/SubjectStatistic'));
 const GSAXPage = lazy(() => import('../../pages/AboutUs/Activities/GSAX'));
 const HomePage = lazy(() => import('../../pages/Home'));
@@ -152,6 +153,14 @@ const UserRoute = () => {
             element={
               <Suspense fallback={<Loading />}>
                 <StatisticPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path='event'
+            element={
+              <Suspense fallback={<Loading />}>
+                <EventPage />
               </Suspense>
             }
           />
