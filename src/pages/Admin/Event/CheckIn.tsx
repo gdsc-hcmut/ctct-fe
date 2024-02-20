@@ -22,10 +22,9 @@ const EventCheckIn: React.FC = () => {
   // const [checkinlist, setCheckinlist] = useState([]);
   const loading = useRef(false);
   const [isChange, setIsChange] = useState(false);
+  const [email, setEmail] = useState('');
 
-  console.log(loadingScan);
-  // setSelected('environment');
-  // setCheckinlist([]);
+  console.log(loadingScan, 'loadingScan');
 
   useEffect(() => {
     try {
@@ -47,7 +46,7 @@ const EventCheckIn: React.FC = () => {
       // {qrcode: 'abc'}
       // console.log(response);
       setIsChange(!isChange);
-      toast.error('Checkin Successfully');
+      toast.success('Checkin Successfully');
     } catch (error) {
       // console.log(error.response.data.message);
       toast.error('Checkin Error');
@@ -65,6 +64,14 @@ const EventCheckIn: React.FC = () => {
       // setLoadingScan(true);
       loading.current = true;
       checkin(scanData.text);
+    }
+  };
+
+  const handleEmail = async (inputEmail: any) => {
+    if (!loading.current && inputEmail) {
+      loading.current = true;
+      checkin(inputEmail);
+      setEmail('');
     }
   };
 
@@ -108,16 +115,31 @@ const EventCheckIn: React.FC = () => {
                 </div>
               </div>
 
-              <div className='flex w-full flex-1 flex-row items-center justify-center'>
+              <div className='flex w-full flex-1 flex-row items-center justify-center gap-x-4'>
                 <div className='flex w-full flex-col items-start justify-center'>
                   <input
                     id='event-name'
                     className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
                   lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
-                    // value={name}
+                    value={email}
                     placeholder='Nhập email'
-                    // onChange={({ target }) => setName(target.value)}
+                    onChange={({ target }) => setEmail(target.value)}
                   />
+                </div>
+                <div className='flex h-max w-fit flex-col items-center justify-center'>
+                  <button
+                    className={
+                      'p-auto m-auto flex items-center rounded-lg bg-[#4285F4]/80 transition-all duration-200 hover:bg-[#4285F4]'
+                    }
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleEmail(email);
+                    }}
+                  >
+                    <p className='whitespace-nowrap p-1 text-xs text-white lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'>
+                      Xác nhận
+                    </p>
+                  </button>
                 </div>
               </div>
 
