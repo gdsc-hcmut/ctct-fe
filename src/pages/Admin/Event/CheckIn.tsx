@@ -15,17 +15,17 @@ const EventCheckIn: React.FC = () => {
 
   const [type, setType] = useState('');
   // const [canSave, setCanSave] = useState (false);
-  const [selected, setSelected] = useState('environment');
+  // const [selected, setSelected] = useState('environment');
   // const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   // const [data, setData] = useState('');
-  const [checkinlist, setCheckinlist] = useState([]);
+  // const [checkinlist, setCheckinlist] = useState([]);
   const loading = useRef(false);
   const [isChange, setIsChange] = useState(false);
 
   console.log(loadingScan);
-  setSelected('user');
-  setCheckinlist([]);
+  // setSelected('environment');
+  // setCheckinlist([]);
 
   useEffect(() => {
     try {
@@ -68,7 +68,6 @@ const EventCheckIn: React.FC = () => {
     }
   };
 
-  console.log(checkinlist);
   const handleError = (err: any) => {
     console.error(err);
   };
@@ -99,9 +98,10 @@ const EventCheckIn: React.FC = () => {
               <div className='flex w-full flex-1 flex-row items-center justify-center'>
                 <div>
                   <QrReader
-                    facingMode={selected}
+                    // facingMode={selected}
                     onError={handleError}
                     onScan={handleScan}
+                    delay={1000}
                     // chooseDeviceId={()=>selected}
                     style={{ width: '400px', aspect: '1/1' }}
                   />
