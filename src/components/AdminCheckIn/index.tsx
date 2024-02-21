@@ -79,6 +79,9 @@ const AdminCheckIn = () => {
             lg:px-10 lg:py-4 3xl:px-12 3xl:py-6'
     >
       <form className='flex flex-col gap-y-6'>
+        <p className='mt-4 flex flex-[2.5] text-base font-semibold lg:text-lg 3xl:text-xl'>
+          Check-In sự kiện
+        </p>
         <div className='flex w-full flex-1 flex-col items-center justify-center space-y-4'>
           {toggleScanner && (
             <div>
@@ -93,7 +96,7 @@ const AdminCheckIn = () => {
           )}
           <button
             type='button'
-            className='m-2 flex flex-row rounded-lg bg-[#4285F4] px-4 py-2 font-medium text-white'
+            className='m-2 flex flex-row rounded-lg bg-[#4285F4]/80 px-4 py-2 font-medium text-white hover:bg-[#4285F4]'
             onClick={() => {
               setToggleScanner(!toggleScanner);
             }}
@@ -116,7 +119,7 @@ const AdminCheckIn = () => {
           <div className='flex h-max w-fit flex-col items-center justify-center'>
             <button
               className={
-                'p-auto m-auto flex items-center rounded-lg border border-[#4285F4] bg-[#4285F4] font-medium transition-all duration-200'
+                'p-auto m-auto flex items-center rounded-lg border bg-[#4285F4]/80 px-1 font-medium transition-all duration-200 hover:bg-[#4285F4]'
               }
               onClick={(e) => {
                 e.preventDefault();

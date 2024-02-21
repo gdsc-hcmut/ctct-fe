@@ -114,7 +114,7 @@ const EventCreate = () => {
                 />
               </div>
 
-              <div className='flex w-full flex-1 flex-row items-center justify-start gap-x-4'>
+              <div className='flex w-full flex-1 flex-row items-end justify-start gap-x-4'>
                 <div className='flex w-full flex-1 flex-col'>
                   <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>Danh mục</p>
                   <Select
@@ -142,8 +142,14 @@ const EventCreate = () => {
                 </div>
 
                 <div className='flex w-full flex-1 flex-col'>
-                  <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
+                  <p className='hidden w-full text-sm font-semibold lg:block lg:text-base 3xl:text-xl'>
                     Thời gian bắt đầu
+                  </p>
+                  <p className='hidden w-full text-sm font-semibold md:block lg:hidden lg:text-base 3xl:text-xl'>
+                    T.gian bắt đầu
+                  </p>
+                  <p className='block w-full text-sm font-semibold md:hidden lg:text-base 3xl:text-xl'>
+                    Bắt đầu
                   </p>
                   <DatePicker
                     selected={duration.start === 0 ? new Date() : new Date(duration.start)}
@@ -166,8 +172,14 @@ const EventCreate = () => {
                 </div>
 
                 <div className='flex w-full flex-1 flex-col'>
-                  <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
+                  <p className='hidden w-full text-sm font-semibold lg:block lg:text-base 3xl:text-xl'>
                     Thời gian kết thúc
+                  </p>
+                  <p className='hidden w-full text-sm font-semibold md:block lg:hidden lg:text-base 3xl:text-xl'>
+                    T.gian kết thúc
+                  </p>
+                  <p className='block w-full text-sm font-semibold md:hidden lg:text-base 3xl:text-xl'>
+                    Kết thúc
                   </p>
                   <DatePicker
                     selected={duration.end === 0 ? new Date() : new Date(duration.end)}
