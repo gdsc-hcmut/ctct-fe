@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 import { Icon } from '../../../components';
+import AdminCheckIn from '../../../components/AdminCheckIn';
 import { Page, Wrapper } from '../../../layout';
 import MockTestService from '../../../service/mockTest.service';
 // import { Event } from '../../../types/events';
@@ -74,112 +75,117 @@ const EventView = () => {
               </p>
             </>
           ) : (
-            <div
-              className='h-full w-full rounded-lg bg-white px-8 py-2
-            lg:px-10 lg:py-4 3xl:px-12 3xl:py-6'
-            >
-              <form className='flex flex-col gap-y-6'>
-                <p className='flex flex-[2.5] text-base lg:text-lg 3xl:text-xl'>ID sự kiện: {id}</p>
-                <div className='flex w-full flex-col items-start justify-center'>
-                  <label className='mb-2 w-full' htmlFor='event-name'>
-                    <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
-                      Tên sự kiện
-                    </p>
-                  </label>
-                  <div
-                    id='event-name'
-                    className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
-                  lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
-                  >
-                    {/* {event?.name} */} Vật lý 2
-                  </div>
-                </div>
-
-                <div className='flex w-full flex-1 flex-row items-center justify-start gap-x-4'>
-                  <div className='flex w-full flex-1 flex-col'>
-                    <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
-                      Danh mục
-                    </p>
-                    <div className='flex h-full w-full flex-1 rounded-lg border border-[#CCC] p-1 text-xs font-medium lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'>
-                      {/* <span>{event?.type}</span> */}
-                      <span>tmp</span>
-                    </div>
-                  </div>
-
-                  <div className='flex w-full flex-1 flex-col'>
-                    <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
-                      Địa điểm
-                    </p>
+            <>
+              <div
+                className='h-full w-full rounded-lg bg-white px-8
+            py-2 lg:px-10 lg:py-4 3xl:px-12 3xl:py-6'
+              >
+                <form className='flex flex-col gap-y-6'>
+                  <p className='flex flex-[2.5] text-base lg:text-lg 3xl:text-xl'>
+                    ID sự kiện: {id}
+                  </p>
+                  <div className='flex w-full flex-col items-start justify-center'>
+                    <label className='mb-2 w-full' htmlFor='event-name'>
+                      <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
+                        Tên sự kiện
+                      </p>
+                    </label>
                     <div
-                      id='event-venue'
+                      id='event-name'
                       className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
                   lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
                     >
-                      {/* {event?.venue} */}
-                      tmp
+                      {/* {event?.name} */} Vật lý 2
                     </div>
                   </div>
 
-                  <div className='flex w-full flex-1 flex-col'>
-                    <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
-                      Thời gian bắt đầu
-                    </p>
-                    <div className='flex w-full flex-1 items-center rounded-lg border border-[#CCC] bg-[#efefef4d]  p-1 text-xs font-medium text-[#252641] lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'>
-                      {/* {formattedDate(event?.startedAt || 0) || 'Chưa có thời gian'} */} 0
+                  <div className='flex w-full flex-1 flex-row items-center justify-start gap-x-4'>
+                    <div className='flex w-full flex-1 flex-col'>
+                      <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
+                        Danh mục
+                      </p>
+                      <div className='flex h-full w-full flex-1 rounded-lg border border-[#CCC] p-1 text-xs font-medium lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'>
+                        {/* <span>{event?.type}</span> */}
+                        <span>tmp</span>
+                      </div>
+                    </div>
+
+                    <div className='flex w-full flex-1 flex-col'>
+                      <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
+                        Địa điểm
+                      </p>
+                      <div
+                        id='event-venue'
+                        className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
+                  lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
+                      >
+                        {/* {event?.venue} */}
+                        tmp
+                      </div>
+                    </div>
+
+                    <div className='flex w-full flex-1 flex-col'>
+                      <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
+                        Thời gian bắt đầu
+                      </p>
+                      <div className='flex w-full flex-1 items-center rounded-lg border border-[#CCC] bg-[#efefef4d]  p-1 text-xs font-medium text-[#252641] lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'>
+                        {/* {formattedDate(event?.startedAt || 0) || 'Chưa có thời gian'} */} 0
+                      </div>
+                    </div>
+
+                    <div className='flex w-full flex-1 flex-col'>
+                      <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
+                        Thời gian kết thúc
+                      </p>
+                      <div className='flex w-full flex-1 items-center rounded-lg border border-[#CCC] bg-[#efefef4d]  p-1 text-xs font-medium text-[#252641] lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'>
+                        {/* {formattedDate(event?.endedAt || 0) || 'Chưa có thời gian'} */} 0
+                      </div>
                     </div>
                   </div>
 
-                  <div className='flex w-full flex-1 flex-col'>
-                    <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
-                      Thời gian kết thúc
-                    </p>
-                    <div className='flex w-full flex-1 items-center rounded-lg border border-[#CCC] bg-[#efefef4d]  p-1 text-xs font-medium text-[#252641] lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'>
-                      {/* {formattedDate(event?.endedAt || 0) || 'Chưa có thời gian'} */} 0
-                    </div>
-                  </div>
-                </div>
-
-                <div className='flex w-full flex-col items-start justify-center'>
-                  <label className='mb-2 w-full' htmlFor='event-description'>
-                    <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
-                      Chú thích
-                    </p>
-                  </label>
-                  <textarea
-                    id='exam-description'
-                    value={'tmp'}
-                    placeholder='Không có chú thích'
-                    rows={5}
-                    className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs
+                  <div className='flex w-full flex-col items-start justify-center'>
+                    <label className='mb-2 w-full' htmlFor='event-description'>
+                      <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
+                        Chú thích
+                      </p>
+                    </label>
+                    <textarea
+                      id='exam-description'
+                      value={'tmp'}
+                      placeholder='Không có chú thích'
+                      rows={5}
+                      className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs
                   font-medium lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
-                    disabled
-                  />
-                </div>
+                      disabled
+                    />
+                  </div>
 
-                <div className='flex w-full flex-row items-center justify-start gap-x-4'>
-                  <p className='flex text-sm font-medium lg:text-base 3xl:text-base'>
-                    Hiển thị với người dùng:
-                  </p>
-                  <input
-                    type='checkbox'
-                    className='allow-checked h-7 w-7 cursor-not-allowed'
-                    checked={true}
-                    disabled
-                  />
+                  <div className='flex w-full flex-row items-center justify-start gap-x-4'>
+                    <p className='flex text-sm font-medium lg:text-base 3xl:text-base'>
+                      Hiển thị với người dùng:
+                    </p>
+                    <input
+                      type='checkbox'
+                      className='allow-checked h-7 w-7 cursor-not-allowed'
+                      checked={true}
+                      disabled
+                    />
+                  </div>
+                </form>
+                <div className='my-4 flex flex-row-reverse gap-x-8'>
+                  <button
+                    type='button'
+                    onClick={() => navigate(`/admin/mock-test/edit/${params.id}`)}
+                    className='w-fit cursor-pointer rounded-lg bg-[#4285F4]/80 px-1 transition-all duration-200 hover:bg-[#4285F4] lg:px-3 3xl:px-5'
+                  >
+                    <p className='p-1 text-xs font-medium text-white lg:p-2 lg:text-sm 3xl:p-3 3xl:text-base'>
+                      Chỉnh sửa
+                    </p>
+                  </button>
                 </div>
-              </form>
-              <div className='my-4 flex flex-row-reverse gap-x-8'>
-                <button
-                  type='button'
-                  onClick={() => navigate(`/admin/mock-test/edit/${params.id}`)}
-                  className='w-fit cursor-pointer rounded-lg bg-[#4285F4]/80 px-1 transition-all duration-200 hover:bg-[#4285F4] lg:px-3 3xl:px-5'
-                >
-                  <p className='p-1 text-xs font-medium text-white lg:p-2 lg:text-sm 3xl:p-3 3xl:text-base'>
-                    Chỉnh sửa
-                  </p>
-                </button>
               </div>
-            </div>
+              <AdminCheckIn />
+            </>
           )}
         </div>
         <ToastContainer position='bottom-right' />

@@ -6,7 +6,6 @@ import { Protected } from '../../layout';
 import AdminAside from '../../pages/Admin/AdminAside';
 import ChapterEdit from '../../pages/Admin/Chapter/Edit';
 import ChapterView from '../../pages/Admin/Chapter/View';
-import EventCheckIn from '../../pages/Admin/Event/CheckIn';
 import EventCreate from '../../pages/Admin/Event/Create';
 import EventEdit from '../../pages/Admin/Event/Edit';
 import EventList from '../../pages/Admin/Event/List';
@@ -361,14 +360,6 @@ const AdministratorRoute = () => {
               element={
                 <Suspense fallback={<Loading />}>
                   <EventEdit />
-                </Suspense>
-              }
-            />
-            <Route
-              path='check-in'
-              element={
-                <Suspense fallback={<Loading />}>
-                  <EventCheckIn />
                 </Suspense>
               }
             />

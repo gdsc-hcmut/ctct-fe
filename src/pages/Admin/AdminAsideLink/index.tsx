@@ -40,7 +40,6 @@ const AdminAsideLink: React.FC<AdminAsideLinkProps> = ({
   const [isHover, setIsHover] = useState(false);
   const [isHoverListButton, setIsHoverListButton] = useState(false);
   const [isHoverCreateButton, setIsHoverCreateButton] = useState(false);
-  const [isHoverCheckInButton, setIsHoverCheckInButton] = useState(false);
 
   let pathLink;
   switch (path) {
@@ -128,22 +127,6 @@ const AdminAsideLink: React.FC<AdminAsideLinkProps> = ({
         >
           {`Tạo ${titleName}`}
         </NavLink>
-
-        {path === 'event' && (
-          <NavLink
-            to={`/admin/${pathLink}/check-in`}
-            className='flex w-full flex-row items-center justify-start gap-x-[16px] rounded-[12px] bg-transparent px-[20px] py-[16px]'
-            style={(a) => ({
-              color: a.isActive || a.isPending || isHoverCheckInButton ? '#4285F4' : '#5B5B5B',
-              backgroundColor:
-                a.isActive || a.isPending || isHoverCheckInButton ? '#f1f6fe' : 'transparent',
-            })}
-            onMouseEnter={() => setIsHoverCheckInButton(true)}
-            onMouseLeave={() => setIsHoverCheckInButton(false)}
-          >
-            {`Check-In ${titleName}`}
-          </NavLink>
-        )}
       </nav>
     </div>
   );
