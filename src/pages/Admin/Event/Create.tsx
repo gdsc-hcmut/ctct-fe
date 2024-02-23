@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { Icon, Select } from '../../../components';
+import { Option } from '../../../components/Select';
 import { Page, Wrapper } from '../../../layout';
-import { EVENT_TYPE_OPTIONS } from '../../../types/events';
-
-// import EventService from '../../../service/event.service';
+import EventService from '../../../service/event.service';
+import SubjectService from '../../../service/subject.service';
+import { EVENT_TYPE_OPTIONS, EventType } from '../../../types/events';
 
 interface CustomTimeInputProps {
   date: Date | null;
@@ -35,49 +36,108 @@ const CustomTimeInput: React.FC<CustomTimeInputProps> = ({ date, onChangeCustom,
 const EventCreate = () => {
   const [name, setName] = useState('');
   const [venue, setVenue] = useState('');
-  const [type, setType] = useState('');
+  const [eventType, setEventType] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
-  const [duration, setDuration] = useState<{ start: number; end: number }>({ start: 0, end: 0 });
+  const [subject, setSubject] = useState('');
+  const [hasRegistrationTime, setHasRegistrationTime] = useState(false);
+  const [eventDuration, setEventDuration] = useState<{ start: number; end: number }>({
+    start: 0,
+    end: 0,
+  });
+  const [registrationDuration, setRegistrationDuration] = useState<{ start: number; end: number }>({
+    start: 0,
+    end: 0,
+  });
+
+  const [subjectOptions, setSubjectOptions] = useState<Option[]>([]);
+
+  useEffect(() => {
+    SubjectService.getAll({}, true)
+      .then((res) => {
+        const { result: allSubjects } = res.data.payload;
+        setSubjectOptions(
+          allSubjects.map((sub) => {
+            return {
+              value: sub._id,
+              label: sub.name,
+            };
+          })
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   const submitDisabled =
     name === '' ||
     venue === '' ||
-    type === '' ||
+    eventType === '' ||
     loading ||
-    duration.start === 0 ||
-    duration.end === 0;
+    eventDuration.start === 0 ||
+    eventDuration.end === 0 ||
+    eventDuration.start > eventDuration.end ||
+    (eventType === EventType.LHOT && subject === '') ||
+    (hasRegistrationTime && (registrationDuration.start === 0 || registrationDuration.end === 0)) ||
+    (hasRegistrationTime && registrationDuration.start > registrationDuration.end);
 
   const handleChangeTime = (date: Date | null, time: string, isStartDate: boolean) => {
     const [hh, mm, ss] = time.split(':');
     const targetDate = date instanceof Date ? date : new Date();
     targetDate.setHours(Number(hh) || 0, Number(mm) || 0, Number(ss) || 0);
     if (isStartDate) {
-      setDuration({ ...duration, start: new Date(targetDate || 0).getTime() });
-    } else setDuration({ ...duration, end: new Date(targetDate || 0).getTime() });
+      setEventDuration({ ...eventDuration, start: new Date(targetDate || 0).getTime() });
+    } else setEventDuration({ ...eventDuration, end: new Date(targetDate || 0).getTime() });
+  };
+
+  const handleChangeRegistrationTime = (date: Date | null, time: string, isStartDate: boolean) => {
+    const [hh, mm, ss] = time.split(':');
+    const targetDate = date instanceof Date ? date : new Date();
+    targetDate.setHours(Number(hh) || 0, Number(mm) || 0, Number(ss) || 0);
+    if (isStartDate) {
+      setRegistrationDuration({
+        ...registrationDuration,
+        start: new Date(targetDate || 0).getTime(),
+      });
+    } else
+      setRegistrationDuration({
+        ...registrationDuration,
+        end: new Date(targetDate || 0).getTime(),
+      });
   };
 
   const createEvent = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setLoading(true);
-    // const data = {
-    //   name,
-    //   venue,
-    //   description,
-    //   type,
-    // };
-    // MockTestService.create(data)
-    //   .then((_) => {
-    //     toast.success('Tạo đợt thi thử thành công');
-    //     setName('');
-    //     setVenue('');
-    //     setType('');
-    //     setDescription('');
-    //   })
-    //   .catch((err) => {
-    //     toast.error(err.response.data.message);
-    //   })
-    //   .finally(() => setLoading(false));
+    console.log(name, description, eventType, venue, eventDuration.start, eventDuration.end);
+    const data = {
+      name,
+      description,
+      eventType,
+      venue,
+      hasRegistrationTime,
+      registrationStartedAt: registrationDuration.start,
+      registrationEndedAt: registrationDuration.end,
+      startedAt: eventDuration.start,
+      endedAt: eventDuration.end,
+      lhotMetadata: {
+        subject: subject,
+      },
+    };
+    EventService.create(data)
+      .then((_) => {
+        toast.success('Tạo sự kiện thành công');
+        setName('');
+        setEventType('');
+        setVenue('');
+        setDescription('');
+        setEventDuration({ start: 0, end: 0 });
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -119,10 +179,10 @@ const EventCreate = () => {
                   <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>Danh mục</p>
                   <Select
                     options={EVENT_TYPE_OPTIONS}
-                    value={EVENT_TYPE_OPTIONS.find((x) => x.value === type) ?? null}
+                    value={EVENT_TYPE_OPTIONS.find((x) => x.value === eventType) ?? null}
                     onChange={(v) => {
                       if (v !== null) {
-                        setType(v.value);
+                        setEventType(v.value);
                       }
                     }}
                     placeholder='Chọn danh mục'
@@ -152,18 +212,22 @@ const EventCreate = () => {
                     Bắt đầu
                   </p>
                   <DatePicker
-                    selected={duration.start === 0 ? new Date() : new Date(duration.start)}
+                    selected={
+                      eventDuration.start === 0 ? new Date() : new Date(eventDuration.start)
+                    }
                     showTimeInput
                     timeInputLabel='Time:'
                     onChange={(date) =>
-                      setDuration({ ...duration, start: new Date(date || 0).getTime() })
+                      setEventDuration({ ...eventDuration, start: new Date(date || 0).getTime() })
                     }
                     className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
                     lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
                     dateFormat={'dd/MM/yyyy HH:mm:ss'}
                     customTimeInput={
                       <CustomTimeInput
-                        date={duration.start === 0 ? new Date() : new Date(duration.start)}
+                        date={
+                          eventDuration.start === 0 ? new Date() : new Date(eventDuration.start)
+                        }
                         onChangeCustom={handleChangeTime}
                         isStartDate={false}
                       />
@@ -182,18 +246,17 @@ const EventCreate = () => {
                     Kết thúc
                   </p>
                   <DatePicker
-                    selected={duration.end === 0 ? new Date() : new Date(duration.end)}
+                    selected={eventDuration.end === 0 ? new Date() : new Date(eventDuration.end)}
                     showTimeInput
                     timeInputLabel='Time:'
                     onChange={(date) =>
-                      setDuration({ ...duration, end: new Date(date || 0).getTime() })
+                      setEventDuration({ ...eventDuration, end: new Date(date || 0).getTime() })
                     }
-                    className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
-                    lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
+                    className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
                     dateFormat={'dd/MM/yyyy HH:mm:ss'}
                     customTimeInput={
                       <CustomTimeInput
-                        date={duration.end === 0 ? new Date() : new Date(duration.end)}
+                        date={eventDuration.end === 0 ? new Date() : new Date(eventDuration.end)}
                         onChangeCustom={handleChangeTime}
                         isStartDate={false}
                       />
@@ -201,6 +264,126 @@ const EventCreate = () => {
                   />
                 </div>
               </div>
+
+              {eventType === EventType.LHOT && (
+                <div className='flex w-full flex-1 flex-row items-end justify-start gap-x-4'>
+                  <div className='flex w-full flex-1 flex-col'>
+                    <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>Môn</p>
+                    <Select
+                      options={subjectOptions}
+                      value={subjectOptions.find((x) => x.value === subject) ?? null}
+                      onChange={(v) => {
+                        if (v !== null) {
+                          setSubject(v.value);
+                        }
+                      }}
+                      placeholder='Chọn môn'
+                    />
+                  </div>
+                </div>
+              )}
+
+              {eventType !== EventType.LHOT && eventType !== '' && (
+                <div className='flex w-full flex-1 flex-row items-end justify-start gap-x-4'>
+                  <div className='flex w-full flex-row items-center justify-start gap-x-4'>
+                    <p className='flex text-sm font-medium lg:text-base 3xl:text-base'>
+                      Giới hạn thời gian đăng ký:
+                    </p>
+                    <input
+                      type='checkbox'
+                      className='allow-checked h-4 w-4 cursor-pointer'
+                      checked={hasRegistrationTime}
+                      onChange={() => setHasRegistrationTime(!hasRegistrationTime)}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {hasRegistrationTime === true && (
+                <div className='flex w-full flex-1 flex-row items-end justify-start gap-x-4'>
+                  <div className='flex w-full flex-1 flex-col'>
+                    <p className='hidden w-full text-sm font-semibold lg:block lg:text-base 3xl:text-xl'>
+                      Thời gian bắt đầu đăng ký
+                    </p>
+                    <p className='hidden w-full text-sm font-semibold md:block lg:hidden lg:text-base 3xl:text-xl'>
+                      T.gian bắt đầu đ.ký
+                    </p>
+                    <p className='block w-full text-sm font-semibold md:hidden lg:text-base 3xl:text-xl'>
+                      Bắt đầu đăng ký
+                    </p>
+                    <DatePicker
+                      selected={
+                        registrationDuration.start === 0
+                          ? new Date()
+                          : new Date(registrationDuration.start)
+                      }
+                      showTimeInput
+                      timeInputLabel='Time:'
+                      onChange={(date) =>
+                        setRegistrationDuration({
+                          ...registrationDuration,
+                          start: new Date(date || 0).getTime(),
+                        })
+                      }
+                      className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
+                    lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
+                      dateFormat={'dd/MM/yyyy HH:mm:ss'}
+                      customTimeInput={
+                        <CustomTimeInput
+                          date={
+                            registrationDuration.start === 0
+                              ? new Date()
+                              : new Date(registrationDuration.start)
+                          }
+                          onChangeCustom={handleChangeRegistrationTime}
+                          isStartDate={false}
+                        />
+                      }
+                    />
+                  </div>
+
+                  <div className='flex w-full flex-1 flex-col'>
+                    <p className='hidden w-full text-sm font-semibold lg:block lg:text-base 3xl:text-xl'>
+                      Thời gian kết thúc đăng ký
+                    </p>
+                    <p className='hidden w-full text-sm font-semibold md:block lg:hidden lg:text-base 3xl:text-xl'>
+                      T.gian kết thúc đ.ký
+                    </p>
+                    <p className='block w-full text-sm font-semibold md:hidden lg:text-base 3xl:text-xl'>
+                      Kết thúc đăng ký
+                    </p>
+                    <DatePicker
+                      selected={
+                        registrationDuration.end === 0
+                          ? new Date()
+                          : new Date(registrationDuration.end)
+                      }
+                      showTimeInput
+                      timeInputLabel='Time:'
+                      onChange={(date) =>
+                        setRegistrationDuration({
+                          ...eventDuration,
+                          end: new Date(date || 0).getTime(),
+                        })
+                      }
+                      className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
+                    lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
+                      dateFormat={'dd/MM/yyyy HH:mm:ss'}
+                      customTimeInput={
+                        <CustomTimeInput
+                          date={
+                            registrationDuration.end === 0
+                              ? new Date()
+                              : new Date(registrationDuration.end)
+                          }
+                          onChangeCustom={handleChangeRegistrationTime}
+                          isStartDate={false}
+                        />
+                      }
+                    />
+                  </div>
+                </div>
+              )}
 
               <div className='flex w-full flex-col items-start justify-center'>
                 <label className='mb-2 w-full' htmlFor='event-description'>
@@ -239,9 +422,13 @@ const EventCreate = () => {
                   focus:outline-none lg:px-7 lg:py-2 3xl:px-8 3xl:py-3'
                   onClick={() => {
                     setName('');
-                    setType('');
+                    setEventType('');
                     setVenue('');
                     setDescription('');
+                    setEventDuration({ start: 0, end: 0 });
+                    setHasRegistrationTime(false);
+                    setRegistrationDuration({ start: 0, end: 0 });
+                    setSubject('');
                   }}
                 >
                   <p className='font-medium text-inherit'>Huỷ</p>

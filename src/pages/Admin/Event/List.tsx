@@ -6,13 +6,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import { ReactComponent as NoData } from '../../../assets/svgs/NoData.svg';
 import { Icon, Pagination, Select } from '../../../components';
 import DeleteModal from '../../../components/Modal/DeleteModal';
-import { Option } from '../../../components/Select';
+// import { Option } from '../../../components/Select';
 import { useDebounce } from '../../../hooks';
 import { Page, Wrapper } from '../../../layout';
 import MockTestService from '../../../service/mockTest.service';
-import SubjectService from '../../../service/subject.service';
+// import SubjectService from '../../../service/subject.service';
 import useBoundStore from '../../../store';
-// import { EXAM_TYPE_OPTIONS, SEMESTER_OPTIONS } from '../../../types/examArchive';
+import { EVENT_TYPE_OPTIONS } from '../../../types/events';
 import { MockTest } from '../../../types/mockTest';
 
 const ITEMS_PER_PAGE = 10;
@@ -32,7 +32,6 @@ const EventList = () => {
   const page = useBoundStore.use.page();
   const setPage = useBoundStore.use.setPage();
 
-  const [filterSubjectOptions, setFilterSubjectOptions] = useState<Option[]>([]);
   const [mockTests, setMockTests] = useState<MockTest[]>([]);
   const [totalCount, setTotalCount] = useState(1);
 
@@ -105,21 +104,21 @@ const EventList = () => {
   }, [page, filterName, filterSubject, filterSemester, filterExamType, fetchMockTest]);
 
   // TODO: get all event type
-  useEffect(() => {
-    SubjectService.getAll({}, true)
-      .then((res) => {
-        const { result: allSubjects } = res.data.payload;
-        setFilterSubjectOptions(
-          allSubjects.map((subject) => ({
-            value: subject._id,
-            label: subject.name,
-          }))
-        );
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
-  }, []);
+  // useEffect(() => {
+  //   SubjectService.getAll({}, true)
+  //     .then((res) => {
+  //       const { result: allSubjects } = res.data.payload;
+  //       // setFilterSubjectOptions(
+  //       //   allSubjects.map((subject) => ({
+  //       //     value: subject._id,
+  //       //     label: subject.name,
+  //       //   }))
+  //       // );
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.response.data.message);
+  //     });
+  // }, []);
 
   return (
     <Page>
@@ -157,8 +156,8 @@ const EventList = () => {
                 </div>
                 <div className='flex w-full flex-[3] flex-col gap-y-4 md:flex-row md:gap-x-4'>
                   <Select
-                    options={filterSubjectOptions}
-                    value={filterSubjectOptions.find((x) => x.value === filterSubject) ?? null}
+                    options={EVENT_TYPE_OPTIONS}
+                    value={EVENT_TYPE_OPTIONS.find((x) => x.value === filterSubject) ?? null}
                     onChange={(v) => {
                       if (v !== null) {
                         setFilterSubject(v.value);
