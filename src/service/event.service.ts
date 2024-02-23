@@ -37,8 +37,13 @@ type EditEventArgument = {
 type GetAllEventPaginatedArgument = {
   name?: string;
   eventType?: string;
+  subject?: string;
   pageNumber?: number;
   pageSize?: number;
+  startedAtMin?: number;
+  startedAtMax?: number;
+  endedAtMin?: number;
+  endedAtMax?: number;
 };
 
 type GetAllEventPaginatedReturnType = {
@@ -70,12 +75,20 @@ const getById = (id: string, admin = false) => {
   return axios.get<Response<Event>>(`${API_URL}${admin ? 'admin/' : ''}event/${id}`);
 };
 
-const getAllPaginated = (query: GetAllEventPaginatedArgument, admin = false) => {
+const getAllPaginated = (query: GetAllEventPaginatedArgument, admin = true) => {
   const queryString = `${API_URL}${admin ? 'admin/' : ''}event?pagination=true\
-  ${query.name ? `&name=${query.name}` : ''}\
-  ${query.eventType ? `&eventType=${query.eventType}` : ''}\
-  ${query.pageNumber !== undefined ? `&pageNumber=${query.pageNumber}` : ''}\
-  ${query.pageSize !== undefined ? `&pageSize=${query.pageSize}` : ''}`;
+${query.name ? `&name=${encodeURIComponent(query.name)}` : ''}\
+${query.eventType ? `&eventType=${query.eventType}` : ''}\
+${query.subject ? `&subject=${encodeURIComponent(query.subject)}` : ''}\
+${query.pageNumber !== undefined ? `&pageNumber=${query.pageNumber}` : ''}\
+${query.pageSize !== undefined ? `&pageSize=${query.pageSize}` : ''}\
+${query.startedAtMin !== undefined ? `&startedAtMin=${query.startedAtMin}` : ''}\
+${query.startedAtMax !== undefined ? `&startedAtMax=${query.startedAtMax}` : ''}\
+${query.endedAtMin !== undefined ? `&endedAtMin=${query.endedAtMin}` : ''}\
+${query.endedAtMax !== undefined ? `&endedAtMax=${query.endedAtMax}` : ''}
+  `;
+
+  console.log(queryString);
 
   return axios.get<Response<GetAllEventPaginatedReturnType>>(queryString);
 };

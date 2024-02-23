@@ -9,13 +9,23 @@ import DeleteModal from '../../../components/Modal/DeleteModal';
 // import { Option } from '../../../components/Select';
 import { useDebounce } from '../../../hooks';
 import { Page, Wrapper } from '../../../layout';
-import MockTestService from '../../../service/mockTest.service';
-// import SubjectService from '../../../service/subject.service';
+import EventService from '../../../service/event.service';
 import useBoundStore from '../../../store';
-import { EVENT_TYPE_OPTIONS } from '../../../types/events';
-import { MockTest } from '../../../types/mockTest';
+import { EVENT_TYPE_OPTIONS, Event } from '../../../types/events';
 
 const ITEMS_PER_PAGE = 10;
+
+const convertEpochToVietnameseDateAndTime = (epoch: number) => {
+  const date = new Date(epoch);
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+  return `${hour}:${minute < 10 ? `0${minute}` : minute}, ${day < 10 ? `0${day}` : day}/${
+    month < 10 ? `0${month}` : month
+  }/${year} `;
+};
 
 const EventList = () => {
   const navigate = useNavigate();
@@ -23,16 +33,12 @@ const EventList = () => {
 
   const filterName = useBoundStore.use.filterName();
   const setFilterName = useBoundStore.use.setFilterName();
-  const filterSubject = useBoundStore.use.filterSubject();
-  const setFilterSubject = useBoundStore.use.setFilterSubject();
-  const filterSemester = useBoundStore.use.filterSemster();
-  const setFilterSemester = useBoundStore.use.setFilterSemester();
-  const filterExamType = useBoundStore.use.filterChapter();
-  const setFilterExamType = useBoundStore.use.setFilterChapter();
+  const filterEventType = useBoundStore.use.filterEventType();
+  const setFilterEventType = useBoundStore.use.setFilterEventType();
   const page = useBoundStore.use.page();
   const setPage = useBoundStore.use.setPage();
 
-  const [mockTests, setMockTests] = useState<MockTest[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
   const [totalCount, setTotalCount] = useState(1);
 
   const tableRef = useRef<HTMLDivElement>(null);
@@ -43,11 +49,11 @@ const EventList = () => {
   const onDeleteEvent = () => {
     const eventId = eventToDelete.current;
     if (eventId !== null) {
-      MockTestService.deleteById(eventId)
+      EventService.deleteById(eventId)
         .then((_res) => {
-          toast.success('Xóa đợt thi thử thành công');
+          toast.success('Xóa sự kiện thành công');
           setPage(1);
-          fetchMockTest();
+          fetchEvent();
         })
         .catch((err) => {
           toast.error(err.response.data.message);
@@ -73,23 +79,22 @@ const EventList = () => {
     };
   }, []);
 
-  const fetchMockTest = useDebounce(() => {
+  const fetchEvent = useDebounce(() => {
     setLoading(true);
-    MockTestService.getAllPaginated(
+    EventService.getAllPaginated(
       {
         name: filterName,
-        subject: filterSubject === '' ? undefined : filterSubject,
-        semester: filterSemester === '' ? undefined : filterSemester,
-        type: filterExamType === '' ? undefined : filterExamType,
+        eventType: filterEventType,
         pageNumber: page,
         pageSize: ITEMS_PER_PAGE,
       },
       true
     )
       .then((res) => {
-        const { total, result: allMockTests } = res.data.payload;
-        setMockTests(allMockTests);
+        const { total, pageCount, pageSize, result: allEvents } = res.data.payload;
+        setEvents(allEvents);
         setTotalCount(total);
+        console.log(allEvents, pageCount, pageSize);
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -100,25 +105,8 @@ const EventList = () => {
   });
 
   useEffect(() => {
-    fetchMockTest();
-  }, [page, filterName, filterSubject, filterSemester, filterExamType, fetchMockTest]);
-
-  // TODO: get all event type
-  // useEffect(() => {
-  //   SubjectService.getAll({}, true)
-  //     .then((res) => {
-  //       const { result: allSubjects } = res.data.payload;
-  //       // setFilterSubjectOptions(
-  //       //   allSubjects.map((subject) => ({
-  //       //     value: subject._id,
-  //       //     label: subject.name,
-  //       //   }))
-  //       // );
-  //     })
-  //     .catch((err) => {
-  //       toast.error(err.response.data.message);
-  //     });
-  // }, []);
+    fetchEvent();
+  }, [page, filterName, filterEventType, fetchEvent]);
 
   return (
     <Page>
@@ -157,10 +145,10 @@ const EventList = () => {
                 <div className='flex w-full flex-[3] flex-col gap-y-4 md:flex-row md:gap-x-4'>
                   <Select
                     options={EVENT_TYPE_OPTIONS}
-                    value={EVENT_TYPE_OPTIONS.find((x) => x.value === filterSubject) ?? null}
+                    value={EVENT_TYPE_OPTIONS.find((x) => x.value === filterEventType) ?? null}
                     onChange={(v) => {
                       if (v !== null) {
-                        setFilterSubject(v.value);
+                        setFilterEventType(v.value);
                         setPage(1);
                       }
                     }}
@@ -169,24 +157,12 @@ const EventList = () => {
                 </div>
                 <button
                   className={`flex flex-[0.5] ${
-                    filterName !== '' ||
-                    filterSubject !== '' ||
-                    filterSemester !== '' ||
-                    filterExamType !== ''
-                      ? 'opacity-1'
-                      : 'opacity-0'
+                    filterName !== '' || filterEventType !== '' ? 'opacity-1' : 'opacity-0'
                   }`}
-                  disabled={
-                    filterName === '' &&
-                    filterSubject === '' &&
-                    filterSemester === '' &&
-                    filterExamType === ''
-                  }
+                  disabled={filterName === '' && filterEventType === ''}
                   onClick={() => {
                     setFilterName('');
-                    setFilterSubject('');
-                    setFilterSemester('');
-                    setFilterExamType('');
+                    setFilterEventType('');
                     setPage(1);
                   }}
                 >
@@ -223,10 +199,10 @@ const EventList = () => {
                             Danh mục
                           </th>
                           <th className='flex flex-1 items-center justify-start text-base font-semibold text-[#4285f4] lg:text-lg 3xl:text-xl'>
-                            Thời gian
+                            T.gian bắt đầu
                           </th>
                           <th className='flex flex-1 items-center justify-start text-base font-semibold text-[#4285f4] lg:text-lg 3xl:text-xl'>
-                            Thời lượng
+                            T.gian kết thúc
                           </th>
                           <th className='flex flex-1 items-center justify-start text-base font-semibold text-[#4285f4] lg:text-lg 3xl:text-xl'>
                             {''}
@@ -234,40 +210,36 @@ const EventList = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {mockTests.length === 0 ? (
+                        {events.length === 0 ? (
                           <div className='z-10 rounded-[20px] bg-white px-4 py-3 md:p-5 xl:p-6 2xl:p-7'>
                             <NoData width={200} className='mx-auto w-[200px] p-7 xl:w-[300px]' />
                             <p className='w-full text-center'>Không tìm thấy đợt thi thử</p>
                           </div>
                         ) : (
-                          mockTests.map((exam) => (
+                          events.map((event) => (
                             <tr
-                              key={`exam-${exam._id}`}
+                              key={`event-${event._id}`}
                               className='flex w-full flex-1 items-center justify-start gap-x-4 border-b border-b-[#CCC] p-2 px-6 hover:cursor-pointer hover:bg-[#F1F1F1] lg:p-4 lg:px-8 3xl:p-6 3xl:px-10'
-                              onClick={() => navigate(`/admin/event/view/${exam._id}`)}
+                              onClick={() => navigate(`/admin/event/view/${event._id}`)}
                             >
                               <td className='flex flex-[1.5] items-center justify-start text-xs font-medium lg:text-sm 3xl:text-base'>
-                                {/* {exam.name} */}
-                                Vật lý 2
+                                {event.name}
                               </td>
                               <td className='flex flex-[1.5] items-center justify-start text-xs font-medium lg:text-sm 3xl:text-base'>
-                                {/* {exam?.subject?.name} */}
-                                Lớp học ôn tập
+                                {event.eventType === 'LOP_HOC_ON_TAP' ? 'Lớp học ôn tập' : 'Khác'}
                               </td>
                               <td className='flex flex-1 items-center justify-start text-xs font-medium lg:text-sm 3xl:text-base'>
-                                {/* {SEMESTER_OPTIONS.find((x) => x.value === exam.semester)?.label} */}
-                                8h00, 10/10/2024
+                                {convertEpochToVietnameseDateAndTime(event.startedAt)}
                               </td>
                               <td className='flex flex-1 items-center justify-start text-xs font-medium lg:text-sm 3xl:text-base'>
-                                {/* {EXAM_TYPE_OPTIONS.find((x) => x.value === exam.type)?.label} */}
-                                120 phút
+                                {convertEpochToVietnameseDateAndTime(event.endedAt)}
                               </td>
                               <td className='flex flex-1 flex-wrap items-center justify-end gap-x-4 gap-y-2'>
                                 <button
                                   type='button'
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    navigate(`/admin/event/edit/${exam._id}`);
+                                    navigate(`/admin/event/edit/${event._id}`);
                                   }}
                                   className='flex items-center justify-center rounded-full bg-[#4285F4]/90 p-2 hover:bg-[#4285F4]'
                                 >
@@ -280,7 +252,7 @@ const EventList = () => {
                                   className='flex items-center justify-center rounded-full bg-[#DB4437]/90 p-2 hover:bg-[#DB4437]'
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    eventToDelete.current = exam._id;
+                                    eventToDelete.current = event._id;
                                     setDeleteModal(true);
                                   }}
                                 >
