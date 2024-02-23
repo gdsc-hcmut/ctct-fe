@@ -1,9 +1,10 @@
 import QRCode from 'qrcode.react';
-// import { useState } from 'react';
+import { useState } from 'react';
 // import { toast } from 'react-toastify';
 
 import { Footer } from '../../../components';
 // import Icon from '../../../components/Icon';
+import DeleteModal from '../../../components/Modal/DeleteModal';
 import ProfileOption from '../../../components/ProfileOption';
 import { Page } from '../../../layout';
 // import UserService from '../../../service/user.service';
@@ -12,6 +13,25 @@ import useBoundStore from '../../../store';
 
 const UserEvent = () => {
   const user = useBoundStore.use.user();
+
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const onDeleteEvent = () => {
+    // const eventId = eventToDelete.current;
+    // if (eventId !== null) {
+    //   MockTestService.deleteById(eventId)
+    //     .then((_res) => {
+    //       toast.success('Xóa đợt thi thử thành công');
+    //       setPage(1);
+    //       fetchMockTest();
+    //     })
+    //     .catch((err) => {
+    //       toast.error(err.response.data.message);
+    //     });
+    // }
+    // eventToDelete.current = null;
+    console.log('Delete event');
+  };
 
   const epochToDateString = (epochTime: number): string => {
     const date = new Date(epochTime);
@@ -27,6 +47,12 @@ const UserEvent = () => {
 
   return (
     <Page title='Thông tin người dùng - Xem và cập nhật thông tin'>
+      <DeleteModal
+        text='Bạn có chắc chắn muốn huỷ đăng ký sự kiện này?'
+        onClose={() => setDeleteModal(false)}
+        show={deleteModal}
+        onDelete={() => onDeleteEvent()}
+      />
       <main className='with-nav-height w-full overflow-y-auto'>
         <ProfileOption option={4} editAvatar={false} setAvatar={() => {}} updatedName='' />
         <div className='relative mt-[0.5rem] flex flex-col items-center gap-y-0 space-x-4 bg-white px-5 md:mt-[1rem] md:flex-row md:items-start md:rounded-[20px] md:px-12 lg:mb-24 lg:px-24 xl:mt-[1.5rem] 2xl:px-32 3xl:px-40'>
@@ -66,55 +92,100 @@ const UserEvent = () => {
               <li className='flex h-fit w-full flex-row items-center justify-between space-x-[2rem] rounded-[1rem] bg-slate-50 p-4 hover:bg-slate-100'>
                 <div className='flex flex-col items-start space-y-[0.5rem]'>
                   <p className='font-semibold text-slate-600'>Lớp học ôn tập - Vật lý 1</p>
-                  <p className=''>{epochToDateString(1708399962)} - 120 phút</p>
+                  <p className=''>{epochToDateString(1708399962)} - 120 phút - P.210H1</p>
                 </div>
                 <div className='flex flex-col items-end space-y-[0.5rem]'>
                   <p className='font-semibold text-slate-400'>Không tham gia</p>
-                  <p className='hidden cursor-pointer text-slate-600 underline'>Huỷ đăng ký</p>
+                  <button
+                    className='hidden cursor-pointer text-slate-600 underline'
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // eventToDelete.current = exam._id;
+                      setDeleteModal(true);
+                    }}
+                  >
+                    Huỷ đăng ký
+                  </button>
                 </div>
               </li>
 
               <li className='flex h-fit w-full flex-row items-center justify-between space-x-[2rem] rounded-[1rem] bg-slate-50 p-4 hover:bg-slate-100'>
                 <div className='flex flex-col items-start space-y-[0.5rem]'>
                   <p className='font-semibold text-slate-600'>Lớp học ôn tập - Vật lý 1</p>
-                  <p className=''>{epochToDateString(1708399962)} - 120 phút</p>
+                  <p className=''>{epochToDateString(1708399962)} - 120 phút - P.210H1</p>
                 </div>
                 <div className='flex flex-col items-end space-y-[0.5rem]'>
                   <p className='font-semibold text-[#3d8c40]'>Đã check-in</p>
-                  <p className='hidden cursor-pointer text-slate-600 underline'>Huỷ đăng ký</p>
+                  <button
+                    className='hidden cursor-pointer text-slate-600 underline'
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // eventToDelete.current = exam._id;
+                      setDeleteModal(true);
+                    }}
+                  >
+                    Huỷ đăng ký
+                  </button>
                 </div>
               </li>
 
               <li className='flex h-fit w-full flex-row items-center justify-between space-x-[2rem] rounded-[1rem] bg-slate-50 p-4 hover:bg-slate-100'>
                 <div className='flex flex-col items-start space-y-[0.5rem]'>
                   <p className='font-semibold text-slate-600'>Lớp học ôn tập - Vật lý 1</p>
-                  <p className=''>{epochToDateString(1708399962)} - 120 phút</p>
+                  <p className=''>{epochToDateString(1708399962)} - 120 phút - P.210H1</p>
                 </div>
                 <div className='flex flex-col items-end space-y-[0.5rem]'>
                   <p className='font-semibold text-[#fee135]'>Đã đăng ký</p>
-                  <p className='cursor-pointer text-slate-600 underline'>Huỷ đăng ký</p>
+                  <button
+                    className='cursor-pointer text-slate-600 underline'
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // eventToDelete.current = exam._id;
+                      setDeleteModal(true);
+                    }}
+                  >
+                    Huỷ đăng ký
+                  </button>
                 </div>
               </li>
 
               <li className='flex h-fit w-full flex-row items-center justify-between space-x-[2rem] rounded-[1rem] bg-slate-50 p-4 hover:bg-slate-100'>
                 <div className='flex flex-col items-start space-y-[0.5rem]'>
-                  <p className='font-semibold text-slate-600'>Lớp học ôn tập - Vật lý 1</p>
-                  <p className=''>{epochToDateString(1708399962)} - 120 phút</p>
+                  <p className='font-semibold text-slate-600'>Lớp học ôn tập - Đại số Tuyến tính</p>
+                  <p className=''>{epochToDateString(1708399962)} - 120 phút - P.210H1</p>
                 </div>
                 <div className='flex flex-col items-end space-y-[0.5rem]'>
                   <p className='font-semibold text-[#fee135]'>Đã đăng ký</p>
-                  <p className='cursor-pointer text-slate-600 underline'>Huỷ đăng ký</p>
+                  <button
+                    className='cursor-pointer text-slate-600 underline'
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // eventToDelete.current = exam._id;
+                      setDeleteModal(true);
+                    }}
+                  >
+                    Huỷ đăng ký
+                  </button>
                 </div>
               </li>
 
               <li className='flex h-fit w-full flex-row items-center justify-between space-x-[2rem] rounded-[1rem] bg-slate-50 p-4 hover:bg-slate-100'>
                 <div className='flex flex-col items-start space-y-[0.5rem]'>
                   <p className='font-semibold text-slate-600'>Lớp học ôn tập - Vật lý 1</p>
-                  <p className=''>{epochToDateString(1708399962)} - 120 phút</p>
+                  <p className=''>{epochToDateString(1708399962)} - 120 phút - P.210H1</p>
                 </div>
                 <div className='flex flex-col items-end space-y-[0.5rem]'>
                   <p className='font-semibold text-slate-400'>Đã huỷ đăng ký</p>
-                  <p className='hidden cursor-pointer text-slate-600 underline'>Huỷ đăng ký</p>
+                  <button
+                    className='hidden cursor-pointer text-slate-600 underline'
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // eventToDelete.current = exam._id;
+                      setDeleteModal(true);
+                    }}
+                  >
+                    Huỷ đăng ký
+                  </button>
                 </div>
               </li>
             </ul>

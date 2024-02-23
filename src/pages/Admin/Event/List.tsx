@@ -104,6 +104,7 @@ const EventList = () => {
     fetchMockTest();
   }, [page, filterName, filterSubject, filterSemester, filterExamType, fetchMockTest]);
 
+  // TODO: get all event type
   useEffect(() => {
     SubjectService.getAll({}, true)
       .then((res) => {
