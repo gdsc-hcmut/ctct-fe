@@ -395,7 +395,7 @@ const EventEdit = () => {
                   </div>
                 )}
 
-                {hasRegistrationTime === true && (
+                {hasRegistrationTime === true && eventType !== EventType.LHOT && (
                   <div className='flex w-full flex-1 flex-row items-end justify-start gap-x-4'>
                     <div className='flex w-full flex-1 flex-col'>
                       <p className='hidden w-full text-sm font-semibold lg:block lg:text-base 3xl:text-xl'>
