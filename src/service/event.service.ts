@@ -55,7 +55,7 @@ type GetAllEventPaginatedReturnType = {
 };
 
 const create = (data: CreateEventArgument) => {
-  console.log(data);
+  console.log('API', data);
   return axios.post<Response<Event>>(`${API_URL}admin/event`, data);
 };
 
@@ -68,6 +68,7 @@ const checkInByEmail = (id: string, email: string) => {
 };
 
 const editById = (id: string, data: EditEventArgument) => {
+  console.log(data);
   return axios.patch<Response<Event>>(`${API_URL}admin/event/${id}`, data);
 };
 
@@ -87,8 +88,6 @@ ${query.startedAtMax !== undefined ? `&startedAtMax=${query.startedAtMax}` : ''}
 ${query.endedAtMin !== undefined ? `&endedAtMin=${query.endedAtMin}` : ''}\
 ${query.endedAtMax !== undefined ? `&endedAtMax=${query.endedAtMax}` : ''}
   `;
-
-  console.log(queryString);
 
   return axios.get<Response<GetAllEventPaginatedReturnType>>(queryString);
 };

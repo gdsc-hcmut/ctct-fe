@@ -110,7 +110,6 @@ const EventCreate = () => {
   const createEvent = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setLoading(true);
-    console.log(name, description, eventType, venue, eventDuration.start, eventDuration.end);
     const data = {
       name,
       description,
@@ -362,7 +361,7 @@ const EventCreate = () => {
                       timeInputLabel='Time:'
                       onChange={(date) =>
                         setRegistrationDuration({
-                          ...eventDuration,
+                          ...registrationDuration,
                           end: new Date(date || 0).getTime(),
                         })
                       }

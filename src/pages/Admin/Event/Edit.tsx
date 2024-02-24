@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import Skeleton from 'react-loading-skeleton';
@@ -7,12 +6,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Icon, Select } from '../../../components';
+import { Option } from '../../../components/Select';
 // import DeleteModal from '../../../components/Modal/DeleteModal';
 import { useDebounce } from '../../../hooks';
 import { Page, Wrapper } from '../../../layout';
-import MockTestService from '../../../service/mockTest.service';
-import { EVENT_TYPE_OPTIONS } from '../../../types/events';
-import { MockTest } from '../../../types/mockTest';
+import EventService from '../../../service/event.service';
+import SubjectService from '../../../service/subject.service';
+import { EVENT_TYPE_OPTIONS, Event, EventType } from '../../../types/events';
 
 interface CustomTimeInputProps {
   date: Date | null;
@@ -41,58 +41,91 @@ const EventEdit = () => {
   const navigate = useNavigate();
   const params = useParams();
   const id = params?.id ?? '';
-  const [event, setMockTest] = useState<MockTest>();
+  const [event, setEvent] = useState<Event>();
 
   const [name, setName] = useState('');
   const [venue, setVenue] = useState('');
-  const [type, setType] = useState('');
+  const [eventType, setEventType] = useState('');
   const [description, setDescription] = useState('');
-  const [isHidden, setIsHidden] = useState(false);
-  const [duration, setDuration] = useState<{ start: number; end: number }>({ start: 0, end: 0 });
-
-  const [canSave, setCanSave] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [subject, setSubject] = useState('');
+  const [hasRegistrationTime, setHasRegistrationTime] = useState(false);
+  const [eventDuration, setEventDuration] = useState<{ start: number; end: number }>({
+    start: 0,
+    end: 0,
+  });
+  const [registrationDuration, setRegistrationDuration] = useState<{ start: number; end: number }>({
+    start: 0,
+    end: 0,
+  });
+  const [subjectOptions, setSubjectOptions] = useState<Option[]>([]);
+  const [canSave, setCanSave] = useState(false);
 
-  // const [deleteModal, setDeleteModal] = useState(false);
+  useEffect(() => {
+    SubjectService.getAll({}, true)
+      .then((res) => {
+        const { result: allSubjects } = res.data.payload;
+        setSubjectOptions(
+          allSubjects.map((sub) => {
+            return {
+              value: sub._id,
+              label: sub.name,
+            };
+          })
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   const handleChangeTime = (date: Date | null, time: string, isStartDate: boolean) => {
     const [hh, mm, ss] = time.split(':');
     const targetDate = date instanceof Date ? date : new Date();
     targetDate.setHours(Number(hh) || 0, Number(mm) || 0, Number(ss) || 0);
     if (isStartDate) {
-      setDuration({ ...duration, start: new Date(targetDate || 0).getTime() });
-    } else setDuration({ ...duration, end: new Date(targetDate || 0).getTime() });
+      setEventDuration({ ...eventDuration, start: new Date(targetDate || 0).getTime() });
+    } else setEventDuration({ ...eventDuration, end: new Date(targetDate || 0).getTime() });
   };
 
-  // const onDeleteEvent = (slotNumber: number) => {
-  //   if (mockTest?._id !== null) {
-  //     MockTestService.deleteSlot(mockTest?._id || '', slotNumber)
-  //       .then((_res) => {
-  //         toast.success('Xóa ca thi thử thành công');
-  //         setMockTest(_res.data.payload);
-  //       })
-  //       .catch((err) => {
-  //         toast.error(err.response.data.message);
-  //       });
-  //   }
-  // };
+  const handleChangeRegistrationTime = (date: Date | null, time: string, isStartDate: boolean) => {
+    const [hh, mm, ss] = time.split(':');
+    const targetDate = date instanceof Date ? date : new Date();
+    targetDate.setHours(Number(hh) || 0, Number(mm) || 0, Number(ss) || 0);
+    if (isStartDate) {
+      setRegistrationDuration({
+        ...registrationDuration,
+        start: new Date(targetDate || 0).getTime(),
+      });
+    } else
+      setRegistrationDuration({
+        ...registrationDuration,
+        end: new Date(targetDate || 0).getTime(),
+      });
+  };
 
   const setSave = useDebounce(() => {
     if (event) {
       setCanSave(
         name === event.name &&
-          type === event.type &&
-          _.trim(description) === event.description &&
-          isHidden === event.isHidden
+          description === event.description &&
+          eventType === event.eventType &&
+          venue === event.venue &&
+          hasRegistrationTime === event.hasRegistrationTime &&
+          eventDuration.start === event.startedAt &&
+          eventDuration.end === event.endedAt &&
+          registrationDuration.start === event.registrationStartedAt &&
+          registrationDuration.end === event.registrationEndedAt
+        // subject === event.lhotMetadata.subject
       );
     }
   });
 
   const fetchData = useCallback(() => {
     setLoading(true);
-    MockTestService.getById(id, true)
+    EventService.getById(id, true)
       .then((res) => {
-        setMockTest(res.data.payload);
+        setEvent(res.data.payload);
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -103,30 +136,45 @@ const EventEdit = () => {
   }, [id]);
 
   const handleOnSave = useDebounce((): void => {
-    // const formData = {
-    //   name,
-    //   description,
-    //   type,
-    //   isHidden,
-    // };
-    // MockTestService.editGeneralInformation(id, formData, true)
-    //   .then(() => {
-    //     toast.success('Chỉnh sửa thành công');
-    //   })
-    //   .catch((err) => {
-    //     toast.error(err.response.data.message);
-    //   })
-    //   .finally(() => {
-    //     fetchData();
-    //   });
+    const formData = {
+      name,
+      description,
+      eventType,
+      venue,
+      hasRegistrationTime,
+      registrationStartedAt: registrationDuration.start,
+      registrationEndedAt: registrationDuration.end,
+      startedAt: eventDuration.start,
+      endedAt: eventDuration.end,
+      lhotMetadata: {
+        subject: subject === '' ? '64da22874b60004c167e493b' : subject,
+      },
+    };
+    EventService.editById(id, formData)
+      .then((_) => {
+        toast.success('Chỉnh sửa thành công');
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      })
+      .finally(() => {
+        fetchData();
+      });
   });
 
   useEffect(() => {
     if (event) {
       setName(event.name);
       setDescription(event.description);
-      setType(event.type);
-      setIsHidden(event.isHidden);
+      setEventType(event.eventType);
+      setVenue(event.venue);
+      setHasRegistrationTime(event.hasRegistrationTime);
+      setEventDuration({ start: event.startedAt, end: event.endedAt });
+      setRegistrationDuration({
+        start: event.registrationStartedAt ?? 0,
+        end: event.registrationEndedAt ?? 0,
+      });
+      // setSubject(event.lhotMetadata.subject);
     }
   }, [event]);
 
@@ -136,16 +184,19 @@ const EventEdit = () => {
 
   useEffect(() => {
     setSave();
-  }, [name, type, description, isHidden, setSave, duration]);
+  }, [
+    name,
+    description,
+    eventType,
+    venue,
+    hasRegistrationTime,
+    eventDuration,
+    registrationDuration,
+    setSave,
+  ]);
 
   return (
     <Page>
-      {/* <DeleteModal
-        text='Bạn có chắc chắn muốn xóa sự kiện này?'
-        onClose={() => setDeleteModal(false)}
-        show={deleteModal}
-        onDelete={() => onDeleteSlot(slotToDelete ?? -1)}
-      /> */}
       <Wrapper className='flex flex-1 flex-col'>
         <div className='w-full bg-[#4285F4]/90 py-4'>
           <p className='text-center text-sm font-bold text-white md:text-2xl 3xl:text-4xl'>
@@ -209,10 +260,10 @@ const EventEdit = () => {
                     </p>
                     <Select
                       options={EVENT_TYPE_OPTIONS}
-                      value={EVENT_TYPE_OPTIONS.find((x) => x.value === type) ?? null}
+                      value={EVENT_TYPE_OPTIONS.find((x) => x.value === eventType) ?? null}
                       onChange={(v) => {
                         if (v !== null) {
-                          setType(v.value);
+                          setEventType(v.value);
                         }
                       }}
                       placeholder='Chọn danh mục'
@@ -244,18 +295,22 @@ const EventEdit = () => {
                       Bắt đầu
                     </p>
                     <DatePicker
-                      selected={duration.start === 0 ? new Date() : new Date(duration.start)}
+                      selected={
+                        eventDuration.start === 0 ? new Date() : new Date(eventDuration.start)
+                      }
                       showTimeInput
                       timeInputLabel='Time:'
                       onChange={(date) =>
-                        setDuration({ ...duration, start: new Date(date || 0).getTime() })
+                        setEventDuration({ ...eventDuration, start: new Date(date || 0).getTime() })
                       }
                       className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
                     lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
                       dateFormat={'dd/MM/yyyy HH:mm:ss'}
                       customTimeInput={
                         <CustomTimeInput
-                          date={duration.start === 0 ? new Date() : new Date(duration.start)}
+                          date={
+                            eventDuration.start === 0 ? new Date() : new Date(eventDuration.start)
+                          }
                           onChangeCustom={handleChangeTime}
                           isStartDate={false}
                         />
@@ -274,18 +329,18 @@ const EventEdit = () => {
                       Kết thúc
                     </p>
                     <DatePicker
-                      selected={duration.end === 0 ? new Date() : new Date(duration.end)}
+                      selected={eventDuration.end === 0 ? new Date() : new Date(eventDuration.end)}
                       showTimeInput
                       timeInputLabel='Time:'
                       onChange={(date) =>
-                        setDuration({ ...duration, end: new Date(date || 0).getTime() })
+                        setEventDuration({ ...eventDuration, end: new Date(date || 0).getTime() })
                       }
                       className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
                     lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
                       dateFormat={'dd/MM/yyyy HH:mm:ss'}
                       customTimeInput={
                         <CustomTimeInput
-                          date={duration.end === 0 ? new Date() : new Date(duration.end)}
+                          date={eventDuration.end === 0 ? new Date() : new Date(eventDuration.end)}
                           onChangeCustom={handleChangeTime}
                           isStartDate={false}
                         />
@@ -293,6 +348,126 @@ const EventEdit = () => {
                     />
                   </div>
                 </div>
+
+                {eventType === EventType.LHOT && (
+                  <div className='flex w-full flex-1 flex-row items-end justify-start gap-x-4'>
+                    <div className='flex w-full flex-1 flex-col'>
+                      <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>Môn</p>
+                      <Select
+                        options={subjectOptions}
+                        value={subjectOptions.find((x) => x.value === subject) ?? null}
+                        onChange={(v) => {
+                          if (v !== null) {
+                            setSubject(v.value);
+                          }
+                        }}
+                        placeholder='Chọn môn'
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {eventType !== EventType.LHOT && eventType !== '' && (
+                  <div className='flex w-full flex-1 flex-row items-end justify-start gap-x-4'>
+                    <div className='flex w-full flex-row items-center justify-start gap-x-4'>
+                      <p className='flex text-sm font-medium lg:text-base 3xl:text-base'>
+                        Giới hạn thời gian đăng ký:
+                      </p>
+                      <input
+                        type='checkbox'
+                        className='allow-checked h-4 w-4 cursor-pointer'
+                        checked={hasRegistrationTime}
+                        onChange={() => setHasRegistrationTime(!hasRegistrationTime)}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {hasRegistrationTime === true && (
+                  <div className='flex w-full flex-1 flex-row items-end justify-start gap-x-4'>
+                    <div className='flex w-full flex-1 flex-col'>
+                      <p className='hidden w-full text-sm font-semibold lg:block lg:text-base 3xl:text-xl'>
+                        Thời gian bắt đầu đăng ký
+                      </p>
+                      <p className='hidden w-full text-sm font-semibold md:block lg:hidden lg:text-base 3xl:text-xl'>
+                        T.gian bắt đầu đ.ký
+                      </p>
+                      <p className='block w-full text-sm font-semibold md:hidden lg:text-base 3xl:text-xl'>
+                        Bắt đầu đăng ký
+                      </p>
+                      <DatePicker
+                        selected={
+                          registrationDuration.start === 0
+                            ? new Date()
+                            : new Date(registrationDuration.start)
+                        }
+                        showTimeInput
+                        timeInputLabel='Time:'
+                        onChange={(date) =>
+                          setRegistrationDuration({
+                            ...registrationDuration,
+                            start: new Date(date || 0).getTime(),
+                          })
+                        }
+                        className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
+                    lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
+                        dateFormat={'dd/MM/yyyy HH:mm:ss'}
+                        customTimeInput={
+                          <CustomTimeInput
+                            date={
+                              registrationDuration.start === 0
+                                ? new Date()
+                                : new Date(registrationDuration.start)
+                            }
+                            onChangeCustom={handleChangeRegistrationTime}
+                            isStartDate={false}
+                          />
+                        }
+                      />
+                    </div>
+
+                    <div className='flex w-full flex-1 flex-col'>
+                      <p className='hidden w-full text-sm font-semibold lg:block lg:text-base 3xl:text-xl'>
+                        Thời gian kết thúc đăng ký
+                      </p>
+                      <p className='hidden w-full text-sm font-semibold md:block lg:hidden lg:text-base 3xl:text-xl'>
+                        T.gian kết thúc đ.ký
+                      </p>
+                      <p className='block w-full text-sm font-semibold md:hidden lg:text-base 3xl:text-xl'>
+                        Kết thúc đăng ký
+                      </p>
+                      <DatePicker
+                        selected={
+                          registrationDuration.end === 0
+                            ? new Date()
+                            : new Date(registrationDuration.end)
+                        }
+                        showTimeInput
+                        timeInputLabel='Time:'
+                        onChange={(date) =>
+                          setRegistrationDuration({
+                            ...registrationDuration,
+                            end: new Date(date || 0).getTime(),
+                          })
+                        }
+                        className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
+                    lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
+                        dateFormat={'dd/MM/yyyy HH:mm:ss'}
+                        customTimeInput={
+                          <CustomTimeInput
+                            date={
+                              registrationDuration.end === 0
+                                ? new Date()
+                                : new Date(registrationDuration.end)
+                            }
+                            onChangeCustom={handleChangeRegistrationTime}
+                            isStartDate={false}
+                          />
+                        }
+                      />
+                    </div>
+                  </div>
+                )}
 
                 <div className='flex w-full flex-col items-start justify-center'>
                   <label className='mb-2 w-full' htmlFor='event-description'>
@@ -314,17 +489,6 @@ const EventEdit = () => {
                 </div>
 
                 <div className='my-5 flex w-full flex-row justify-between'>
-                  <div className='flex w-full flex-row items-center justify-start gap-x-4'>
-                    <p className='flex text-sm font-medium lg:text-base 3xl:text-base'>
-                      Hiển thị với người dùng:
-                    </p>
-                    <input
-                      type='checkbox'
-                      className='allow-checked h-7 w-7 cursor-pointer'
-                      checked={!isHidden}
-                      onChange={() => setIsHidden(!isHidden)}
-                    />
-                  </div>
                   <div className='flex flex-row-reverse gap-x-8'>
                     <button
                       className={`flex items-center rounded-lg px-6 py-1
