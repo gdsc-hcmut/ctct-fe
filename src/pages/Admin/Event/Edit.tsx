@@ -104,6 +104,18 @@ const EventEdit = () => {
       });
   };
 
+  const submitDisabled =
+    name === '' ||
+    venue === '' ||
+    eventType === '' ||
+    loading ||
+    eventDuration.start === 0 ||
+    eventDuration.end === 0 ||
+    eventDuration.start > eventDuration.end ||
+    (eventType === EventType.LHOT && subject === '') ||
+    (hasRegistrationTime && (registrationDuration.start === 0 || registrationDuration.end === 0)) ||
+    (hasRegistrationTime && registrationDuration.start > registrationDuration.end);
+
   const setSave = useDebounce(() => {
     if (event) {
       setCanSave(
@@ -493,9 +505,11 @@ const EventEdit = () => {
                     <button
                       className={`flex items-center rounded-lg px-6 py-1
                       transition-all duration-200 lg:px-7 lg:py-2 3xl:px-8 3xl:py-3 ${
-                        !canSave ? 'bg-[#4285F4]/80 hover:bg-[#4285F4]' : 'bg-gray-400/80'
+                        !canSave && !submitDisabled
+                          ? 'bg-[#4285F4]/80 hover:bg-[#4285F4]'
+                          : 'bg-gray-400/80'
                       }`}
-                      disabled={canSave}
+                      disabled={canSave && submitDisabled}
                       onClick={(e) => {
                         e.preventDefault();
                         handleOnSave();
