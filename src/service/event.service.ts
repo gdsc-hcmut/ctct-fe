@@ -55,7 +55,6 @@ type GetAllEventPaginatedReturnType = {
 };
 
 const create = (data: CreateEventArgument) => {
-  console.log('API', data);
   return axios.post<Response<Event>>(`${API_URL}admin/event`, data);
 };
 
@@ -68,7 +67,6 @@ const checkInByEmail = (id: string, email: string) => {
 };
 
 const editById = (id: string, data: EditEventArgument) => {
-  console.log(data);
   return axios.patch<Response<Event>>(`${API_URL}admin/event/${id}`, data);
 };
 

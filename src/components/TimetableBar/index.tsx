@@ -1,3 +1,4 @@
+import { Event } from '../../types/events';
 import TimetableCard from '../TimetableCard';
 
 const DayOfWeekVietnamese = [
@@ -16,9 +17,10 @@ const translateDayOfWeekVietnamese = (dayOfWeek: number) => {
 
 interface TimetableBarProps {
   date: Date;
+  eventSets: Event[];
 }
 
-const TimetableBar = ({ date }: TimetableBarProps) => {
+const TimetableBar = ({ date, eventSets }: TimetableBarProps) => {
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const dayOfWeek = translateDayOfWeekVietnamese(date.getDay());
@@ -41,10 +43,15 @@ const TimetableBar = ({ date }: TimetableBarProps) => {
         </p>
       </div>
       <div className='grid w-full grid-cols-2 gap-[1.25rem] py-[1.25rem] px-[1.25rem] md:flex md:flex-row md:items-center md:justify-start md:gap-0 md:space-x-[1.25rem] md:py-0'>
-        <TimetableCard startDate={date} endDate={date} location='Phòng 210H1' />
-        <TimetableCard startDate={date} endDate={date} location='Phòng 210H1' />
-        <TimetableCard startDate={date} endDate={date} location='Phòng 210H1' />
-        <TimetableCard startDate={date} endDate={date} location='Phòng 210H1' />
+        {eventSets.map((event, index) => (
+          <TimetableCard
+            key={index}
+            subject={event.lhotMetadata?.subject}
+            startDate={new Date(event.startedAt)}
+            endDate={new Date(event.endedAt)}
+            location={event.venue}
+          />
+        ))}
       </div>
     </div>
   );

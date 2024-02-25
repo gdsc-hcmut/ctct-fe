@@ -1,4 +1,7 @@
-import { Footer, LazyLoadImage } from '../../../components';
+import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+
+import { Footer, LazyLoadImage, Loading } from '../../../components';
 import Achievement1 from '../../../components/Achivement/Achievement1';
 import BenefitBoard from '../../../components/BenefitBoard';
 import Comments from '../../../components/Comments';
@@ -7,9 +10,70 @@ import NewsCarousel from '../../../components/NewsCarousel/NewsCarousel';
 import SignUpManual from '../../../components/SignUpManual';
 import SocialMediaCarousel from '../../../components/SocialMediaCarousel/SocialMediaCarousel';
 import Timetable from '../../../components/Timetable';
+import { useDebounce } from '../../../hooks';
 import { Page } from '../../../layout';
+import EventService from '../../../service/event.service';
+import { Event } from '../../../types/events';
+
+const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
 const LHOTDKPage = () => {
+  const [loading, setLoading] = useState(false);
+
+  const [firstDisplayedDate, setFirstDisplayedDate] = useState<number>();
+  const [secondDisplayedDate, setSecondDisplayedDate] = useState<number>();
+  const [firstDisplayedEventSet, setFirstDisplayedEventSet] = useState<Event[]>([]);
+  const [secondDisplayedEventSet, setSecondDisplayedEventSet] = useState<Event[]>([]);
+
+  const fetchEvent = useDebounce(() => {
+    setLoading(true);
+    EventService.getAllPaginated(
+      {
+        startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
+      },
+      false
+    )
+      .then((res) => {
+        const { result: allEvents } = res.data.payload;
+
+        const sortedEvents = allEvents.sort((a, b) => a.startedAt - b.startedAt);
+        const firstDate =
+          allEvents.length > 0
+            ? allEvents[0].startedAt - (allEvents[0].startedAt % ONE_DAY_MILLISECOND)
+            : 0;
+        const firstEventSet = sortedEvents.filter(
+          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === firstDate
+        );
+        const remainingEvents = sortedEvents.filter(
+          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== firstDate
+        );
+
+        const secondDate =
+          remainingEvents.length > 0
+            ? remainingEvents[0].startedAt - (remainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
+            : 0;
+        const secondEventSet = remainingEvents.filter(
+          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === secondDate
+        );
+
+        setFirstDisplayedDate(firstDate);
+        setSecondDisplayedDate(secondDate);
+        setFirstDisplayedEventSet(firstEventSet);
+        setSecondDisplayedEventSet(secondEventSet);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  });
+
+  useEffect(() => {
+    fetchEvent();
+  }, [fetchEvent]);
+
+  if (loading) return <Loading />; // need fix
   return (
     <Page title='Lớp học ôn tập'>
       <main className='with-nav-height flex flex-col gap-y-5 overflow-hidden overflow-y-auto text-[16px] md:text-[14px] lg:gap-y-10 lg:text-[18px] xl:text-[20px] 2xl:gap-y-[54px] 3xl:gap-y-[60px]'>
@@ -80,7 +144,12 @@ const LHOTDKPage = () => {
                     mùa thi.*
                   </p>
                 </div>
-                <Timetable />
+                <Timetable
+                  firstDate={firstDisplayedDate ? new Date(firstDisplayedDate) : undefined}
+                  secondDate={secondDisplayedDate ? new Date(secondDisplayedDate) : undefined}
+                  firstEventSet={firstDisplayedEventSet}
+                  secondEventSet={secondDisplayedEventSet}
+                />
               </div>
 
               <div className='relative flex w-full flex-col items-center justify-between gap-5 md:flex-row md:gap-[1rem] lg:gap-[1.5rem] 2xl:gap-[2rem]'>

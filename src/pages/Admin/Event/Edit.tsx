@@ -338,7 +338,7 @@ const EventEdit = () => {
                             eventDuration.start === 0 ? new Date() : new Date(eventDuration.start)
                           }
                           onChangeCustom={handleChangeTime}
-                          isStartDate={false}
+                          isStartDate
                         />
                       }
                     />
@@ -446,7 +446,7 @@ const EventEdit = () => {
                                 : new Date(registrationDuration.start)
                             }
                             onChangeCustom={handleChangeRegistrationTime}
-                            isStartDate={false}
+                            isStartDate
                           />
                         }
                       />
