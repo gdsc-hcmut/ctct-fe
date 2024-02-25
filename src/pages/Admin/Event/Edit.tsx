@@ -148,20 +148,34 @@ const EventEdit = () => {
   }, [id]);
 
   const handleOnSave = useDebounce((): void => {
-    const formData = {
-      name,
-      description,
-      eventType,
-      venue,
-      hasRegistrationTime,
-      registrationStartedAt: registrationDuration.start,
-      registrationEndedAt: registrationDuration.end,
-      startedAt: eventDuration.start,
-      endedAt: eventDuration.end,
-      lhotMetadata: {
-        subject: subject === '' ? '64da22874b60004c167e493b' : subject,
-      },
-    };
+    const formData =
+      subject === ''
+        ? {
+            name,
+            description,
+            eventType,
+            venue,
+            hasRegistrationTime,
+            registrationStartedAt: registrationDuration.start,
+            registrationEndedAt: registrationDuration.end,
+            startedAt: eventDuration.start,
+            endedAt: eventDuration.end,
+          }
+        : {
+            name,
+            description,
+            eventType,
+            venue,
+            hasRegistrationTime,
+            registrationStartedAt: registrationDuration.start,
+            registrationEndedAt: registrationDuration.end,
+            startedAt: eventDuration.start,
+            endedAt: eventDuration.end,
+            lhotMetadata: {
+              subject,
+            },
+          };
+
     EventService.editById(id, formData)
       .then((_) => {
         toast.success('Chỉnh sửa thành công');
