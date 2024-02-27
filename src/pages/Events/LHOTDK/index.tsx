@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import { Footer, LazyLoadImage, Loading } from '../../../components';
+import { Footer, LazyLoadImage } from '../../../components';
 import Achievement1 from '../../../components/Achivement/Achievement1';
 import BenefitBoard from '../../../components/BenefitBoard';
 import Comments from '../../../components/Comments';
@@ -30,6 +30,7 @@ const LHOTDKPage = () => {
     EventService.getAllPaginated(
       {
         startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
+        pageSize: 100,
       },
       false
     )
@@ -73,7 +74,9 @@ const LHOTDKPage = () => {
     fetchEvent();
   }, [fetchEvent]);
 
-  if (loading) return <Loading />; // need fix
+  // if (loading) return <Loading />; // need fix
+  console.log(loading);
+
   return (
     <Page title='Lớp học ôn tập'>
       <main className='with-nav-height flex flex-col gap-y-5 overflow-hidden overflow-y-auto text-[16px] md:text-[14px] lg:gap-y-10 lg:text-[18px] xl:text-[20px] 2xl:gap-y-[54px] 3xl:gap-y-[60px]'>

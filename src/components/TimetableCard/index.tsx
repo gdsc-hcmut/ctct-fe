@@ -130,7 +130,7 @@ const TimetableCard = ({
 
   return (
     <>
-      <div className='relative flex min-h-[15rem] w-full flex-col items-start space-y-[0.25rem] rounded-[1.25rem] bg-white p-[1.25rem] shadow-[0_0_20px_0_rgba(0,0,0,0.1)] sm:min-h-[12rem] md:min-h-[85%] md:w-[33%] lg:min-h-[90%] xl:min-h-[85%]'>
+      <div className='relative flex min-h-[15rem] w-full flex-col items-start space-y-[0.25rem] rounded-[1.25rem] bg-white p-[1.25rem] shadow-[0_0_20px_0_rgba(0,0,0,0.1)] sm:min-h-[12rem] md:min-h-[85%] md:w-[100%] lg:min-h-[90%] xl:min-h-[85%]'>
         <p className='cursor-pointer text-[24px] font-bold text-[#2F327D] lg:text-[24px]'>
           {subject?.name}
         </p>
