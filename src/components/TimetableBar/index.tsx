@@ -1,3 +1,7 @@
+import { useMutation } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
+
+import EventService from '../../service/event.service';
 import { Event } from '../../types/events';
 import TimetableCard from '../TimetableCard';
 
@@ -25,6 +29,18 @@ const TimetableBar = ({ date, eventSets }: TimetableBarProps) => {
   const month = date.getMonth() + 1;
   const dayOfWeek = translateDayOfWeekVietnamese(date.getDay());
 
+  const { mutateAsync: register, isLoading: isRegistering } = useMutation({
+    mutationFn: async (eventId: string) => {
+      await EventService.register(eventId);
+    },
+    onSuccess: () => {
+      toast.success('Đăng ký sự kiện thành công');
+    },
+    onError: () => {
+      toast.error('Đã có lỗi trong lúc đăng ký sự kiện! Vui lòng thử lại sau.');
+    },
+  });
+
   return (
     <div className='relative flex h-fit w-full flex-col rounded-[1.25rem] bg-white shadow-[0_0_20px_0_rgba(0,0,0,0.1)] md:h-[17rem] md:flex-row'>
       <div className='flex h-[25%] w-full flex-row items-center justify-center rounded-tl-[1.25rem] rounded-tr-[1.25rem] rounded-bl-none bg-[#5B72EE] md:h-full md:w-[13%] md:flex-col md:space-x-0 md:rounded-tr-none md:rounded-bl-[1.25rem]'>
@@ -46,10 +62,14 @@ const TimetableBar = ({ date, eventSets }: TimetableBarProps) => {
         {eventSets.map((event, index) => (
           <TimetableCard
             key={index}
+            eventId={event._id}
             subject={event.lhotMetadata?.subject}
-            startDate={new Date(event.startedAt)}
-            endDate={new Date(event.endedAt)}
+            startedAt={new Date(event.startedAt)}
+            endedAt={new Date(event.endedAt)}
             location={event.venue}
+            register={register}
+            disabledRegisterButton={isRegistering}
+            registeredUsers={event.registeredUsers}
           />
         ))}
       </div>

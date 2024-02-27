@@ -91,7 +91,23 @@ ${query.endedAtMax !== undefined ? `&endedAtMax=${query.endedAtMax}` : ''}
 };
 
 const deleteById = (id: string) => {
-  return axios.delete<Response<null>>(`${API_URL}admin/event/${id}`);
+  return axios.delete<Response>(`${API_URL}admin/event/${id}`);
+};
+
+const register = (eventId: string) => {
+  return axios.post<Response>(`${API_URL}event/${eventId}/register`);
+};
+
+const unregister = (eventId: string) => {
+  return axios.post<Response<null>>(`${API_URL}event/${eventId}/unregister`);
+};
+
+const getUserQR = () => {
+  return axios.get<Response<string>>(`${API_URL}event/qr/my`);
+};
+
+const getUserEvents = () => {
+  return axios.get<Response<GetAllEventPaginatedReturnType>>(`${API_URL}event/my`);
 };
 
 const EventService = {
@@ -102,6 +118,10 @@ const EventService = {
   getById,
   getAllPaginated,
   deleteById,
+  register,
+  unregister,
+  getUserQR,
+  getUserEvents,
 };
 
 export default EventService;

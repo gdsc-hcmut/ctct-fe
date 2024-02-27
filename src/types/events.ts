@@ -12,6 +12,11 @@ export const EVENT_TYPE_OPTIONS: Option[] = [
   { value: EventType.OTHER, label: 'Khác' },
 ];
 
+type EventUser = {
+  userId: string;
+  checkedInAt: Date;
+};
+
 export type Event = {
   _id: string;
 
@@ -32,7 +37,7 @@ export type Event = {
     subject: Subject;
   };
 
-  registeredUsers: User[];
+  registeredUsers: EventUser[];
 
   createdAt: number;
   createdBy: User;
