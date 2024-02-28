@@ -58,7 +58,7 @@ const TimetableBar = ({ date, eventSets }: TimetableBarProps) => {
           {dayOfWeek}, ngày {day} tháng {month}
         </p>
       </div>
-      <div className='grid w-full grid-cols-2 gap-[1.25rem] py-[1.25rem] px-[1.25rem] md:flex md:flex-row md:items-center md:justify-start md:gap-0 md:space-x-[1.25rem] md:py-0'>
+      <div className='grid w-full grid-cols-2 gap-[1.25rem] py-[1.25rem] px-[1.25rem] md:grid-cols-4 md:items-center md:justify-start md:py-0'>
         {eventSets.map((event, index) => (
           <TimetableCard
             key={index}
