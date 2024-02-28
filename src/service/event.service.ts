@@ -46,6 +46,11 @@ type GetAllEventPaginatedArgument = {
   endedAtMax?: number;
 };
 
+type GetUserEventPaginatedArgument = {
+  pageNumber?: number;
+  pageSize?: number;
+};
+
 type GetAllEventPaginatedReturnType = {
   total: number;
   pageCount: number;
@@ -106,8 +111,11 @@ const getUserQR = () => {
   return axios.get<Response<string>>(`${API_URL}event/qr/my`);
 };
 
-const getUserEvents = () => {
-  return axios.get<Response<GetAllEventPaginatedReturnType>>(`${API_URL}event/my`);
+const getUserEvents = (query: GetUserEventPaginatedArgument) => {
+  const queryString = `${API_URL}event/my?pagination=true\
+${query.pageNumber !== undefined ? `&pageNumber=${query.pageNumber}` : ''}\
+${query.pageSize !== undefined ? `&pageSize=${query.pageSize}` : ''}`;
+  return axios.get<Response<GetAllEventPaginatedReturnType>>(queryString);
 };
 
 const EventService = {

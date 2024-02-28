@@ -4,14 +4,20 @@ import { useEffect, useState, useRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-// import { useDebounce } from 'usehooks-ts';
 
-import { Icon } from '../../../components';
+import { Icon, Pagination } from '../../../components';
 import { Page, Wrapper } from '../../../layout';
 import EventService from '../../../service/event.service';
+import useBoundStore from '../../../store';
 import { EVENT_TYPE_OPTIONS, Event, EventType, EventUser } from '../../../types/events';
 
+const ITEMS_PER_PAGE = 10;
+
 const EventView = () => {
+  const page = useBoundStore.use.page();
+  const setPage = useBoundStore.use.setPage();
+  const [totalCount, setTotalCount] = useState(1);
+
   const params = useParams();
   const id = params?.id ?? '';
   const navigate = useNavigate();
@@ -44,17 +50,18 @@ const EventView = () => {
     EventService.getById(id, true)
       .then((res) => {
         const result = res.data.payload;
-        // console.log(result);
         setEvent(result);
         setRegisteredUser(result.registeredUsers);
+        setTotalCount(result.registeredUsers.length);
       })
       .catch((err) => {
         toast.error(err.response.data.message);
       })
       .finally(() => {
         setLoading(false);
+        setPage(0);
       });
-  }, [id, isChange]);
+  }, [id, isChange, page, setPage]);
 
   const checkIn = async (qrcode: any) => {
     console.log(qrcode, 'Checkin');
@@ -310,10 +317,7 @@ const EventView = () => {
                   </button>
                 </div>
               </div>
-              <div
-                className='mt-4 h-full w-full rounded-lg bg-white px-8 py-2
-            lg:px-10 lg:py-4 3xl:px-12 3xl:py-6'
-              >
+              <div className='mt-4 h-full w-full rounded-lg bg-white px-8 py-2 lg:px-10 lg:py-4 3xl:px-12 3xl:py-6'>
                 <form className='flex flex-col gap-y-6'>
                   <p className='mt-4 flex flex-[2.5] text-base font-semibold lg:text-lg 3xl:text-xl'>
                     Check-In sự kiện
@@ -370,7 +374,7 @@ const EventView = () => {
                   </div>
 
                   <ul className='my-5 flex w-full flex-col justify-between gap-2 text-sm md:gap-4 lg:text-base 3xl:text-xl'>
-                    {registeredUser.map((user, index) => (
+                    {registeredUser.slice(page * 10, (page + 1) * 10).map((user, index) => (
                       <li
                         key={index}
                         className='flex w-full flex-row items-center justify-between rounded-xl bg-slate-100 p-2 md:p-4'
@@ -389,6 +393,12 @@ const EventView = () => {
                       </li>
                     ))}
                   </ul>
+                  <Pagination
+                    pageSize={ITEMS_PER_PAGE}
+                    totalCount={totalCount}
+                    currentPage={page}
+                    onPageChange={setPage}
+                  />
                 </form>
               </div>
             </>

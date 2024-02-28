@@ -91,10 +91,9 @@ const EventList = () => {
       true
     )
       .then((res) => {
-        const { total, pageCount, pageSize, result: allEvents } = res.data.payload;
+        const { total, result: allEvents } = res.data.payload;
         setEvents(allEvents);
         setTotalCount(total);
-        console.log(allEvents, pageCount, pageSize);
       })
       .catch((err) => {
         toast.error(err.response.data.message);

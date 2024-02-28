@@ -2,8 +2,7 @@ import QRCode from 'qrcode.react';
 import { useEffect, useState, useRef } from 'react';
 import { toast } from 'react-toastify';
 
-import { Footer, Loading } from '../../../components';
-// import Icon from '../../../components/Icon';
+import { Footer, Loading, Pagination } from '../../../components';
 import DeleteModal from '../../../components/Modal/DeleteModal';
 import ProfileOption from '../../../components/ProfileOption';
 import { useDebounce } from '../../../hooks';
@@ -11,6 +10,8 @@ import { Page } from '../../../layout';
 import EventService from '../../../service/event.service';
 import useBoundStore from '../../../store';
 import { Event } from '../../../types/events';
+
+const ITEMS_PER_PAGE = 10;
 
 const epochToDateString = (epochTime: number): string => {
   const date = new Date(epochTime);
@@ -34,6 +35,9 @@ const calculateEpochDuration = (start: number, end: number): string => {
 
 const UserEvent = () => {
   const user = useBoundStore.use.user();
+  const page = useBoundStore.use.page();
+  const setPage = useBoundStore.use.setPage();
+  const [totalCount, setTotalCount] = useState(1);
 
   const eventToDelete = useRef<string | null>(null);
   const [deleteModal, setDeleteModal] = useState(false);
@@ -48,7 +52,7 @@ const UserEvent = () => {
           toast.success('Huỷ đăng ký sự kiện thành công');
           setDeleteModal(false);
           eventToDelete.current = null;
-          getHistory();
+          fetchHistory();
           // setPage(1);
         })
         .catch((err) => {
@@ -71,12 +75,16 @@ const UserEvent = () => {
       });
   });
 
-  const getHistory = useDebounce(() => {
+  const fetchHistory = useDebounce(() => {
     setLoading(true);
-    EventService.getUserEvents()
+    EventService.getUserEvents({
+      pageNumber: page,
+      pageSize: ITEMS_PER_PAGE,
+    })
       .then((res) => {
-        const { result: allEvents } = res.data.payload;
+        const { total, result: allEvents } = res.data.payload;
         setEvents(allEvents);
+        setTotalCount(total);
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -91,8 +99,8 @@ const UserEvent = () => {
   }, [getQRCode]);
 
   useEffect(() => {
-    getHistory();
-  }, [getHistory]);
+    fetchHistory();
+  }, [fetchHistory, page]);
 
   if (isLoading) {
     // bug
@@ -183,6 +191,12 @@ const UserEvent = () => {
                   ))
                 : null}
             </ul>
+            <Pagination
+              pageSize={ITEMS_PER_PAGE}
+              totalCount={totalCount}
+              currentPage={page}
+              onPageChange={setPage}
+            />
           </div>
         </div>
         <Footer />
