@@ -1,49 +1,103 @@
 import QRCode from 'qrcode.react';
-import { useState } from 'react';
-// import { toast } from 'react-toastify';
+import { useEffect, useState, useRef } from 'react';
+import { toast } from 'react-toastify';
 
-import { Footer } from '../../../components';
+import { Footer, Loading } from '../../../components';
 // import Icon from '../../../components/Icon';
 import DeleteModal from '../../../components/Modal/DeleteModal';
 import ProfileOption from '../../../components/ProfileOption';
+import { useDebounce } from '../../../hooks';
 import { Page } from '../../../layout';
-// import UserService from '../../../service/user.service';
+import EventService from '../../../service/event.service';
 import useBoundStore from '../../../store';
-// import { User } from '../../../types';
+import { Event } from '../../../types/events';
+
+const epochToDateString = (epochTime: number): string => {
+  const date = new Date(epochTime);
+
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear().toString();
+  const hour = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+
+  return `${hour}h${minutes}, ${day}/${month}/${year}`;
+};
+
+const calculateEpochDuration = (start: number, end: number): string => {
+  const minutes = Math.floor((end - start) / 1000 / 60);
+  // const hours = Math.floor(minutes / 60);
+  // const remainingMinutes = minutes % 60;
+  // return `${hours ? `${hours} giờ` : ''} ${remainingMinutes} phút`;
+  return `${minutes} phút`;
+};
 
 const UserEvent = () => {
   const user = useBoundStore.use.user();
 
+  const eventToDelete = useRef<string | null>(null);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+  const [events, setEvents] = useState<Event[]>([]);
 
   const onDeleteEvent = () => {
-    // const eventId = eventToDelete.current;
-    // if (eventId !== null) {
-    //   MockTestService.deleteById(eventId)
-    //     .then((_res) => {
-    //       toast.success('Xóa đợt thi thử thành công');
-    //       setPage(1);
-    //       fetchMockTest();
-    //     })
-    //     .catch((err) => {
-    //       toast.error(err.response.data.message);
-    //     });
-    // }
-    // eventToDelete.current = null;
-    console.log('Delete event');
+    const eventId = eventToDelete.current;
+    if (eventId !== null) {
+      EventService.unregister(eventId)
+        .then((_res) => {
+          toast.success('Huỷ đăng ký sự kiện thành công');
+          setDeleteModal(false);
+          eventToDelete.current = null;
+          getHistory();
+          // setPage(1);
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message);
+        });
+    }
+    eventToDelete.current = null;
   };
 
-  const epochToDateString = (epochTime: number): string => {
-    const date = new Date(epochTime);
+  const [userQRCode, setUserQRCode] = useState('');
 
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear().toString();
-    const hour = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
+  const getQRCode = useDebounce(() => {
+    setLoading(true);
+    EventService.getUserQR()
+      .then((res) => {
+        setUserQRCode(res.data.payload);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  });
 
-    return `${hour}h${minutes}, ${day}/${month}/${year}`;
-  };
+  const getHistory = useDebounce(() => {
+    setLoading(true);
+    EventService.getUserEvents()
+      .then((res) => {
+        const { result: allEvents } = res.data.payload;
+        setEvents(allEvents);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  });
+
+  useEffect(() => {
+    getQRCode();
+  }, [getQRCode]);
+
+  useEffect(() => {
+    getHistory();
+  }, [getHistory]);
+
+  if (isLoading) {
+    // bug
+    return <Loading />;
+  }
 
   return (
     <Page title='Thông tin người dùng - Xem và cập nhật thông tin'>
@@ -68,7 +122,7 @@ const UserEvent = () => {
                 bgColor='#FFFFFF'
                 fgColor='#000000'
                 id='qrcode'
-                value={'https://www.google.com/'}
+                value={userQRCode}
                 size={300}
                 style={{
                   display: 'block',
@@ -89,105 +143,39 @@ const UserEvent = () => {
               </h1>
             </div>
             <ul className='3xl:text-x mx-auto mt-[0.75rem] flex w-full flex-col items-center justify-center space-y-[0.5rem] text-sm md:mt-[1rem] md:space-y-[0.75rem] lg:text-base'>
-              <li className='flex h-fit w-full flex-row items-center justify-between space-x-[2rem] rounded-[1rem] bg-slate-50 p-4 hover:bg-slate-100'>
-                <div className='flex flex-col items-start space-y-[0.5rem]'>
-                  <p className='font-semibold text-slate-600'>Lớp học ôn tập - Vật lý 1</p>
-                  <p className=''>{epochToDateString(1708399962)} - 120 phút - P.210H1</p>
-                </div>
-                <div className='flex flex-col items-end space-y-[0.5rem]'>
-                  <p className='font-semibold text-slate-400'>Không tham gia</p>
-                  <button
-                    className='hidden cursor-pointer text-slate-600 underline'
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // eventToDelete.current = exam._id;
-                      setDeleteModal(true);
-                    }}
-                  >
-                    Huỷ đăng ký
-                  </button>
-                </div>
-              </li>
-
-              <li className='flex h-fit w-full flex-row items-center justify-between space-x-[2rem] rounded-[1rem] bg-slate-50 p-4 hover:bg-slate-100'>
-                <div className='flex flex-col items-start space-y-[0.5rem]'>
-                  <p className='font-semibold text-slate-600'>Lớp học ôn tập - Vật lý 1</p>
-                  <p className=''>{epochToDateString(1708399962)} - 120 phút - P.210H1</p>
-                </div>
-                <div className='flex flex-col items-end space-y-[0.5rem]'>
-                  <p className='font-semibold text-[#3d8c40]'>Đã check-in</p>
-                  <button
-                    className='hidden cursor-pointer text-slate-600 underline'
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // eventToDelete.current = exam._id;
-                      setDeleteModal(true);
-                    }}
-                  >
-                    Huỷ đăng ký
-                  </button>
-                </div>
-              </li>
-
-              <li className='flex h-fit w-full flex-row items-center justify-between space-x-[2rem] rounded-[1rem] bg-slate-50 p-4 hover:bg-slate-100'>
-                <div className='flex flex-col items-start space-y-[0.5rem]'>
-                  <p className='font-semibold text-slate-600'>Lớp học ôn tập - Vật lý 1</p>
-                  <p className=''>{epochToDateString(1708399962)} - 120 phút - P.210H1</p>
-                </div>
-                <div className='flex flex-col items-end space-y-[0.5rem]'>
-                  <p className='font-semibold text-[#fee135]'>Đã đăng ký</p>
-                  <button
-                    className='cursor-pointer text-slate-600 underline'
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // eventToDelete.current = exam._id;
-                      setDeleteModal(true);
-                    }}
-                  >
-                    Huỷ đăng ký
-                  </button>
-                </div>
-              </li>
-
-              <li className='flex h-fit w-full flex-row items-center justify-between space-x-[2rem] rounded-[1rem] bg-slate-50 p-4 hover:bg-slate-100'>
-                <div className='flex flex-col items-start space-y-[0.5rem]'>
-                  <p className='font-semibold text-slate-600'>Lớp học ôn tập - Đại số Tuyến tính</p>
-                  <p className=''>{epochToDateString(1708399962)} - 120 phút - P.210H1</p>
-                </div>
-                <div className='flex flex-col items-end space-y-[0.5rem]'>
-                  <p className='font-semibold text-[#fee135]'>Đã đăng ký</p>
-                  <button
-                    className='cursor-pointer text-slate-600 underline'
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // eventToDelete.current = exam._id;
-                      setDeleteModal(true);
-                    }}
-                  >
-                    Huỷ đăng ký
-                  </button>
-                </div>
-              </li>
-
-              <li className='flex h-fit w-full flex-row items-center justify-between space-x-[2rem] rounded-[1rem] bg-slate-50 p-4 hover:bg-slate-100'>
-                <div className='flex flex-col items-start space-y-[0.5rem]'>
-                  <p className='font-semibold text-slate-600'>Lớp học ôn tập - Vật lý 1</p>
-                  <p className=''>{epochToDateString(1708399962)} - 120 phút - P.210H1</p>
-                </div>
-                <div className='flex flex-col items-end space-y-[0.5rem]'>
-                  <p className='font-semibold text-slate-400'>Đã huỷ đăng ký</p>
-                  <button
-                    className='hidden cursor-pointer text-slate-600 underline'
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // eventToDelete.current = exam._id;
-                      setDeleteModal(true);
-                    }}
-                  >
-                    Huỷ đăng ký
-                  </button>
-                </div>
-              </li>
+              {events && events[0]
+                ? events.map((event, index) => (
+                    <li
+                      key={index}
+                      className='flex h-fit w-full flex-row items-center justify-between space-x-[2rem] rounded-[1rem] bg-slate-50 p-4 hover:bg-slate-100'
+                    >
+                      <div className='flex flex-col items-start space-y-[0.5rem]'>
+                        <p className='font-semibold text-slate-600'>
+                          Lớp học ôn tập - {event.name}
+                        </p>
+                        <p className=''>
+                          {epochToDateString(event.startedAt)} -{' '}
+                          {calculateEpochDuration(event.startedAt, event.endedAt)} - {event.venue}
+                        </p>
+                      </div>
+                      <div className='flex flex-col items-end space-y-[0.5rem]'>
+                        <p className='font-semibold text-[#F4B400]'>Đã đăng ký</p>
+                        {
+                          <button
+                            className='cursor-pointer text-slate-600 underline'
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              eventToDelete.current = event._id;
+                              setDeleteModal(true);
+                            }}
+                          >
+                            Huỷ đăng ký
+                          </button>
+                        }
+                      </div>
+                    </li>
+                  ))
+                : null}
             </ul>
           </div>
         </div>
