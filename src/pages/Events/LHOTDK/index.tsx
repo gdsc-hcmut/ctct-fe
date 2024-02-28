@@ -1,3 +1,4 @@
+import { useMutation } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
@@ -24,6 +25,19 @@ const LHOTDKPage = () => {
   const [secondDisplayedDate, setSecondDisplayedDate] = useState<number>();
   const [firstDisplayedEventSet, setFirstDisplayedEventSet] = useState<Event[]>([]);
   const [secondDisplayedEventSet, setSecondDisplayedEventSet] = useState<Event[]>([]);
+
+  const { mutateAsync: register } = useMutation({
+    mutationFn: async (eventId: string) => {
+      await EventService.register(eventId);
+      fetchEvent();
+    },
+    onSuccess: () => {
+      toast.success('Đăng ký sự kiện thành công');
+    },
+    onError: () => {
+      toast.error('Đã có lỗi trong lúc đăng ký sự kiện! Vui lòng thử lại sau.');
+    },
+  });
 
   const fetchEvent = useDebounce(() => {
     setLoading(true);
@@ -152,6 +166,7 @@ const LHOTDKPage = () => {
                   secondDate={secondDisplayedDate ? new Date(secondDisplayedDate) : undefined}
                   firstEventSet={firstDisplayedEventSet}
                   secondEventSet={secondDisplayedEventSet}
+                  register={register}
                 />
               </div>
 

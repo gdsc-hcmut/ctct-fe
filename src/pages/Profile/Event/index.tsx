@@ -85,6 +85,7 @@ const UserEvent = () => {
         const { total, result: allEvents } = res.data.payload;
         setEvents(allEvents);
         setTotalCount(total);
+        console.log(allEvents);
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -103,7 +104,6 @@ const UserEvent = () => {
   }, [fetchHistory, page]);
 
   if (isLoading) {
-    // bug
     return <Loading />;
   }
 
@@ -167,7 +167,7 @@ const UserEvent = () => {
                         </p>
                       </div>
                       <div className='flex flex-col items-end space-y-[0.5rem]'>
-                        {event.registeredUsers[0].checkedInAt ? (
+                        {!event.registeredUsers[0].checkedInAt ? (
                           <>
                             <p className='font-semibold text-[#F4B400]'>Đã đăng ký</p>
                             <button
