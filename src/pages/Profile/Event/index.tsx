@@ -167,7 +167,15 @@ const UserEvent = () => {
                         </p>
                       </div>
                       <div className='flex flex-col items-end space-y-[0.5rem]'>
-                        {!event.registeredUsers[0].checkedInAt ? (
+                        {event.registeredUsers[0].checkedInAt ? (
+                          <>
+                            <p className='font-semibold text-[#3d8c40]'>Đã check-in</p>
+                          </>
+                        ) : event.endedAt < Date.now() ? (
+                          <>
+                            <p className='font-semibold text-slate-600'>Sự kiện đã kết thúc</p>
+                          </>
+                        ) : (
                           <>
                             <p className='font-semibold text-[#F4B400]'>Đã đăng ký</p>
                             <button
@@ -180,10 +188,6 @@ const UserEvent = () => {
                             >
                               Huỷ đăng ký
                             </button>
-                          </>
-                        ) : (
-                          <>
-                            <p className='font-semibold text-[#3d8c40]'>Đã check-in</p>
                           </>
                         )}
                       </div>
