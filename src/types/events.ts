@@ -37,7 +37,7 @@ export type Event = {
   startedAt: number;
   endedAt: number;
 
-  lhotMetadata?: {
+  lhotMetadata: {
     subject: Subject;
   };
 

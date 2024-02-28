@@ -108,6 +108,8 @@ const EventEdit = () => {
     name === '' ||
     venue === '' ||
     eventType === '' ||
+    description === '' ||
+    subject === '' ||
     loading ||
     eventDuration.start === 0 ||
     eventDuration.end === 0 ||
@@ -126,12 +128,17 @@ const EventEdit = () => {
           hasRegistrationTime === event.hasRegistrationTime &&
           eventDuration.start === event.startedAt &&
           eventDuration.end === event.endedAt &&
-          registrationDuration.start === event.registrationStartedAt &&
-          registrationDuration.end === event.registrationEndedAt
-        // subject === event.lhotMetadata.subject
+          (registrationDuration.start === event.registrationStartedAt ||
+            event.registrationStartedAt === undefined) &&
+          (registrationDuration.end === event.registrationEndedAt ||
+            event.registrationEndedAt === undefined) &&
+          subject === event.lhotMetadata.subject._id
       );
     }
   });
+
+  console.log('canSave', canSave);
+  console.log('submitDisabled', submitDisabled);
 
   const fetchData = useCallback(() => {
     setLoading(true);
@@ -148,33 +155,20 @@ const EventEdit = () => {
   }, [id]);
 
   const handleOnSave = useDebounce((): void => {
-    const formData =
-      subject === ''
-        ? {
-            name,
-            description,
-            eventType,
-            venue,
-            hasRegistrationTime,
-            registrationStartedAt: registrationDuration.start,
-            registrationEndedAt: registrationDuration.end,
-            startedAt: eventDuration.start,
-            endedAt: eventDuration.end,
-          }
-        : {
-            name,
-            description,
-            eventType,
-            venue,
-            hasRegistrationTime,
-            registrationStartedAt: registrationDuration.start,
-            registrationEndedAt: registrationDuration.end,
-            startedAt: eventDuration.start,
-            endedAt: eventDuration.end,
-            lhotMetadata: {
-              subject,
-            },
-          };
+    const formData = {
+      name,
+      description,
+      eventType,
+      venue,
+      hasRegistrationTime,
+      registrationStartedAt: registrationDuration.start,
+      registrationEndedAt: registrationDuration.end,
+      startedAt: eventDuration.start,
+      endedAt: eventDuration.end,
+      lhotMetadata: {
+        subject,
+      },
+    };
 
     EventService.editById(id, formData)
       .then((_) => {
@@ -195,12 +189,12 @@ const EventEdit = () => {
       setEventType(event.eventType);
       setVenue(event.venue);
       setHasRegistrationTime(event.hasRegistrationTime);
+      setSubject(event.lhotMetadata.subject._id);
       setEventDuration({ start: event.startedAt, end: event.endedAt });
       setRegistrationDuration({
         start: event.registrationStartedAt ?? 0,
         end: event.registrationEndedAt ?? 0,
       });
-      // setSubject(event.lhotMetadata.subject);
     }
   }, [event]);
 
@@ -219,6 +213,7 @@ const EventEdit = () => {
     eventDuration,
     registrationDuration,
     setSave,
+    subject,
   ]);
 
   return (
@@ -523,7 +518,7 @@ const EventEdit = () => {
                           ? 'bg-[#4285F4]/80 hover:bg-[#4285F4]'
                           : 'bg-gray-400/80'
                       }`}
-                      disabled={canSave && submitDisabled}
+                      disabled={canSave || submitDisabled}
                       onClick={(e) => {
                         e.preventDefault();
                         handleOnSave();
