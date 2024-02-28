@@ -114,8 +114,9 @@ const TimetableCard = ({
   useEffect(() => {
     if (Date.now() > endedAt.getTime()) {
       setEventStatus(EventStatus.ENDED);
-    } else if (Date.now() > startedAt.getTime()) {
-      setEventStatus(EventStatus.ONGOING);
+    } else if (Date.now() > startedAt.getTime() && Date.now() < endedAt.getTime()) {
+      if (isRegistered) setEventStatus(EventStatus.REGISTERED);
+      else setEventStatus(EventStatus.ONGOING);
     } else {
       if (isRegistered) setEventStatus(EventStatus.REGISTERED);
       else setEventStatus(EventStatus.OPEN);
