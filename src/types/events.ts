@@ -12,8 +12,12 @@ export const EVENT_TYPE_OPTIONS: Option[] = [
   { value: EventType.OTHER, label: 'Khác' },
 ];
 
-type EventUser = {
+export type EventUser = {
   userId: string;
+  studentId: string;
+  phoneNumber: string;
+  givenName: string;
+  familyAndMiddleName: string;
   checkedInAt: Date;
 };
 

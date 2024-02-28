@@ -63,7 +63,7 @@ const checkInByQRCode = (id: string, qrCode: string) => {
 };
 
 const checkInByEmail = (id: string, email: string) => {
-  return axios.post<Response<null>>(`${API_URL}admin/event/${id}/checkin`, { email });
+  return axios.post<Response<null>>(`${API_URL}admin/event/${id}/checkin/email`, { email });
 };
 
 const editById = (id: string, data: EditEventArgument) => {
