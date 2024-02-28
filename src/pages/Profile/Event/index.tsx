@@ -159,19 +159,25 @@ const UserEvent = () => {
                         </p>
                       </div>
                       <div className='flex flex-col items-end space-y-[0.5rem]'>
-                        <p className='font-semibold text-[#F4B400]'>Đã đăng ký</p>
-                        {
-                          <button
-                            className='cursor-pointer text-slate-600 underline'
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              eventToDelete.current = event._id;
-                              setDeleteModal(true);
-                            }}
-                          >
-                            Huỷ đăng ký
-                          </button>
-                        }
+                        {event.registeredUsers[0].checkedInAt ? (
+                          <>
+                            <p className='font-semibold text-[#F4B400]'>Đã đăng ký</p>
+                            <button
+                              className='cursor-pointer text-slate-600 underline'
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                eventToDelete.current = event._id;
+                                setDeleteModal(true);
+                              }}
+                            >
+                              Huỷ đăng ký
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <p className='font-semibold text-[#3d8c40]'>Đã check-in</p>
+                          </>
+                        )}
                       </div>
                     </li>
                   ))
