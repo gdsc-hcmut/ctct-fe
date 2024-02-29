@@ -167,7 +167,10 @@ const LHOTDKPage = () => {
                 </div>
               </div>
 
-              <div className='flex w-full flex-col items-start justify-between gap-8'>
+              <div
+                className='flex w-full flex-col items-start justify-between gap-8'
+                id='timetable'
+              >
                 <div className='flex w-full flex-col justify-start gap-2 md:items-center md:justify-center lg:gap-4 2xl:gap-5'>
                   <div className='text-justify text-[24px] font-bold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
                     Các lớp học sắp tới
