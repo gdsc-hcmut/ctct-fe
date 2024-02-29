@@ -21,10 +21,15 @@ const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 const LHOTDKPage = () => {
   const [loading, setLoading] = useState(false);
 
-  const [firstDisplayedDate, setFirstDisplayedDate] = useState<number>();
-  const [secondDisplayedDate, setSecondDisplayedDate] = useState<number>();
-  const [firstDisplayedEventSet, setFirstDisplayedEventSet] = useState<Event[]>([]);
-  const [secondDisplayedEventSet, setSecondDisplayedEventSet] = useState<Event[]>([]);
+  // const [firstDisplayedDate, setFirstDisplayedDate] = useState<number>();
+  // const [secondDisplayedDate, setSecondDisplayedDate] = useState<number>();
+  // const [thirdDisplayedDate, setThirdDisplayedDate] = useState<number>();
+  // const [firstDisplayedEventSet, setFirstDisplayedEventSet] = useState<Event[]>([]);
+  // const [secondDisplayedEventSet, setSecondDisplayedEventSet] = useState<Event[]>([]);
+  // const [thirdDisplayedEventSet, setThirdDisplayedEventSet] = useState<Event[]>([]);
+
+  const [displatedDate, setDisplayedDate] = useState<number[]>([]);
+  const [displatedEventSet, setDisplatedEventSet] = useState<Event[][]>([[]]);
 
   const { mutateAsync: register } = useMutation({
     mutationFn: async (eventId: string) => {
@@ -71,10 +76,22 @@ const LHOTDKPage = () => {
           (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === secondDate
         );
 
-        setFirstDisplayedDate(firstDate);
-        setSecondDisplayedDate(secondDate);
-        setFirstDisplayedEventSet(firstEventSet);
-        setSecondDisplayedEventSet(secondEventSet);
+        const secondRemainingEvents = remainingEvents.filter(
+          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== secondDate
+        );
+
+        const thirdDate =
+          secondRemainingEvents.length > 0
+            ? secondRemainingEvents[0].startedAt -
+              (secondRemainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
+            : 0;
+
+        const thirdEventSet = secondRemainingEvents.filter(
+          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === thirdDate
+        );
+
+        setDisplayedDate([firstDate, secondDate, thirdDate]);
+        setDisplatedEventSet([firstEventSet, secondEventSet, thirdEventSet]);
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -162,10 +179,8 @@ const LHOTDKPage = () => {
                   </p>
                 </div>
                 <Timetable
-                  firstDate={firstDisplayedDate ? new Date(firstDisplayedDate) : undefined}
-                  secondDate={secondDisplayedDate ? new Date(secondDisplayedDate) : undefined}
-                  firstEventSet={firstDisplayedEventSet}
-                  secondEventSet={secondDisplayedEventSet}
+                  dates={displatedDate}
+                  eventSets={displatedEventSet}
                   register={register}
                 />
               </div>
