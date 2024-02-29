@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import { Footer, LazyLoadImage } from '../../../components';
+import { Footer, Loading, LazyLoadImage } from '../../../components';
 import Achievement1 from '../../../components/Achivement/Achievement1';
 import BenefitBoard from '../../../components/BenefitBoard';
 import Comments from '../../../components/Comments';
@@ -19,7 +19,7 @@ import { Event } from '../../../types/events';
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
 const LHOTDKPage = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // const [firstDisplayedDate, setFirstDisplayedDate] = useState<number>();
   // const [secondDisplayedDate, setSecondDisplayedDate] = useState<number>();
@@ -105,8 +105,7 @@ const LHOTDKPage = () => {
     fetchEvent();
   }, [fetchEvent]);
 
-  // if (loading) return <Loading />; // need fix
-  console.log(loading);
+  if (loading) return <Loading />;
 
   return (
     <Page title='Lớp học ôn tập'>

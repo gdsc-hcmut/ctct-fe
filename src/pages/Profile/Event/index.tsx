@@ -41,7 +41,7 @@ const UserEvent = () => {
 
   const eventToDelete = useRef<string | null>(null);
   const [deleteModal, setDeleteModal] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [events, setEvents] = useState<Event[]>([]);
 
   const onDeleteEvent = () => {
@@ -85,7 +85,6 @@ const UserEvent = () => {
         const { total, result: allEvents } = res.data.payload;
         setEvents(allEvents);
         setTotalCount(total);
-        console.log(allEvents);
       })
       .catch((err) => {
         toast.error(err.response.data.message);
