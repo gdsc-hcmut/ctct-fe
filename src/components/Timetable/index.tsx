@@ -1,10 +1,55 @@
+import { UseMutateAsyncFunction } from '@tanstack/react-query';
+
+import { useWindowDimensions } from '../../hooks';
+import { Event } from '../../types/events';
 import TimetableBar from '../TimetableBar';
 
-const Timetable = () => {
+interface TimetableProps {
+  dates: number[];
+  eventSets: Event[][];
+  register: UseMutateAsyncFunction<void, unknown, string, unknown>;
+}
+
+const Timetable = ({ dates, eventSets, register }: TimetableProps) => {
+  const { width } = useWindowDimensions();
   return (
     <div className='flex w-full flex-col items-center justify-between space-y-[2.5rem]'>
-      <TimetableBar date={new Date()} />
-      <TimetableBar date={new Date()} />
+      {dates.map((date, index) => (
+        <>
+          {eventSets[index] && width > 768 && (
+            <>
+              <TimetableBar
+                date={new Date(date)}
+                eventSets={eventSets[index].slice(0, 4)}
+                register={register}
+              />
+              {eventSets[index].length > 4 && (
+                <TimetableBar
+                  date={new Date(date)}
+                  eventSets={eventSets[index].slice(4)}
+                  register={register}
+                />
+              )}
+              {eventSets[index].length > 8 && (
+                <TimetableBar
+                  date={new Date(date)}
+                  eventSets={eventSets[index].slice(8)}
+                  register={register}
+                />
+              )}
+            </>
+          )}
+          {eventSets[index] && width <= 768 && (
+            <>
+              <TimetableBar
+                date={new Date(date)}
+                eventSets={eventSets[index]}
+                register={register}
+              />
+            </>
+          )}
+        </>
+      ))}
     </div>
   );
 };

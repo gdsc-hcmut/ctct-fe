@@ -26,7 +26,6 @@ import EditQuestionPage from '../../pages/Admin/Question/Edit';
 import ViewQuestionPage from '../../pages/Admin/Question/View';
 import SubjectEdit from '../../pages/Admin/Subject/Edit';
 import SubjectView from '../../pages/Admin/Subject/View';
-
 const CreateExercisePage = lazy(() => import('../../pages/Admin/Exercise/Create'));
 const CreateQuestionPage = lazy(() => import('../../pages/Admin/Question/Create'));
 const CreateSubjectPage = lazy(() => import('../../pages/Admin/Subject/Create'));

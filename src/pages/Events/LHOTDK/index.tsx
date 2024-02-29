@@ -1,4 +1,8 @@
-import { Footer, LazyLoadImage } from '../../../components';
+import { useMutation } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+
+import { Footer, Loading, LazyLoadImage } from '../../../components';
 import Achievement1 from '../../../components/Achivement/Achievement1';
 import BenefitBoard from '../../../components/BenefitBoard';
 import Comments from '../../../components/Comments';
@@ -7,9 +11,94 @@ import NewsCarousel from '../../../components/NewsCarousel/NewsCarousel';
 import SignUpManual from '../../../components/SignUpManual';
 import SocialMediaCarousel from '../../../components/SocialMediaCarousel/SocialMediaCarousel';
 import Timetable from '../../../components/Timetable';
+import { useDebounce } from '../../../hooks';
 import { Page } from '../../../layout';
+import EventService from '../../../service/event.service';
+import { Event } from '../../../types/events';
+
+const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
 const LHOTDKPage = () => {
+  const [loading, setLoading] = useState(true);
+  const [displatedDate, setDisplayedDate] = useState<number[]>([]);
+  const [displatedEventSet, setDisplatedEventSet] = useState<Event[][]>([[]]);
+
+  const { mutateAsync: register } = useMutation({
+    mutationFn: async (eventId: string) => {
+      await EventService.register(eventId);
+      fetchEvent();
+    },
+    onSuccess: () => {
+      toast.success('Đăng ký sự kiện thành công');
+    },
+    onError: () => {
+      toast.error('Đã có lỗi trong lúc đăng ký sự kiện! Vui lòng thử lại sau.');
+    },
+  });
+
+  const fetchEvent = useDebounce(() => {
+    setLoading(true);
+    EventService.getAllPaginated(
+      {
+        startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
+        pageSize: 100,
+      },
+      false
+    )
+      .then((res) => {
+        const { result: allEvents } = res.data.payload;
+
+        const sortedEvents = allEvents.sort((a, b) => a.startedAt - b.startedAt);
+        const firstDate =
+          allEvents.length > 0
+            ? allEvents[0].startedAt - (allEvents[0].startedAt % ONE_DAY_MILLISECOND)
+            : 0;
+        const firstEventSet = sortedEvents.filter(
+          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === firstDate
+        );
+        const remainingEvents = sortedEvents.filter(
+          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== firstDate
+        );
+
+        const secondDate =
+          remainingEvents.length > 0
+            ? remainingEvents[0].startedAt - (remainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
+            : 0;
+        const secondEventSet = remainingEvents.filter(
+          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === secondDate
+        );
+
+        const secondRemainingEvents = remainingEvents.filter(
+          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== secondDate
+        );
+
+        const thirdDate =
+          secondRemainingEvents.length > 0
+            ? secondRemainingEvents[0].startedAt -
+              (secondRemainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
+            : 0;
+
+        const thirdEventSet = secondRemainingEvents.filter(
+          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === thirdDate
+        );
+
+        setDisplayedDate([firstDate, secondDate, thirdDate]);
+        setDisplatedEventSet([firstEventSet, secondEventSet, thirdEventSet]);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  });
+
+  useEffect(() => {
+    fetchEvent();
+  }, [fetchEvent]);
+
+  if (loading) return <Loading />;
+
   return (
     <Page title='Lớp học ôn tập'>
       <main className='with-nav-height flex flex-col gap-y-5 overflow-hidden overflow-y-auto text-[16px] md:text-[14px] lg:gap-y-10 lg:text-[18px] xl:text-[20px] 2xl:gap-y-[54px] 3xl:gap-y-[60px]'>
@@ -69,7 +158,10 @@ const LHOTDKPage = () => {
                 </div>
               </div>
 
-              <div className='flex w-full flex-col items-start justify-between gap-8'>
+              <div
+                className='flex w-full flex-col items-start justify-between gap-8'
+                id='timetable'
+              >
                 <div className='flex w-full flex-col justify-start gap-2 md:items-center md:justify-center lg:gap-4 2xl:gap-5'>
                   <div className='text-justify text-[24px] font-bold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
                     Các lớp học sắp tới
@@ -80,7 +172,11 @@ const LHOTDKPage = () => {
                     mùa thi.*
                   </p>
                 </div>
-                <Timetable />
+                <Timetable
+                  dates={displatedDate}
+                  eventSets={displatedEventSet}
+                  register={register}
+                />
               </div>
 
               <div className='relative flex w-full flex-col items-center justify-between gap-5 md:flex-row md:gap-[1rem] lg:gap-[1.5rem] 2xl:gap-[2rem]'>

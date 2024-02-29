@@ -40,6 +40,7 @@ const AdminAsideLink: React.FC<AdminAsideLinkProps> = ({
   const [isHover, setIsHover] = useState(false);
   const [isHoverListButton, setIsHoverListButton] = useState(false);
   const [isHoverCreateButton, setIsHoverCreateButton] = useState(false);
+
   let pathLink;
   switch (path) {
     case 'question':

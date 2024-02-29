@@ -1,3 +1,6 @@
+import { UseMutateAsyncFunction } from '@tanstack/react-query';
+
+import { Event } from '../../types/events';
 import TimetableCard from '../TimetableCard';
 
 const DayOfWeekVietnamese = [
@@ -16,9 +19,11 @@ const translateDayOfWeekVietnamese = (dayOfWeek: number) => {
 
 interface TimetableBarProps {
   date: Date;
+  eventSets: Event[];
+  register: UseMutateAsyncFunction<void, unknown, string, unknown>;
 }
 
-const TimetableBar = ({ date }: TimetableBarProps) => {
+const TimetableBar = ({ date, eventSets, register }: TimetableBarProps) => {
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const dayOfWeek = translateDayOfWeekVietnamese(date.getDay());
@@ -40,11 +45,19 @@ const TimetableBar = ({ date }: TimetableBarProps) => {
           {dayOfWeek}, ngày {day} tháng {month}
         </p>
       </div>
-      <div className='grid w-full grid-cols-2 gap-[1.25rem] py-[1.25rem] px-[1.25rem] md:flex md:flex-row md:items-center md:justify-start md:gap-0 md:space-x-[1.25rem] md:py-0'>
-        <TimetableCard startDate={date} endDate={date} location='Phòng 210H1' />
-        <TimetableCard startDate={date} endDate={date} location='Phòng 210H1' />
-        <TimetableCard startDate={date} endDate={date} location='Phòng 210H1' />
-        <TimetableCard startDate={date} endDate={date} location='Phòng 210H1' />
+      <div className='grid w-full grid-cols-2 gap-[1.25rem] py-[1.25rem] px-[1.25rem] md:grid-cols-4 md:items-center md:justify-start md:py-0'>
+        {eventSets.map((event, index) => (
+          <TimetableCard
+            key={index}
+            eventId={event._id}
+            subject={event.lhotMetadata?.subject}
+            startedAt={new Date(event.startedAt)}
+            endedAt={new Date(event.endedAt)}
+            location={event.venue}
+            register={register}
+            registeredUsers={event.registeredUsers}
+          />
+        ))}
       </div>
     </div>
   );

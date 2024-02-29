@@ -37,9 +37,17 @@ const HeroSection = () => {
                 </div>
               )}
 
-              <div className='mb-[2rem] flex flex-row items-center justify-between rounded-full bg-[#3465E1] hover:bg-[#3465E1]/80'>
+              <button
+                className='mb-[2rem] flex flex-row items-center justify-between rounded-full bg-[#3465E1] hover:bg-[#3465E1]/80'
+                onClick={() => {
+                  const element = document.getElementById('timetable');
+                  if (element) {
+                    element.scrollIntoView();
+                  }
+                }}
+              >
                 <p className='cursor-pointer py-4 px-[3rem] font-bold text-white'>Đăng ký ngay!</p>
-              </div>
+              </button>
             </div>
           </div>
           <div className='relative w-full'>
@@ -65,9 +73,17 @@ const HeroSection = () => {
               hơn cho kỳ thi.
             </p>
 
-            <div className='mb-[2rem] flex flex-row items-center justify-between rounded-full bg-[#4285F4]'>
+            <button
+              className='mb-[2rem] flex flex-row items-center justify-between rounded-full bg-[#4285F4]'
+              onClick={() => {
+                const element = document.getElementById('timetable');
+                if (element) {
+                  element.scrollIntoView();
+                }
+              }}
+            >
               <p className='cursor-pointer py-4 px-[3rem] font-bold text-white'>Đăng ký ngay!</p>
-            </div>
+            </button>
           </div>
           <div className='relative block h-full overflow-hidden'>
             <LazyLoadImage
