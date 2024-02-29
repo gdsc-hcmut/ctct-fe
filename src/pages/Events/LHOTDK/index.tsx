@@ -20,14 +20,6 @@ const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
 const LHOTDKPage = () => {
   const [loading, setLoading] = useState(true);
-
-  // const [firstDisplayedDate, setFirstDisplayedDate] = useState<number>();
-  // const [secondDisplayedDate, setSecondDisplayedDate] = useState<number>();
-  // const [thirdDisplayedDate, setThirdDisplayedDate] = useState<number>();
-  // const [firstDisplayedEventSet, setFirstDisplayedEventSet] = useState<Event[]>([]);
-  // const [secondDisplayedEventSet, setSecondDisplayedEventSet] = useState<Event[]>([]);
-  // const [thirdDisplayedEventSet, setThirdDisplayedEventSet] = useState<Event[]>([]);
-
   const [displatedDate, setDisplayedDate] = useState<number[]>([]);
   const [displatedEventSet, setDisplatedEventSet] = useState<Event[][]>([[]]);
 

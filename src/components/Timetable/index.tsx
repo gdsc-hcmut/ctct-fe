@@ -1,5 +1,6 @@
 import { UseMutateAsyncFunction } from '@tanstack/react-query';
 
+import { useWindowDimensions } from '../../hooks';
 import { Event } from '../../types/events';
 import TimetableBar from '../TimetableBar';
 
@@ -10,11 +11,12 @@ interface TimetableProps {
 }
 
 const Timetable = ({ dates, eventSets, register }: TimetableProps) => {
+  const { width } = useWindowDimensions();
   return (
     <div className='flex w-full flex-col items-center justify-between space-y-[2.5rem]'>
       {dates.map((date, index) => (
         <>
-          {eventSets[index] && (
+          {eventSets[index] && width > 768 && (
             <>
               <TimetableBar
                 date={new Date(date)}
@@ -35,6 +37,15 @@ const Timetable = ({ dates, eventSets, register }: TimetableProps) => {
                   register={register}
                 />
               )}
+            </>
+          )}
+          {eventSets[index] && width <= 768 && (
+            <>
+              <TimetableBar
+                date={new Date(date)}
+                eventSets={eventSets[index]}
+                register={register}
+              />
             </>
           )}
         </>
