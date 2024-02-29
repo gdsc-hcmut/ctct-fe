@@ -9,7 +9,7 @@ import { useDebounce } from '../../../hooks';
 import { Page } from '../../../layout';
 import EventService from '../../../service/event.service';
 import useBoundStore from '../../../store';
-import { Event } from '../../../types/events';
+import { Event, EventType } from '../../../types/events';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -27,9 +27,6 @@ const epochToDateString = (epochTime: number): string => {
 
 const calculateEpochDuration = (start: number, end: number): string => {
   const minutes = Math.floor((end - start) / 1000 / 60);
-  // const hours = Math.floor(minutes / 60);
-  // const remainingMinutes = minutes % 60;
-  // return `${hours ? `${hours} giờ` : ''} ${remainingMinutes} phút`;
   return `${minutes} phút`;
 };
 
@@ -154,17 +151,27 @@ const UserEvent = () => {
                 ? events.map((event, index) => (
                     <li
                       key={index}
-                      className='flex h-fit w-full flex-row items-center justify-between space-x-[2rem] rounded-[1rem] bg-slate-50 p-4 hover:bg-slate-100'
+                      className='flex h-fit w-full flex-row items-center justify-between space-x-[0.5rem] rounded-[1rem] bg-slate-50 p-4 hover:bg-slate-100'
                     >
-                      <div className='flex flex-col items-start space-y-[0.5rem]'>
+                      <div className='hidden flex-col items-start space-y-[0.5rem] xl:block'>
                         <p className='font-semibold text-slate-600'>
-                          Lớp học ôn tập - {event.name}
+                          {event.eventType === EventType.LHOT ? 'Lớp học ôn tập -' : ''}{' '}
+                          {event.name}
                         </p>
                         <p className=''>
                           {epochToDateString(event.startedAt)} -{' '}
                           {calculateEpochDuration(event.startedAt, event.endedAt)} - {event.venue}
                         </p>
                       </div>
+
+                      <div className='flex flex-col items-start space-y-[0.5rem] xl:hidden'>
+                        <p className='font-semibold text-slate-600'>
+                          {event.eventType === EventType.LHOT ? 'LHOT -' : ''} {event.name}
+                        </p>
+                        <p className=''>{epochToDateString(event.startedAt)}</p>
+                        <p className=''>{event.venue}</p>
+                      </div>
+
                       <div className='flex flex-col items-end space-y-[0.5rem]'>
                         {event.registeredUsers[0].checkedInAt ? (
                           <>
@@ -172,7 +179,7 @@ const UserEvent = () => {
                           </>
                         ) : event.endedAt < Date.now() ? (
                           <>
-                            <p className='font-semibold text-slate-600'>Sự kiện đã kết thúc</p>
+                            <p className='font-semibold text-slate-600'>Đã kết thúc</p>
                           </>
                         ) : (
                           <>
