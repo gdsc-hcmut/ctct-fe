@@ -151,7 +151,7 @@ const UserEvent = () => {
                 ? events.map((event, index) => (
                     <li
                       key={index}
-                      className='flex h-fit w-full flex-row items-center justify-between space-x-[0.5rem] rounded-[1rem] bg-slate-100 p-4 hover:bg-slate-200 xl:bg-slate-50 xl:hover:bg-slate-100'
+                      className='flex h-fit w-full flex-row items-center justify-between space-x-[0.5rem] rounded-[1rem] bg-white p-4 shadow-[0px_19px_47px_0px_rgba(47,50,125,0.1)] xl:bg-slate-50 xl:hover:bg-slate-100'
                     >
                       <div className='hidden flex-col items-start space-y-[0.5rem] xl:block'>
                         <p className='font-semibold text-slate-600'>
