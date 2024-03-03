@@ -178,6 +178,11 @@ const LHOTDKPage = () => {
                   eventSets={displatedEventSet}
                   register={register}
                 />
+                <div className='flex w-full flex-row items-end justify-end'>
+                  <a className='text-end underline' href='/profile/event'>
+                    Sự kiện của tôi
+                  </a>
+                </div>
               </div>
 
               <div className='relative flex w-full flex-col items-center justify-between gap-5 md:flex-row md:gap-[1rem] lg:gap-[1.5rem] 2xl:gap-[2rem]'>
