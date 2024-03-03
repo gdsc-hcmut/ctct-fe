@@ -123,7 +123,7 @@ const LHOTDKPage = () => {
                   </p>
                 </div>
 
-                <div className='absolute bottom-0 right-0 z-0 hidden aspect-square w-[52px] rounded-lg bg-[#33EFA0] md:-bottom-4 md:-right-4 md:block md:w-24 md:rounded-xl lg:-bottom-5 lg:-right-5 lg:w-32 xl:-bottom-6 xl:-right-6 xl:w-40 xl:rounded-2xl 2xl:-bottom-8 2xl:-right-8 2xl:w-52 2xl:rounded-3xl' />
+                <div className='absolute bottom-0 right-0 z-0 hidden aspect-square w-[52px] rounded-lg bg-[#4285F4] md:-bottom-4 md:-right-4 md:block md:w-24 md:rounded-xl lg:-bottom-5 lg:-right-5 lg:w-32 xl:-bottom-6 xl:-right-6 xl:w-40 xl:rounded-2xl 2xl:-bottom-8 2xl:-right-8 2xl:w-52 2xl:rounded-3xl' />
 
                 <div className='relative block h-full w-[100%] overflow-hidden md:w-[50%]'>
                   <LazyLoadImage
@@ -137,7 +137,7 @@ const LHOTDKPage = () => {
               </div>
 
               <div className='relative flex w-full flex-col-reverse items-start justify-between gap-5 md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
-                <div className='absolute top-0 left-0 z-0 hidden aspect-square h-[3rem] w-[3rem] rounded-full bg-[#5B61EB] md:-top-4 md:-left-4 md:block md:h-[4rem] md:w-[4rem] lg:-top-5 lg:-left-5 lg:h-[6rem] lg:w-[6rem] xl:-top-6 xl:-left-6 xl:h-[7rem] xl:w-[7rem] 2xl:-top-8 2xl:-left-8 2xl:h-[8rem] 2xl:w-[8rem]' />
+                <div className='absolute top-0 left-0 z-0 hidden aspect-square h-[3rem] w-[3rem] rounded-full bg-[#4285F4] md:-top-4 md:-left-4 md:block md:h-[4rem] md:w-[4rem] lg:-top-5 lg:-left-5 lg:h-[6rem] lg:w-[6rem] xl:-top-6 xl:-left-6 xl:h-[7rem] xl:w-[7rem] 2xl:-top-8 2xl:-left-8 2xl:h-[8rem] 2xl:w-[8rem]' />
                 <div className='relative block h-full w-[100%] overflow-hidden md:w-[50%]'>
                   <LazyLoadImage
                     className='z-[1] block aspect-[3/1] rounded-[20px]'
@@ -189,7 +189,7 @@ const LHOTDKPage = () => {
 
                 <SignUpManual />
 
-                <div className='relative hidden h-full w-[35%] flex-row items-center justify-between lg:block'>
+                <div className='relative hidden h-full w-[70%] flex-row items-center justify-between lg:block'>
                   <LazyLoadImage
                     className='z-[1] block aspect-[2/1] rounded-[20px] md:aspect-[5/2]'
                     src={require('../../../assets/images/LHOTDK_8.png')}
@@ -197,7 +197,7 @@ const LHOTDKPage = () => {
                     alt='tstt_alt'
                     objectFit='cover'
                   />
-                  <div className='absolute bottom-0 right-0 z-0 hidden aspect-square w-[52px] rounded-lg bg-[#5B72EE] md:-bottom-4 md:-right-4 md:block md:w-24 md:rounded-xl lg:-bottom-5 lg:-right-5 lg:w-32 xl:-bottom-6 xl:-right-6 xl:w-40 xl:rounded-2xl 2xl:-bottom-8 2xl:-right-8 2xl:w-52 2xl:rounded-3xl' />
+                  <div className='absolute bottom-0 right-0 z-0 hidden aspect-square w-[52px] rounded-lg bg-[#4285F4] md:-bottom-4 md:-right-4 md:block md:w-24 md:rounded-xl lg:-bottom-5 lg:-right-5 lg:w-32 xl:-bottom-6 xl:-right-6 xl:w-40 xl:rounded-2xl 2xl:-bottom-8 2xl:-right-8 2xl:w-52 2xl:rounded-3xl' />
                 </div>
               </div>
 

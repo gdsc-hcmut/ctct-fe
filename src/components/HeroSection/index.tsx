@@ -38,7 +38,7 @@ const HeroSection = () => {
               )}
 
               <button
-                className='mb-[2rem] flex flex-row items-center justify-between rounded-full bg-[#3465E1] hover:bg-[#3465E1]/80'
+                className='mb-[2rem] flex flex-row items-center justify-between rounded-full bg-[#4285F4] hover:bg-[#4285F4]/80'
                 onClick={() => {
                   const element = document.getElementById('timetable');
                   if (element) {
