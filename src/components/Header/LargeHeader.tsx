@@ -396,6 +396,18 @@ const LargeHeader = () => {
                 boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.1)',
               }}
             >
+              <NavLink to='/events' className='w-full bg-inherit' onClick={throttledEventsClick}>
+                <p
+                  className={`w-full whitespace-nowrap bg-inherit px-6 py-3 text-center transition-all duration-500
+                3xl:px-11 3xl:py-5 ${pathname === '/events' ? '' : 'hover:bg-[#F1F1F1]'}`}
+                  style={{
+                    color: pathname === '/events' ? '#3b3b3b' : 'inherit',
+                    fontWeight: pathname === '/events' ? '700' : 'normal',
+                  }}
+                >
+                  Sự kiện
+                </p>
+              </NavLink>
               <NavLink
                 to='/events/lop-hoc-on-tap'
                 className='w-full bg-inherit'
