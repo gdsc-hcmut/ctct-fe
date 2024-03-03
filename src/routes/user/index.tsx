@@ -14,6 +14,7 @@ const TSTTPage = lazy(() => import('../../pages/AboutUs/Activities/TSTT'));
 
 const LHOTTCPage = lazy(() => import('../../pages/AboutUs/Activities/LHOTTC'));
 const LHOTDKPage = lazy(() => import('../../pages/Events/LHOTDK'));
+const EventsPage = lazy(() => import('../../pages/Events/Events'));
 const SCTTMPage = lazy(() => import('../../pages/AboutUs/Activities/SCTTM'));
 const PartnersPage = lazy(() => import('../../pages/AboutUs/Partners'));
 const ActivityHistoryPage = lazy(() => import('../../pages/Profile/ActivityHistory'));
@@ -128,6 +129,14 @@ const UserRoute = () => {
             element={
               <Suspense fallback={<Loading />}>
                 <LHOTDKPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path=''
+            element={
+              <Suspense fallback={<Loading />}>
+                <EventsPage />
               </Suspense>
             }
           />
