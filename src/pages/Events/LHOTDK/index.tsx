@@ -1,8 +1,8 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import { Footer, Loading, LazyLoadImage } from '../../../components';
+import { Footer, LazyLoadImage } from '../../../components';
 import Achievement1 from '../../../components/Achivement/Achievement1';
 import BenefitBoard from '../../../components/BenefitBoard';
 import Comments from '../../../components/Comments';
@@ -11,7 +11,6 @@ import NewsCarousel from '../../../components/NewsCarousel/NewsCarousel';
 import SignUpManual from '../../../components/SignUpManual';
 import SocialMediaCarousel from '../../../components/SocialMediaCarousel/SocialMediaCarousel';
 import Timetable from '../../../components/Timetable';
-import { useDebounce } from '../../../hooks';
 import { Page } from '../../../layout';
 import EventService from '../../../service/event.service';
 import { Event } from '../../../types/events';
@@ -19,86 +18,78 @@ import { Event } from '../../../types/events';
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
 const LHOTDKPage = () => {
-  const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient();
+
   const [displatedDate, setDisplayedDate] = useState<number[]>([]);
   const [displatedEventSet, setDisplatedEventSet] = useState<Event[][]>([[]]);
+
+  const { data: events } = useQuery({
+    queryKey: ['events', 'LOP_HOC_ON_TAP'],
+    queryFn: async () => {
+      const { data } = await EventService.getAllPaginated(
+        {
+          startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
+          pageSize: 100,
+          eventType: 'LOP_HOC_ON_TAP',
+        },
+        false
+      );
+
+      return data.payload.result;
+    },
+  });
 
   const { mutateAsync: register } = useMutation({
     mutationFn: async (eventId: string) => {
       await EventService.register(eventId);
-      fetchEvent();
     },
     onSuccess: () => {
       toast.success('Đăng ký sự kiện thành công');
+      queryClient.invalidateQueries(['events', 'LOP_HOC_ON_TAP']);
     },
     onError: () => {
       toast.error('Đã có lỗi trong lúc đăng ký sự kiện! Vui lòng thử lại sau.');
     },
   });
 
-  const fetchEvent = useDebounce(() => {
-    setLoading(true);
-    EventService.getAllPaginated(
-      {
-        startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
-        pageSize: 100,
-        eventType: 'LOP_HOC_ON_TAP',
-      },
-      false
-    )
-      .then((res) => {
-        const { result: allEvents } = res.data.payload;
-
-        const sortedEvents = allEvents.sort((a, b) => a.startedAt - b.startedAt);
-        const firstDate =
-          allEvents.length > 0
-            ? allEvents[0].startedAt - (allEvents[0].startedAt % ONE_DAY_MILLISECOND)
-            : 0;
-        const firstEventSet = sortedEvents.filter(
-          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === firstDate
-        );
-        const remainingEvents = sortedEvents.filter(
-          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== firstDate
-        );
-
-        const secondDate =
-          remainingEvents.length > 0
-            ? remainingEvents[0].startedAt - (remainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
-            : 0;
-        const secondEventSet = remainingEvents.filter(
-          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === secondDate
-        );
-
-        const secondRemainingEvents = remainingEvents.filter(
-          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== secondDate
-        );
-
-        const thirdDate =
-          secondRemainingEvents.length > 0
-            ? secondRemainingEvents[0].startedAt -
-              (secondRemainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
-            : 0;
-
-        const thirdEventSet = secondRemainingEvents.filter(
-          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === thirdDate
-        );
-
-        setDisplayedDate([firstDate, secondDate, thirdDate]);
-        setDisplatedEventSet([firstEventSet, secondEventSet, thirdEventSet]);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  });
-
   useEffect(() => {
-    fetchEvent();
-  }, [fetchEvent]);
+    if (events === undefined) return;
 
-  if (loading) return <Loading />;
+    const sortedEvents = events.sort((a, b) => a.startedAt - b.startedAt);
+    const firstDate =
+      events.length > 0 ? events[0].startedAt - (events[0].startedAt % ONE_DAY_MILLISECOND) : 0;
+    const firstEventSet = sortedEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === firstDate
+    );
+    const remainingEvents = sortedEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== firstDate
+    );
+
+    const secondDate =
+      remainingEvents.length > 0
+        ? remainingEvents[0].startedAt - (remainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
+        : 0;
+    const secondEventSet = remainingEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === secondDate
+    );
+
+    const secondRemainingEvents = remainingEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== secondDate
+    );
+
+    const thirdDate =
+      secondRemainingEvents.length > 0
+        ? secondRemainingEvents[0].startedAt -
+          (secondRemainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
+        : 0;
+
+    const thirdEventSet = secondRemainingEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === thirdDate
+    );
+
+    setDisplayedDate([firstDate, secondDate, thirdDate]);
+    setDisplatedEventSet([firstEventSet, secondEventSet, thirdEventSet]);
+  }, [events]);
 
   return (
     <Page title='Lớp học ôn tập'>
