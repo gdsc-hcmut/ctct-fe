@@ -42,6 +42,7 @@ const LHOTDKPage = () => {
       {
         startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
         pageSize: 100,
+        eventType: 'LOP_HOC_ON_TAP',
       },
       false
     )
