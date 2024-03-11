@@ -49,21 +49,18 @@ const MediumHeader = () => {
     setIsLibraryOpen(false);
     setIsRoomOpen(false);
     setIsAboutUsOpen(false);
-    setIsEventsOpen(false);
   };
 
   const onLibraryClick = () => {
     setIsLibraryOpen(!isLibraryOpen);
     setIsRoomOpen(false);
     setIsAboutUsOpen(false);
-    setIsEventsOpen(false);
   };
 
   const onRoomClick = () => {
     setIsLibraryOpen(false);
     setIsRoomOpen(!isRoomOpen);
     setIsAboutUsOpen(false);
-    setIsEventsOpen(false);
   };
 
   const onAboutUsClick = () => {
@@ -80,7 +77,6 @@ const MediumHeader = () => {
     setIsLibraryOpen(false);
     setIsRoomOpen(false);
     setIsAboutUsOpen(false);
-    setIsEventsOpen(false);
     playSegments([60, 30], true);
   };
 
@@ -109,7 +105,6 @@ const MediumHeader = () => {
                 setIsLibraryOpen(false);
                 setIsRoomOpen(false);
                 setIsAboutUsOpen(false);
-                setIsEventsOpen(false);
               }, 500)
             }
             className='aspect-[107/60] h-[40px] w-auto xl:h-[48px]'
@@ -605,23 +600,6 @@ const MediumHeader = () => {
                 </NavLink>
               </nav>
             </div>
-            <NavLink
-              to='/news'
-              end
-              className='z-20 flex w-full flex-row items-center justify-start
-            gap-x-[16px] rounded-[12px] px-[20px] py-[16px]'
-              style={({ isActive, isPending }) => ({
-                backgroundColor: isActive || isPending ? 'rgba(118, 167, 243, 0.1)' : 'transparent',
-              })}
-              onClick={() => setTimeout(throttledOnClick, 1000)}
-            >
-              {({ isActive, isPending }) => (
-                <>
-                  <Icon.Newspaper fill={isActive || isPending ? '#4285F4' : '#696969'} />
-                  <p style={{ color: isActive || isPending ? '#4285F4' : '#696969' }}>Tin tức</p>
-                </>
-              )}
-            </NavLink>
             {!isAuthenticated && <LoginButton />}
             {isAuthenticated &&
             (user.isManager ||
