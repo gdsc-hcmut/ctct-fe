@@ -21,14 +21,14 @@ const NewsFirstItem = () => {
           </p>
         </div>
         <div className='max-w-[50%]'>
-          <p className='text-justify text-[12px] leading-6 text-[#696984] xl:text-[16px] xl:leading-7'>
+          <p className='text-start text-[12px] leading-6 text-[#696984] xl:text-[16px] xl:leading-7'>
             Nhiều trường ĐH tuyển chọn sinh viên khá, giỏi làm trợ lý giảng dạy cho giảng viên. Các
             “giảng viên sinh viên" này tham gia đứng lớp giảng dạy, phụ chấm bài và được nhà trường
             trả lương.
           </p>
         </div>
         <div className='max-w-[50%]'>
-          <p className='text-justify text-[12px] font-semibold leading-6 text-[#696984] xl:text-[16px] xl:leading-7'>
+          <p className='text-start text-[12px] font-semibold leading-6 text-[#696984] xl:text-[16px] xl:leading-7'>
             40 phút trước
           </p>
         </div>

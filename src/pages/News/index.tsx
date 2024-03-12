@@ -1,10 +1,11 @@
 import { Footer } from '../../components';
 import LoadMoreButton from '../../components/LoadMoreButton';
+import { NewsCard1, NewsCard2 } from '../../components/NewsCard';
 import NewsFirstItem from '../../components/NewsFirstItem';
 import NewsItem from '../../components/NewsItem';
 import { Page } from '../../layout';
 
-const NewsPage = () => {
+const NewsPage1 = () => {
   return (
     <Page title='Tin tức'>
       <main className='with-nav-height flex flex-col gap-y-5 overflow-hidden overflow-y-auto text-[16px] md:text-[14px] lg:gap-y-10 lg:text-[18px] xl:text-[20px] 2xl:gap-y-[54px] 3xl:gap-y-[60px]'>
@@ -31,8 +32,10 @@ const NewsPage = () => {
                   <NewsItem />
                   <LoadMoreButton />
                 </div>
-                <div className='ml-[2rem] flex w-full max-w-full flex-col space-y-[0.8rem]'>
-                  Hello
+                <div className='ml-[2rem] flex w-full max-w-full flex-col space-y-[2rem]'>
+                  <NewsCard1 title={'LỚP HỌC ÔN TẬP'} isImageLeft={false} isSolidColor={true} />
+                  <NewsCard1 title={'GIA SƯ ÁO XANH'} isImageLeft={true} isSolidColor={false} />
+                  <NewsCard2 title={'HỖ TRỢ TRUYỀN THÔNG'} />
                 </div>
               </div>
             </div>
@@ -44,4 +47,4 @@ const NewsPage = () => {
   );
 };
 
-export default NewsPage;
+export default NewsPage1;
