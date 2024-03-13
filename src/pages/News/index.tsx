@@ -1,6 +1,6 @@
 import { Footer } from '../../components';
 import LoadMoreButton from '../../components/LoadMoreButton';
-import { NewsCard1, NewsCard2 } from '../../components/NewsCard';
+import { NewsCard1, NewsCard2, NewsTimetableCard } from '../../components/NewsCard';
 import NewsFirstItem from '../../components/NewsFirstItem';
 import NewsItem from '../../components/NewsItem';
 import { Page } from '../../layout';
@@ -34,6 +34,7 @@ const NewsPage1 = () => {
                   <NewsCard1 title={'LỚP HỌC ÔN TẬP'} isImageLeft={true} isSolidColor={true} />
                   <NewsCard1 title={'GIA SƯ ÁO XANH'} isImageLeft={true} isSolidColor={false} />
                   <NewsCard2 title={'HỖ TRỢ TRUYỀN THÔNG'} />
+                  <NewsTimetableCard />
                 </div>
               </div>
             </div>
