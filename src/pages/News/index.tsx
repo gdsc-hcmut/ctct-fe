@@ -33,7 +33,7 @@ const NewsPage1 = () => {
                   <LoadMoreButton />
                 </div>
                 <div className='ml-[2rem] flex w-full max-w-full flex-col space-y-[2rem]'>
-                  <NewsCard1 title={'LỚP HỌC ÔN TẬP'} isImageLeft={false} isSolidColor={true} />
+                  <NewsCard1 title={'LỚP HỌC ÔN TẬP'} isImageLeft={true} isSolidColor={true} />
                   <NewsCard1 title={'GIA SƯ ÁO XANH'} isImageLeft={true} isSolidColor={false} />
                   <NewsCard2 title={'HỖ TRỢ TRUYỀN THÔNG'} />
                 </div>

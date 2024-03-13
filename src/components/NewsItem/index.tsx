@@ -2,7 +2,7 @@ import { LazyLoadImage } from '../';
 
 const NewsItem = () => {
   return (
-    <div className='flex w-full flex-col'>
+    <div className='flex w-full flex-col border-b-[1px] border-[#696984] border-opacity-10 pb-[1.5rem]'>
       <div className='flex w-full flex-row items-start justify-start'>
         <div className='max-w-[45%]'>
           <div className='relative block aspect-[3/2] h-auto w-[100%] overflow-hidden'>
@@ -35,7 +35,6 @@ const NewsItem = () => {
           </div>
         </div>
       </div>
-      <div className='mt-[1.5rem] h-[1px] w-full bg-[#696984] opacity-10'></div>
     </div>
   );
 };

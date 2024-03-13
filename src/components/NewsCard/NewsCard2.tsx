@@ -14,8 +14,8 @@ const NewsCard2 = ({ eventSets, title }: NewsCardProps) => {
         <p className='text-start font-semibold text-[14x] text-[#696984] xl:text-[20px]'>{title}</p>
         <div className='mt-[0.5rem] h-[1px] w-full bg-[#696984] opacity-10'></div>
       </div>
-      <div className='mt-[1.25rem] flex flex-col'>
-        <div className='flex flex-col'>
+      <div className='flex flex-col'>
+        <div className='mt-[1.25rem] flex flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[1rem]'>
           <div className='flex flex-row'>
             <div className='flex max-w-[65%] flex-col'>
               <p className='text-start font-semibold text-[12x] text-[#696984] xl:text-[16px]'>
@@ -39,9 +39,9 @@ const NewsCard2 = ({ eventSets, title }: NewsCardProps) => {
               </div>
             </div>
           </div>
-          <div className='my-[1rem] h-[1px] w-full bg-[#696984] opacity-10'></div>
         </div>
-        <div className='flex flex-col'>
+
+        <div className='mt-[1.25rem] flex flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[1rem]	'>
           <div className='flex flex-row'>
             <div className='flex max-w-[65%] flex-col'>
               <p className='text-start font-semibold text-[12x] text-[#696984] xl:text-[16px]'>
@@ -65,7 +65,6 @@ const NewsCard2 = ({ eventSets, title }: NewsCardProps) => {
               </div>
             </div>
           </div>
-          <div className='my-[1rem] h-[1px] w-full bg-[#696984] opacity-10'></div>
         </div>
       </div>
     </div>

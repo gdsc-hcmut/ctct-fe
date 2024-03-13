@@ -47,32 +47,28 @@ const NewsCard1 = ({ eventSets, isSolidColor, isImageLeft, title }: NewsCardProp
             isImageLeft ? 'ml-[1.5rem] w-full max-w-full' : 'min-w-[45%]'
           } flex-col space-y-[1.5rem]`}
         >
-          <div className='flex max-w-full flex-col'>
+          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]	'>
             <p className='text-start font-normal text-[12x] text-[#696984] xl:text-[16px] '>
               Thông tin lớp học tuần 14/2024
             </p>
-            <div className='mt-[0.5rem] h-[1px] w-full bg-[#696984] opacity-5'></div>
           </div>
 
-          <div className='flex max-w-full flex-col'>
+          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]	'>
             <p className='text-start font-normal text-[12x] text-[#696984] xl:text-[16px] '>
               Thông tin lớp học tuần 15/2024
             </p>
-            <div className='mt-[0.5rem] h-[1px] w-full bg-[#696984] opacity-5'></div>
           </div>
 
-          <div className='flex max-w-full flex-col'>
+          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]	'>
             <p className='text-start font-normal text-[12x] text-[#696984] xl:text-[16px] '>
               Mở đăng ký thi thử giữa kỳ HK232
             </p>
-            <div className='mt-[0.5rem] h-[1px] w-full bg-[#696984] opacity-5'></div>
           </div>
 
-          <div className='flex max-w-full flex-col'>
+          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]	'>
             <p className='text-start font-normal text-[12x] text-[#696984] xl:text-[16px] '>
               Lịch thi thử cuối kỳ HK232
             </p>
-            <div className='mt-[0.5rem] h-[1px] w-full bg-[#696984] opacity-5'></div>
           </div>
         </div>
       </div>
