@@ -28,8 +28,6 @@ const NewsPage1 = () => {
                   <NewsItem />
                   <NewsItem />
                   <NewsItem />
-                  <NewsItem />
-                  <NewsItem />
                   <LoadMoreButton />
                 </div>
                 <div className='ml-[2rem] flex w-full max-w-full flex-col space-y-[2rem]'>

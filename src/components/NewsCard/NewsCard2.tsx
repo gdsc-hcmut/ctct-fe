@@ -10,9 +10,8 @@ const NewsCard2 = ({ eventSets, title }: NewsCardProps) => {
   console.log(eventSets);
   return (
     <div className='flex w-full flex-col rounded-[0.5rem] border-[1px] border-[#696984] border-opacity-10 bg-white p-[1.25rem]'>
-      <div className='flex w-full flex-col'>
+      <div className='flex w-full flex-col border-b-[1px] border-[#696984] border-opacity-10 pb-[0.5rem]'>
         <p className='text-start font-semibold text-[14x] text-[#696984] xl:text-[20px]'>{title}</p>
-        <div className='mt-[0.5rem] h-[1px] w-full bg-[#696984] opacity-10'></div>
       </div>
       <div className='flex flex-col'>
         <div className='mt-[1.25rem] flex flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[1rem]'>
