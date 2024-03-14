@@ -12,14 +12,16 @@ const NewsCard1 = ({ eventSets, isSolidColor, isImageLeft, title }: NewsCardProp
   console.log(eventSets, isImageLeft);
   return (
     <div
-      className={`flex w-full flex-col rounded-[0.5rem] p-[1.25rem] ${
+      className={`flex w-full flex-col rounded-[0.5rem] p-0 md:p-[1.25rem] ${
         isSolidColor
-          ? 'bg-[#E3F2FD] bg-opacity-60'
-          : 'border-[1px] border-[#696984] border-opacity-10 bg-white'
+          ? 'bg-white md:bg-[#E3F2FD] md:bg-opacity-60'
+          : 'border-0 border-[#696984] border-opacity-10 bg-white md:border-[1px]'
       }`}
     >
       <div className='flex w-full flex-col border-b-[1px] border-[#696984] border-opacity-10 pb-[0.5rem]'>
-        <p className='text-start font-semibold text-[14x] text-[#696984] xl:text-[20px]'>{title}</p>
+        <p className='text-start text-[18px] font-semibold text-[#696984] md:text-[14x] xl:text-[20px]'>
+          {title}
+        </p>
       </div>
       <div className={`mt-[1.25rem] flex ${isImageLeft ? 'flex-row' : 'flex-row-reverse'} `}>
         <div
