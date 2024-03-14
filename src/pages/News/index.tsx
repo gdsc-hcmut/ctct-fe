@@ -1,11 +1,73 @@
+import { useQuery } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
+
 import { Footer } from '../../components';
 import LoadMoreButton from '../../components/LoadMoreButton';
 import { NewsCard1, NewsCard2, NewsTimetableCard } from '../../components/NewsCard';
 import NewsFirstItem from '../../components/NewsFirstItem';
 import NewsItem from '../../components/NewsItem';
 import { Page } from '../../layout';
+import EventService from '../../service/event.service';
+import { Event } from '../../types/events';
+
+const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
 const NewsPage = () => {
+  const [displatedEventSet, setDisplatedEventSet] = useState<Event[]>([]);
+
+  const { data: events } = useQuery({
+    queryKey: ['events', 'LOP_HOC_ON_TAP'],
+    queryFn: async () => {
+      const { data } = await EventService.getAllPaginated(
+        {
+          startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
+          pageSize: 100,
+          eventType: 'LOP_HOC_ON_TAP',
+        },
+        false
+      );
+      return data.payload.result;
+    },
+  });
+
+  useEffect(() => {
+    if (events === undefined) return;
+
+    const sortedEvents = events.sort((a, b) => a.startedAt - b.startedAt);
+    const firstDate =
+      events.length > 0 ? events[0].startedAt - (events[0].startedAt % ONE_DAY_MILLISECOND) : 0;
+    const firstEventSet = sortedEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === firstDate
+    );
+    const remainingEvents = sortedEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== firstDate
+    );
+
+    const secondDate =
+      remainingEvents.length > 0
+        ? remainingEvents[0].startedAt - (remainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
+        : 0;
+    const secondEventSet = remainingEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === secondDate
+    );
+
+    const secondRemainingEvents = remainingEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== secondDate
+    );
+
+    const thirdDate =
+      secondRemainingEvents.length > 0
+        ? secondRemainingEvents[0].startedAt -
+          (secondRemainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
+        : 0;
+
+    const thirdEventSet = secondRemainingEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === thirdDate
+    );
+
+    setDisplatedEventSet([...firstEventSet, ...secondEventSet, ...thirdEventSet]);
+  }, [events]);
+
   return (
     <Page title='Tin tức'>
       <main className='with-nav-height flex flex-col gap-y-5 overflow-hidden overflow-y-auto text-[16px] md:text-[14px] lg:gap-y-10 lg:text-[18px] xl:text-[20px] 2xl:gap-y-[54px] 3xl:gap-y-[60px]'>
@@ -34,7 +96,7 @@ const NewsPage = () => {
                   <NewsCard1 title={'LỚP HỌC ÔN TẬP'} isImageLeft={true} isSolidColor={true} />
                   <NewsCard1 title={'GIA SƯ ÁO XANH'} isImageLeft={true} isSolidColor={false} />
                   <NewsCard2 title={'HỖ TRỢ TRUYỀN THÔNG'} />
-                  <NewsTimetableCard />
+                  <NewsTimetableCard eventSets={displatedEventSet} />
                 </div>
               </div>
             </div>
