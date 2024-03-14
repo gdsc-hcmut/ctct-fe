@@ -20,7 +20,7 @@ const NewsTimetableCard = ({ eventSets }: NewsTimetableCardProps) => {
           LỚP HỌC SẮP TỚI
         </p>
       </div>
-      <div className='grid grid-cols-2 gap-[0.5rem] pt-[1.25rem] md:grid-cols-3 md:gap-[1rem] xl:grid-cols-3'>
+      <div className='grid grid-cols-2 gap-[0.5rem] pt-[1.25rem] md:grid-cols-3 md:gap-[1rem] lg:grid-cols-2 xl:grid-cols-3'>
         {eventSets.map((event, index) => (
           <div
             key={index}
