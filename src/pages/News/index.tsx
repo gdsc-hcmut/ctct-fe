@@ -5,7 +5,7 @@ import NewsFirstItem from '../../components/NewsFirstItem';
 import NewsItem from '../../components/NewsItem';
 import { Page } from '../../layout';
 
-const NewsPage1 = () => {
+const NewsPage = () => {
   return (
     <Page title='Tin tức'>
       <main className='with-nav-height flex flex-col gap-y-5 overflow-hidden overflow-y-auto text-[16px] md:text-[14px] lg:gap-y-10 lg:text-[18px] xl:text-[20px] 2xl:gap-y-[54px] 3xl:gap-y-[60px]'>
@@ -46,4 +46,4 @@ const NewsPage1 = () => {
   );
 };
 
-export default NewsPage1;
+export default NewsPage;
