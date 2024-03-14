@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 
-import { Footer } from '../../components';
-import LoadMoreButton from '../../components/LoadMoreButton';
-import { NewsCard1, NewsCard2, NewsTimetableCard } from '../../components/NewsCard';
-import NewsFirstItem from '../../components/NewsFirstItem';
-import NewsItem from '../../components/NewsItem';
-import { Page } from '../../layout';
-import EventService from '../../service/event.service';
-import { Event } from '../../types/events';
+import { Footer } from '../../../components';
+import LoadMoreButton from '../../../components/LoadMoreButton';
+import { NewsCard1, NewsCard2, NewsTimetableCard } from '../../../components/NewsCard';
+import NewsFirstItem from '../../../components/NewsFirstItem';
+import NewsItem from '../../../components/NewsItem';
+import { Page } from '../../../layout';
+import EventService from '../../../service/event.service';
+import { Event } from '../../../types/events';
 
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 

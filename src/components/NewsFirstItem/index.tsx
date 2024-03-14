@@ -4,7 +4,7 @@ const NewsFirstItem = () => {
   return (
     <div className='flex w-full flex-col items-start justify-start pt-[1.5rem] md:flex-row md:pt-[2.5rem]'>
       <div className='min-w-full md:min-w-[50%]'>
-        <div className='relative block overflow-visible md:h-max md:w-[100%] md:overflow-hidden'>
+        <div className='relative block overflow-hidden md:h-max md:w-[100%]'>
           <LazyLoadImage
             className='z-[1] block rounded-[0.5rem] md:aspect-auto'
             src={require('../../assets/images/News_1.png')}

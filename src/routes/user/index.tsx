@@ -23,7 +23,8 @@ const EventPage = lazy(() => import('../../pages/Profile/Event'));
 const SubjectStatisticPage = lazy(() => import('../../pages/Profile/Statistic/SubjectStatistic'));
 const GSAXPage = lazy(() => import('../../pages/AboutUs/Activities/GSAX'));
 const HomePage = lazy(() => import('../../pages/Home'));
-const NewsPage = lazy(() => import('../../pages/News'));
+const NewsPage = lazy(() => import('../../pages/News/NewsPage'));
+const NewsDetail = lazy(() => import('../../pages/News/NewsDetail'));
 const MaterialPage = lazy(() => import('../../pages/Library/MaterialPage'));
 const MaterialDetail = lazy(() => import('../../pages/Library/MaterialDetail'));
 const ExamArchivePage = lazy(() => import('../../pages/Library/ExamArchivePage'));
@@ -132,14 +133,24 @@ const UserRoute = () => {
             }
           />
         </Route>
-        <Route
-          path='news'
-          element={
-            <Suspense fallback={<Loading />}>
-              <NewsPage />
-            </Suspense>
-          }
-        />
+        <Route path='news' element={<Protected />}>
+          <Route
+            path=''
+            element={
+              <Suspense fallback={<Loading />}>
+                <NewsPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path='detail'
+            element={
+              <Suspense fallback={<Loading />}>
+                <NewsDetail />
+              </Suspense>
+            }
+          />
+        </Route>
         <Route path='profile' element={<Protected />}>
           <Route
             path=''
