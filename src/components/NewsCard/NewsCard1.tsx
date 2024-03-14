@@ -62,28 +62,28 @@ const NewsCard1 = ({ eventSets, isSolidColor, isImageLeft, title }: NewsCardProp
             isImageLeft
               ? 'ml-0 mt-[1.25rem] w-full max-w-full md:mt-0 md:ml-[1.5rem]'
               : 'min-w-[45%]'
-          } flex-col space-y-[1.5rem]`}
+          } flex-col space-y-[1.5rem] lg:space-y-[1rem] xl:space-y-[1.25rem] 2xl:space-y-[1.5rem]`}
         >
-          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]	'>
-            <p className='text-start font-medium text-[12x] text-black md:font-normal md:text-[#696984] xl:text-[16px] '>
+          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]'>
+            <p className='text-start font-medium text-[16x] text-black md:font-normal md:text-[#696984] xl:text-[18px]'>
               Thông tin lớp học tuần 14/2024
             </p>
           </div>
 
-          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]	'>
-            <p className='text-start font-medium text-[12x] text-black md:font-normal md:text-[#696984] xl:text-[16px] '>
+          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]'>
+            <p className='text-start font-medium text-[16x] text-black md:font-normal md:text-[#696984] xl:text-[18px]'>
               Thông tin lớp học tuần 15/2024
             </p>
           </div>
 
-          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]	'>
-            <p className='text-start font-medium text-[12x] text-black md:font-normal md:text-[#696984] xl:text-[16px] '>
+          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]'>
+            <p className='text-start font-medium text-[16x] text-black md:font-normal md:text-[#696984] xl:text-[18px]'>
               Mở đăng ký thi thử giữa kỳ HK232
             </p>
           </div>
 
-          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]	'>
-            <p className='text-start font-medium text-[12x] text-black md:font-normal md:text-[#696984] xl:text-[16px] '>
+          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]'>
+            <p className='text-start font-medium text-[16x] text-black md:font-normal md:text-[#696984] xl:text-[18px]'>
               Lịch thi thử cuối kỳ HK232
             </p>
           </div>

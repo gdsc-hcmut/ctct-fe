@@ -20,7 +20,7 @@ const NewsTimetableCard = ({ eventSets }: NewsTimetableCardProps) => {
           LỚP HỌC SẮP TỚI
         </p>
       </div>
-      <div className='grid grid-cols-2 gap-[0.5rem] pt-[1.25rem] md:grid-cols-3 md:gap-[1rem]'>
+      <div className='grid grid-cols-2 gap-[0.5rem] pt-[1.25rem] md:grid-cols-3 md:gap-[1rem] xl:grid-cols-3'>
         {eventSets.map((event, index) => (
           <div
             key={index}
@@ -54,7 +54,7 @@ const NewsTimetableCard = ({ eventSets }: NewsTimetableCardProps) => {
           </div>
         ))}
       </div>
-      <div className='mt-[1rem] flex w-full flex-row items-center justify-end md:mt-0'>
+      <div className='mt-[1rem] flex w-full flex-row items-center justify-end xl:mt-0'>
         <a
           className='text-start font-normal text-[10x] text-[#696984] underline xl:text-[14px]'
           href='../events/lop-hoc-on-tap'
