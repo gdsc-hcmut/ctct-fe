@@ -78,7 +78,7 @@ const NewsPage = () => {
                 <div className='relative flex w-full flex-col items-start justify-between gap-5 md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
                   <NewsFirstItem />
                 </div>
-                <div className='mt-[2.5rem] h-[1px] w-full bg-[#696984] opacity-10'></div>
+                <div className='mt-[1.5rem] h-[1px] w-full bg-[#696984] opacity-10 md:mt-[2.5rem]'></div>
               </div>
 
               <div className='flex w-full flex-col items-start justify-start lg:flex-row'>
