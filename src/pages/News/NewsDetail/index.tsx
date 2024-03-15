@@ -1,16 +1,6 @@
-// import { useQuery } from '@tanstack/react-query';
-// import { useState, useEffect } from 'react';
-
 import { Footer, LazyLoadImage } from '../../../components';
-// import LoadMoreButton from '../../../components/LoadMoreButton';
-// import { NewsCard1, NewsCard2, NewsTimetableCard } from '../../../components/NewsCard';
-// import NewsFirstItem from '../../../components/NewsFirstItem';
-// import NewsItem from '../../../components/NewsItem';
+import ShareOptions from '../../../components/ShareOptions';
 import { Page } from '../../../layout';
-// import EventService from '../../../service/event.service';
-// import { Event } from '../../../types/events';
-
-// const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
 const DayOfWeekVietnamese = [
   'Chủ Nhật',
@@ -54,7 +44,7 @@ const NewsDetail = () => {
                     Trợ giảng khi còn ngồi trên giảng đường
                   </p>
                 </div>
-                <div className='mt-[2rem] flex flex-col space-y-[1rem] text-[14px] font-normal leading-[1.5rem] text-[#696984] md:text-[16px] md:leading-[1.75rem] xl:text-[18px] xl:leading-[2rem] 2xl:space-y-[2rem]'>
+                <div className='mt-[2rem] flex flex-col space-y-[1rem] text-justify text-[14px] font-normal leading-[1.5rem] text-[#696984] md:text-[16px] md:leading-[1.75rem] xl:text-[18px] xl:leading-[2rem] 2xl:space-y-[2rem]'>
                   <div>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi erat,
                     consequat id luctus ac, viverra et lacus. Orci varius natoque penatibus et
@@ -114,9 +104,11 @@ const NewsDetail = () => {
                     Đoàn Đạt
                   </p>
                 </div>
-                <div></div>
+                <div className='mt-[1rem] flex flex-row items-center justify-end'>
+                  <ShareOptions link='https://www.facebook.com' />
+                </div>
               </div>
-              <div className='flex flex-col'>Hello</div>
+              <div className='flex flex-col'></div>
               <div className='flex flex-col'>Hello</div>
               <div className='flex flex-col'>Hello</div>
             </div>
