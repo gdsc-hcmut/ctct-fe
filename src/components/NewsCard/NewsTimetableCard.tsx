@@ -12,7 +12,6 @@ const translateDayOfWeekVietnamese = (dayOfWeek: number) => {
 };
 
 const NewsTimetableCard = ({ eventSets }: NewsTimetableCardProps) => {
-  console.log(eventSets);
   return (
     <div className='flex w-full flex-col rounded-[0.5rem] border-0 border-[#696984] border-opacity-10 bg-white p-0 md:border-[1px] md:p-[1.25rem]'>
       <div className='flex w-full flex-col border-b-[1px] border-[#4285F4] pb-[0.5rem] md:border-[#696984] md:border-opacity-10'>

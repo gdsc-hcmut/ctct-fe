@@ -13,7 +13,7 @@ import { Event } from '../../../types/events';
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
 const NewsPage = () => {
-  const [displatedEventSet, setDisplatedEventSet] = useState<Event[]>([]);
+  const [displayedEventSet, setDisplatedEventSet] = useState<Event[]>([]);
 
   const { data: events } = useQuery({
     queryKey: ['events', 'LOP_HOC_ON_TAP'],
@@ -94,7 +94,9 @@ const NewsPage = () => {
                 </div>
                 <div className='mt-[2rem] flex w-full max-w-full flex-col space-y-[2rem] lg:ml-[1.5rem] lg:mt-0 xl:ml-[1.75rem] 3xl:ml-[2rem]'>
                   <NewsCard1 title={'LỚP HỌC ÔN TẬP'} isImageLeft={true} isSolidColor={true} />
-                  <NewsTimetableCard eventSets={displatedEventSet} />
+                  {displayedEventSet.length !== 0 && (
+                    <NewsTimetableCard eventSets={displayedEventSet} />
+                  )}
                   <NewsCard1 title={'GIA SƯ ÁO XANH'} isImageLeft={true} isSolidColor={false} />
                   <NewsCard2 title={'HỖ TRỢ TRUYỀN THÔNG'} />
                 </div>
