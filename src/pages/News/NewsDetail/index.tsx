@@ -1,6 +1,16 @@
+import { useQuery } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
+
 import { Footer, LazyLoadImage } from '../../../components';
+import LoadMoreButton from '../../../components/LoadMoreButton';
+import { NewsCard1, NewsCard2, NewsTimetableCard } from '../../../components/NewsCard';
+import NewsItem from '../../../components/NewsItem';
 import ShareOptions from '../../../components/ShareOptions';
 import { Page } from '../../../layout';
+import EventService from '../../../service/event.service';
+import { Event } from '../../../types/events';
+
+const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
 const DayOfWeekVietnamese = [
   'Chủ Nhật',
@@ -24,6 +34,61 @@ const translateVietnameseDay = (date: Date) => {
 };
 
 const NewsDetail = () => {
+  const [displayedEventSet, setDisplatedEventSet] = useState<Event[]>([]);
+
+  const { data: events } = useQuery({
+    queryKey: ['events', 'LOP_HOC_ON_TAP'],
+    queryFn: async () => {
+      const { data } = await EventService.getAllPaginated(
+        {
+          startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
+          pageSize: 100,
+          eventType: 'LOP_HOC_ON_TAP',
+        },
+        false
+      );
+      return data.payload.result;
+    },
+  });
+
+  useEffect(() => {
+    if (events === undefined) return;
+
+    const sortedEvents = events.sort((a, b) => a.startedAt - b.startedAt);
+    const firstDate =
+      events.length > 0 ? events[0].startedAt - (events[0].startedAt % ONE_DAY_MILLISECOND) : 0;
+    const firstEventSet = sortedEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === firstDate
+    );
+    const remainingEvents = sortedEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== firstDate
+    );
+
+    const secondDate =
+      remainingEvents.length > 0
+        ? remainingEvents[0].startedAt - (remainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
+        : 0;
+    const secondEventSet = remainingEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === secondDate
+    );
+
+    const secondRemainingEvents = remainingEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== secondDate
+    );
+
+    const thirdDate =
+      secondRemainingEvents.length > 0
+        ? secondRemainingEvents[0].startedAt -
+          (secondRemainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
+        : 0;
+
+    const thirdEventSet = secondRemainingEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === thirdDate
+    );
+
+    setDisplatedEventSet([...firstEventSet, ...secondEventSet, ...thirdEventSet]);
+  }, [events]);
+
   return (
     <Page title='Tin tức'>
       <main className='with-nav-height flex flex-col items-center gap-y-5 overflow-hidden overflow-y-auto text-[16px] md:text-[14px] lg:gap-y-10 lg:text-[18px] xl:text-[20px] 2xl:gap-y-[54px] 3xl:gap-y-[60px]'>
@@ -108,9 +173,27 @@ const NewsDetail = () => {
                   <ShareOptions link='https://www.facebook.com' />
                 </div>
               </div>
-              <div className='flex flex-col'></div>
-              <div className='flex flex-col'>Hello</div>
-              <div className='flex flex-col'>Hello</div>
+              <div className='flex w-full flex-col border-b-[1px] border-[#696984] border-opacity-10 pb-[1rem]'></div>
+              <div className='flex w-full flex-col items-start justify-start lg:flex-row'>
+                <div className='flex max-w-full flex-col space-y-[1rem] lg:max-w-[50%] lg:space-y-[2rem]'>
+                  <NewsItem />
+                  <NewsItem />
+                  <NewsItem />
+                  <NewsItem />
+                  <NewsItem />
+                  <NewsItem />
+                  <NewsItem />
+                  <LoadMoreButton />
+                </div>
+                <div className='mt-[2rem] flex w-full max-w-full flex-col space-y-[2rem] lg:ml-[1.5rem] lg:mt-0 xl:ml-[1.75rem] 3xl:ml-[2rem]'>
+                  <NewsCard1 title={'LỚP HỌC ÔN TẬP'} isImageLeft={true} isSolidColor={true} />
+                  {displayedEventSet.length !== 0 && (
+                    <NewsTimetableCard eventSets={displayedEventSet} />
+                  )}
+                  <NewsCard1 title={'GIA SƯ ÁO XANH'} isImageLeft={true} isSolidColor={false} />
+                  <NewsCard2 title={'HỖ TRỢ TRUYỀN THÔNG'} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
