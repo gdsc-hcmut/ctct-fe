@@ -417,6 +417,24 @@ const LargeHeader = () => {
             </nav>
           </div>
 
+          <NavLink
+            to='/news'
+            end
+            className={`flex h-[100%] items-center justify-start border-b-[3px]
+            px-[16px] py-4 hover:text-black 3xl:px-[32px] ${
+              pathname.includes('/news')
+                ? 'border-[#4285F4] text-black'
+                : 'border-transparent text-[#5B5B5B]'
+            }`}
+          >
+            <div
+              className={`flex flex-row items-center justify-start gap-x-1 p-0 px-2 py-1
+                text-inherit lg:gap-x-2 2xl:gap-x-3 3xl:px-3 3xl:py-2 `}
+            >
+              <p className='whitespace-nowrap bg-inherit text-inherit'>Tin tức</p>
+            </div>
+          </NavLink>
+
           {isAuthenticated &&
           (user.isManager ||
             _.some(user.accessLevels, (accessLevel) => accessLevel.name.includes('ADMIN'))) ? (
