@@ -7,9 +7,18 @@ interface DeleteModalProps {
   onClose: () => void;
   onDelete: () => void;
   show: boolean;
+  positiveOption?: string;
+  negativeOption?: string;
 }
 
-const DeleteModal = ({ text, onClose, onDelete, show }: DeleteModalProps) => {
+const DeleteModal = ({
+  text,
+  onClose,
+  onDelete,
+  show,
+  positiveOption,
+  negativeOption,
+}: DeleteModalProps) => {
   const closeOnEscapeKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Escape') {
       onClose();
@@ -62,14 +71,14 @@ const DeleteModal = ({ text, onClose, onDelete, show }: DeleteModalProps) => {
             className='h-11 w-[92px] rounded-[4px] border border-[#E9E9E9] bg-white text-center text-base text-[#404046] hover:bg-black/[.2]'
             onClick={handleCancel}
           >
-            Hủy
+            {positiveOption || 'Hủy'}
           </button>
           <button
             type='button'
             className='h-11 w-[92px] rounded-[4px] border bg-[#DB4437] text-center text-base text-white hover:bg-[#DB4437]/[.8]'
             onClick={handleDelete}
           >
-            Xóa
+            {negativeOption || 'Xóa'}
           </button>
         </div>
       </div>

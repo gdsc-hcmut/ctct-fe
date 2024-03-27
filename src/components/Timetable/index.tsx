@@ -16,7 +16,7 @@ const Timetable = ({ dates, eventSets, register }: TimetableProps) => {
     <div className='flex w-full flex-col items-center justify-between space-y-[2.5rem]'>
       {dates.map((date, index) => (
         <>
-          {eventSets[index] && width > 768 && (
+          {eventSets[index].length > 0 && width > 768 && (
             <>
               <TimetableBar
                 date={new Date(date)}
@@ -39,7 +39,7 @@ const Timetable = ({ dates, eventSets, register }: TimetableProps) => {
               )}
             </>
           )}
-          {eventSets[index] && width <= 768 && (
+          {eventSets[index].length > 0 && width <= 768 && (
             <>
               <TimetableBar
                 date={new Date(date)}
