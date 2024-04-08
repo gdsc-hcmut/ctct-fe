@@ -17,6 +17,7 @@ const EventsPage = () => {
   const page = useBoundStore.use.page();
   const setPage = useBoundStore.use.setPage();
 
+  console.log(page);
   return (
     <Page title='Đơn vị hợp tác - Fessior Community'>
       <main className='flex w-full flex-col px-6 py-5 lg:px-10 lg:py-7 xl:px-20 3xl:px-[100px] 3xl:py-9'>
