@@ -3,6 +3,7 @@ import CarouselArrow from './CarouselArrow';
 import CarouselIndicator from './CarouselIndicator';
 import { MarkdownEditor, ExpressionEditor } from './CodeEditor';
 import DocumentCard from './DocumentCard';
+import EventItem from './EventItem';
 import Footer from './Footer';
 import Header from './Header';
 import Histogram from './Histogram';
@@ -49,4 +50,5 @@ export {
   UserSharingCard,
   MarkdownEditor,
   ExpressionEditor,
+  EventItem,
 };

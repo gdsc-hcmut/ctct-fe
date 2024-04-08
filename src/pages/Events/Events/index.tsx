@@ -1,16 +1,31 @@
+import { useQuery } from '@tanstack/react-query';
 // import { useState } from 'react';
 
-import { Footer, LazyLoadImage } from '../../../components';
+import { Footer, LazyLoadImage, EventItem } from '../../../components';
 import { Page } from '../../../layout';
+import EventService from '../../../service/event.service';
 import useBoundStore from '../../../store';
 
-// const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
+const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
 const EventsPage = () => {
-  // const [loading, setLoading] = useState(true);
-  // setLoading(true);
+  // const queryClient = useQueryClient();
 
-  // if (loading) return <Loading />;
+  const { data: events } = useQuery({
+    queryKey: ['events', 'OTHER'],
+    queryFn: async () => {
+      const { data } = await EventService.getAllPaginated(
+        {
+          startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
+          pageSize: 100,
+          eventType: 'OTHER',
+        },
+        false
+      );
+
+      return data.payload.result;
+    },
+  });
 
   const filterName = useBoundStore.use.filterName();
   const setFilterName = useBoundStore.use.setFilterName();
@@ -18,6 +33,7 @@ const EventsPage = () => {
   const setPage = useBoundStore.use.setPage();
 
   console.log(page);
+  console.log(events);
   return (
     <Page title='Đơn vị hợp tác - Fessior Community'>
       <main className='flex w-full flex-col px-6 py-5 lg:px-10 lg:py-7 xl:px-20 3xl:px-[100px] 3xl:py-9'>
@@ -59,11 +75,9 @@ const EventsPage = () => {
         </div>
 
         <div className='mt-[1.75rem] flex flex-col justify-center gap-2 lg:mt-[2rem] lg:gap-4 xl:mt-[2.5rem] 2xl:gap-5 3xl:mt-[2.75rem]'>
-          <div>Hello</div>
-          <div>Hello</div>
-          <div>Hello</div>
-          <div>Hello</div>
-          <div>Hello</div>
+          {events?.map((event, index) => (
+            <EventItem key={index} event={event} />
+          ))}
         </div>
       </main>
       <Footer />
