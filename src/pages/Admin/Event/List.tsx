@@ -138,7 +138,7 @@ const EventList = () => {
                       setFilterName(target.value);
                       setPage(1);
                     }}
-                    placeholder='Tìm tên đợt thi thử'
+                    placeholder='Tìm tên sự kiện'
                   />
                 </div>
                 <div className='flex w-full flex-[3] flex-col gap-y-4 md:flex-row md:gap-x-4'>
