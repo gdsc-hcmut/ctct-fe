@@ -1,5 +1,5 @@
+import { LazyLoadImage } from '../';
 import { Event } from '../../types/events';
-
 interface EventItemProps {
   event: Event;
 }
@@ -10,7 +10,15 @@ const EventItem = ({ event }: EventItemProps) => {
     <div className='mb-[2rem] flex flex-col'>
       <div className='flex flex-row'>
         <div className='flex flex-row items-start justify-center'>
-          <div className='aspect-square h-auto w-[8.75rem] rounded-full bg-blue-500'></div>
+          <div className='aspect-square h-auto w-[8.75rem] rounded-full bg-blue-500'>
+            <LazyLoadImage
+              src={'https://i.imgur.com/2MJpQ7C.jpeg'}
+              placeHolderSrc={'https://i.imgur.com/2MJpQ7C.jpeg'}
+              alt='Thumbnail'
+              objectFit='cover'
+              className='aspect-square h-auto w-[8.75rem] overflow-hidden rounded-full object-cover'
+            />
+          </div>
         </div>
         <div className='ml-[1.5rem] flex flex-col lg:ml-[2rem] xl:ml-[2.5rem] 3xl:ml-[3rem]'>
           <div className='flex flex-row'>
@@ -32,10 +40,8 @@ const EventItem = ({ event }: EventItemProps) => {
               một thời gian
             </p>
           </div>
-          <div className='mt-[1rem] flex flex-row xl:mt-[1.5rem]'>
-            <div className='flex aspect-[3/1] h-auto w-[10rem] flex-row items-center justify-center rounded-[0.5rem] bg-[#4285F4]'>
-              <p className='text-white'>Xem chi tiết</p>
-            </div>
+          <div className='mt-[1rem] flex aspect-[3/1] h-auto w-[10rem] flex-row items-center justify-center rounded-[0.5rem] bg-[#4285F4] hover:opacity-90 xl:mt-[1.5rem]'>
+            <p className='text-white'>Xem chi tiết</p>
           </div>
         </div>
       </div>
