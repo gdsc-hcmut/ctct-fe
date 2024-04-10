@@ -43,6 +43,10 @@ export type Event = {
 
   registeredUsers: EventUser[];
 
+  hasThumbnailAndBanner: boolean;
+  thumbnailUrl?: string;
+  bannerUrl?: string;
+
   createdAt: number;
   createdBy: User;
   lastUpdatedAt: number;
