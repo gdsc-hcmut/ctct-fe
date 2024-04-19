@@ -137,9 +137,6 @@ const EventEdit = () => {
     }
   });
 
-  console.log('canSave', canSave);
-  console.log('submitDisabled', submitDisabled);
-
   const fetchData = useCallback(() => {
     setLoading(true);
     EventService.getById(id, true)
@@ -189,7 +186,7 @@ const EventEdit = () => {
       setEventType(event.eventType);
       setVenue(event.venue);
       setHasRegistrationTime(event.hasRegistrationTime);
-      setSubject(event.lhotMetadata.subject._id);
+      setSubject(event.lhotMetadata ? event.lhotMetadata.subject._id : '');
       setEventDuration({ start: event.startedAt, end: event.endedAt });
       setRegistrationDuration({
         start: event.registrationStartedAt ?? 0,
