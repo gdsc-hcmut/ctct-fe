@@ -1,8 +1,15 @@
+import { upperCase } from 'lodash';
+
 import { LazyLoadImage } from '../';
 import { Event } from '../../types/events';
 interface EventItemProps {
   event: Event;
 }
+
+const EpochTimeToDateStringVietnamese = (epochTime: number) => {
+  const date = new Date(epochTime);
+  return `Ngày ${date.getDate()} tháng ${date.getMonth() + 1} năm ${date.getFullYear()}`;
+};
 
 const EventItem = ({ event }: EventItemProps) => {
   console.log(event);
@@ -22,23 +29,20 @@ const EventItem = ({ event }: EventItemProps) => {
         </div>
         <div className='ml-[1.5rem] flex flex-col lg:ml-[2rem] xl:ml-[2.5rem] 3xl:ml-[3rem]'>
           <div className='flex flex-row'>
-            <h3 className='font-semibold text-[#696984]'>Ngày 27 tháng 05 năm 2024</h3>
+            <h3 className='font-semibold text-[#696984]'>
+              {EpochTimeToDateStringVietnamese(event.startedAt)}
+            </h3>
             <h3 className='ml-[0.75rem] font-normal text-[#696984] lg:ml-[1rem] xl:ml-[1.25rem] 3xl:ml-[1.5rem] '>
-              Nhà thi đấu TDTT - Trường Đại học Bách khoa - ĐHQG TP.HCM, cơ sở Dĩ An
+              {event.venue}
             </h3>
           </div>
           <div className='mt-[0.25rem] flex flex-row'>
             <h2 className='text-start text-[20px] font-semibold text-[#000000] lg:text-[24px] xl:text-[28px] 2xl:text-[32px]'>
-              NGÀY HỘI SÁCH CŨ TRI THỨC MỚI
+              {upperCase(event.name)}
             </h2>
           </div>
           <div className='mt-[0.25rem] flex flex-row xl:mt-[0.5rem]'>
-            <p className='text-[#696984]'>
-              Bạn vừa học xong kì 1, bạn vừa dọn KTX, bạn vừa dọn bàn học. NHƯNG tủ cá nhân chật
-              rồi, bàn học và tủ sách cũng kín mít, không còn đủ chỗ cho tất cả những người bạn giáo
-              trình đã đồng hành cùng bạn, không còn đủ khoảng trống cho cô cậu sách đã được bạn đọc
-              một thời gian
-            </p>
+            <p className='text-[#696984]'>{event.description}</p>
           </div>
           <div className='mt-[1rem] flex aspect-[3/1] h-auto w-[10rem] flex-row items-center justify-center rounded-[0.5rem] bg-[#4285F4] hover:opacity-90 xl:mt-[1.5rem]'>
             <p className='text-white'>Xem chi tiết</p>
