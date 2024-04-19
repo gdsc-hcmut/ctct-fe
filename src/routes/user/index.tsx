@@ -15,6 +15,7 @@ const TSTTPage = lazy(() => import('../../pages/AboutUs/Activities/TSTT'));
 const LHOTTCPage = lazy(() => import('../../pages/AboutUs/Activities/LHOTTC'));
 const LHOTDKPage = lazy(() => import('../../pages/Events/LHOTDK'));
 const EventsPage = lazy(() => import('../../pages/Events/Events'));
+const EventDetail = lazy(() => import('../../pages/Events/EventDetail'));
 const SCTTMPage = lazy(() => import('../../pages/AboutUs/Activities/SCTTM'));
 const PartnersPage = lazy(() => import('../../pages/AboutUs/Partners'));
 const ActivityHistoryPage = lazy(() => import('../../pages/Profile/ActivityHistory'));
@@ -124,6 +125,14 @@ const UserRoute = () => {
         </Route>
         <Route path='events'>
           <Route
+            path=''
+            element={
+              <Suspense fallback={<Loading />}>
+                <EventsPage />
+              </Suspense>
+            }
+          />
+          <Route
             path='lop-hoc-on-tap'
             element={
               <Suspense fallback={<Loading />}>
@@ -132,10 +141,10 @@ const UserRoute = () => {
             }
           />
           <Route
-            path=''
+            path='others/:eventId?'
             element={
               <Suspense fallback={<Loading />}>
-                <EventsPage />
+                <EventDetail />
               </Suspense>
             }
           />

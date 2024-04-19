@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-// import { useState } from 'react';
 
 import { Footer, LazyLoadImage, EventItem } from '../../../components';
 import { Page } from '../../../layout';
@@ -9,8 +8,6 @@ import useBoundStore from '../../../store';
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
 const EventsPage = () => {
-  // const queryClient = useQueryClient();
-
   const { data: events } = useQuery({
     queryKey: ['events', 'OTHER'],
     queryFn: async () => {
@@ -38,8 +35,8 @@ const EventsPage = () => {
     <Page title='Đơn vị hợp tác - Fessior Community'>
       <main className='flex w-full flex-col px-6 py-5 lg:px-10 lg:py-7 xl:px-20 3xl:px-[100px] 3xl:py-9'>
         <section
-          id='fessior-banner'
-          className='relative -mx-6 -mt-5 h-fit w-screen md:m-0 md:w-full'
+          id='ctct-banner'
+          className='relative -mx-6 -mt-5 flex h-[18rem] w-screen flex-row items-center justify-center md:m-0 md:w-full'
         >
           <LazyLoadImage
             src={require('../../../assets/images/SCTTM_6.jpg')}
