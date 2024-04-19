@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Icon, Select } from '../../../components';
 import { Option } from '../../../components/Select';
-// import DeleteModal from '../../../components/Modal/DeleteModal';
 import { useDebounce } from '../../../hooks';
 import { Page, Wrapper } from '../../../layout';
 import EventService from '../../../service/event.service';
@@ -21,11 +20,7 @@ interface CustomTimeInputProps {
 }
 
 const CustomTimeInput: React.FC<CustomTimeInputProps> = ({ date, onChangeCustom, isStartDate }) => {
-  const value =
-    date instanceof Date
-      ? // Getting time from Date because `value` comes here without seconds
-        date.toLocaleTimeString('it-IT')
-      : '';
+  const value = date instanceof Date ? date.toLocaleTimeString('it-IT') : '';
 
   return (
     <input
@@ -109,7 +104,6 @@ const EventEdit = () => {
     venue === '' ||
     eventType === '' ||
     description === '' ||
-    subject === '' ||
     loading ||
     eventDuration.start === 0 ||
     eventDuration.end === 0 ||
@@ -131,8 +125,7 @@ const EventEdit = () => {
           (registrationDuration.start === event.registrationStartedAt ||
             event.registrationStartedAt === undefined) &&
           (registrationDuration.end === event.registrationEndedAt ||
-            event.registrationEndedAt === undefined) &&
-          subject === event.lhotMetadata.subject._id
+            event.registrationEndedAt === undefined)
       );
     }
   });
@@ -152,6 +145,32 @@ const EventEdit = () => {
   }, [id]);
 
   const handleOnSave = useDebounce((): void => {
+    if (eventType !== EventType.LHOT) {
+      const formData = {
+        name,
+        description,
+        eventType,
+        venue,
+        hasRegistrationTime,
+        registrationStartedAt: registrationDuration.start,
+        registrationEndedAt: registrationDuration.end,
+        startedAt: eventDuration.start,
+        endedAt: eventDuration.end,
+      };
+
+      EventService.editById(id, formData)
+        .then((_) => {
+          toast.success('Chỉnh sửa thành công');
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message);
+        })
+        .finally(() => {
+          fetchData();
+        });
+      return;
+    }
+
     const formData = {
       name,
       description,
