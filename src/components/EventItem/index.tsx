@@ -1,5 +1,3 @@
-import { upperCase } from 'lodash';
-
 import { LazyLoadImage } from '../';
 import { Event } from '../../types/events';
 interface EventItemProps {
@@ -38,7 +36,7 @@ const EventItem = ({ event }: EventItemProps) => {
           </div>
           <div className='mt-[0.25rem] flex flex-row'>
             <h2 className='text-start text-[20px] font-semibold text-[#000000] lg:text-[24px] xl:text-[28px] 2xl:text-[32px]'>
-              {upperCase(event.name)}
+              {event.name.toUpperCase()}
             </h2>
           </div>
           <div className='mt-[0.25rem] flex flex-row xl:mt-[0.5rem]'>
