@@ -36,7 +36,9 @@ const MediumHeader = () => {
       pathname === '/about-us/partners'
   );
   const [isEventsOpen, setIsEventsOpen] = useState(
-    pathname === '/events' || pathname.includes('/events/lop-hoc-on-tap')
+    pathname === '/events' ||
+      pathname.includes('/events/lop-hoc-on-tap') ||
+      pathname.includes('/events/others')
   );
 
   const isAuthenticated = useBoundStore.use.isAuthenticated();
@@ -522,7 +524,8 @@ const MediumHeader = () => {
                     fill={
                       pathname === '/events' ||
                       pathname.includes('/events/lop-hoc-on-tap') ||
-                      pathname === '/events/lop-hoc-on-tap'
+                      pathname === '/events/lop-hoc-on-tap' ||
+                      pathname.includes('/events/others')
                         ? '#4285F4'
                         : '#696969'
                     }
@@ -532,7 +535,8 @@ const MediumHeader = () => {
                       color:
                         pathname === '/events' ||
                         pathname.includes('/events/lop-hoc-on-tap') ||
-                        pathname === '/events/lop-hoc-on-tap'
+                        pathname === '/events/lop-hoc-on-tap' ||
+                        pathname.includes('/events/others')
                           ? '#4285F4'
                           : '#696969',
                     }}
@@ -545,7 +549,8 @@ const MediumHeader = () => {
                     fill={
                       pathname === '/events' ||
                       pathname.includes('/events/lop-hoc-on-tap') ||
-                      pathname === '/events/lop-hoc-on-tap'
+                      pathname === '/events/lop-hoc-on-tap' ||
+                      pathname.includes('/events/others')
                         ? '#4285F4'
                         : '#696969'
                     }
@@ -557,7 +562,8 @@ const MediumHeader = () => {
                     fill={
                       pathname === '/events' ||
                       pathname.includes('/events/lop-hoc-on-tap') ||
-                      pathname === '/events/lop-hoc-on-tap'
+                      pathname === '/events/lop-hoc-on-tap' ||
+                      pathname.includes('/events/others')
                         ? '#4285F4'
                         : '#696969'
                     }
@@ -594,6 +600,31 @@ const MediumHeader = () => {
                       <Icon.Book fill={isActive || isPending ? '#4285F4' : '#696969'} />
                       <p style={{ color: isActive || isPending ? '#4285F4' : '#696969' }}>
                         Lớp học ôn tập
+                      </p>
+                    </>
+                  )}
+                </NavLink>
+
+                <NavLink
+                  to='/events'
+                  end
+                  className='flex w-full flex-row items-center justify-start
+                gap-x-[16px] rounded-[12px] px-[20px] py-[16px]'
+                  style={({ isActive, isPending }) => ({
+                    backgroundColor:
+                      isActive || isPending ? 'rgba(118, 167, 243, 0.1)' : 'transparent',
+                  })}
+                  onClick={useDebounce(() => {
+                    setIsOverlayOpen(false);
+                    setIsAboutUsOpen(!isEventsOpen);
+                    playSegments([60, 30], true);
+                  })}
+                >
+                  {({ isActive, isPending }) => (
+                    <>
+                      <Icon.MockTestIcon fill={isActive || isPending ? '#4285F4' : '#696969'} />
+                      <p style={{ color: isActive || isPending ? '#4285F4' : '#696969' }}>
+                        Sự kiện khác
                       </p>
                     </>
                   )}

@@ -357,7 +357,8 @@ const LargeHeader = () => {
             border-b-[3px] px-[16px] py-4 hover:text-black 3xl:px-[32px] ${
               pathname === '/events' ||
               pathname.includes('/events/lop-hoc-on-tap') ||
-              pathname === '/events/lop-hoc-on-tap'
+              pathname === '/events/lop-hoc-on-tap' ||
+              pathname.includes('/events/others')
                 ? 'border-[#4285F4] text-black'
                 : 'border-transparent text-[#5B5B5B]'
             }`}
@@ -373,7 +374,8 @@ const LargeHeader = () => {
                   fill={
                     pathname === '/events' ||
                     pathname.includes('/events/lop-hoc-on-tap') ||
-                    pathname === '/events/lop-hoc-on-tap'
+                    pathname === '/events/lop-hoc-on-tap' ||
+                    pathname.includes('/events/others')
                       ? '#3b3b3b'
                       : '#5B5B5B'
                   }
