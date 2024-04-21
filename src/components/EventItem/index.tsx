@@ -10,7 +10,13 @@ const EpochTimeToDateStringVietnamese = (epochTime: number) => {
 };
 
 const EventItem = ({ event }: EventItemProps) => {
-  console.log(event);
+  let displayedDescription = event.description.split('\n')[0];
+  if (displayedDescription.length > 100) {
+    const displayedDescriptionArray = displayedDescription.split(' ');
+    displayedDescription = displayedDescriptionArray.slice(0, 100).join(' ');
+  }
+  displayedDescription += ' . . .';
+
   return (
     <div className='mb-[2rem] flex flex-col'>
       <div className='flex flex-row'>
@@ -40,7 +46,7 @@ const EventItem = ({ event }: EventItemProps) => {
             </h2>
           </div>
           <div className='mt-[0.25rem] flex flex-row xl:mt-[0.5rem]'>
-            <p className='text-[#696984]'>{event.description}</p>
+            <p className='text-[#696984]'>{displayedDescription}</p>
           </div>
           <div className='mt-[1rem] flex aspect-[3/1] h-auto w-[10rem] flex-row items-center justify-center rounded-[0.5rem] bg-[#4285F4] hover:opacity-90 xl:mt-[1.5rem]'>
             <p className='text-white'>Xem chi tiết</p>
