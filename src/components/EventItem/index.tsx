@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { LazyLoadImage } from '../';
 import { Event } from '../../types/events';
 interface EventItemProps {
@@ -48,9 +50,12 @@ const EventItem = ({ event }: EventItemProps) => {
           <div className='mt-[0.25rem] flex flex-row xl:mt-[0.5rem]'>
             <p className='text-[#696984]'>{displayedDescription}</p>
           </div>
-          <div className='mt-[1rem] flex aspect-[3/1] h-auto w-[10rem] flex-row items-center justify-center rounded-[0.5rem] bg-[#4285F4] hover:opacity-90 xl:mt-[1.5rem]'>
+          <Link
+            className='mt-[1rem] flex aspect-[3/1] h-auto w-[10rem] flex-row items-center justify-center rounded-[0.5rem] bg-[#4285F4] hover:opacity-90 xl:mt-[1.5rem]'
+            to={`others/${event?._id}`}
+          >
             <p className='text-white'>Xem chi tiết</p>
-          </div>
+          </Link>
         </div>
       </div>
       <div className='mt-[2rem] h-[1px] w-full bg-[#696984] opacity-10'></div>
