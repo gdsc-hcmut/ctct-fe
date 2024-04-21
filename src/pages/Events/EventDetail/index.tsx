@@ -87,7 +87,11 @@ const EventsPage = () => {
               {events?.venue}
             </div>
           </div>
-          <div className='ml-auto flex flex-col items-center justify-center'>Hello</div>
+          <div className='ml-auto flex flex-row items-center justify-center'>
+            <div className='flex h-[2.75rem] w-[8rem] flex-row items-center justify-center rounded-[0.5rem] bg-[#4285F4] hover:opacity-90'>
+              <p className='font-bold text-white'>Đăng ký</p>
+            </div>
+          </div>
         </div>
       </div>
 
