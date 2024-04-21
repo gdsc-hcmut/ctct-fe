@@ -51,6 +51,7 @@ import { ReactComponent as Library } from '../../assets/svgs/LibraryIcon.svg';
 import { ReactComponent as List } from '../../assets/svgs/ListIcon.svg';
 import { ReactComponent as LiveHelpIcon } from '../../assets/svgs/LiveHelpIcon.svg';
 import { ReactComponent as LocationIcon } from '../../assets/svgs/LocationIcon.svg';
+import { ReactComponent as LocationPin } from '../../assets/svgs/LocationPin.svg';
 import { ReactComponent as LocationTransparent } from '../../assets/svgs/LocationTransparent.svg';
 import { ReactComponent as LogoCTCT } from '../../assets/svgs/LogoCTCT.svg';
 import { ReactComponent as LogoCTCTNoText } from '../../assets/svgs/LogoCTCTNoText.svg';
@@ -131,6 +132,7 @@ export default {
   FilterIcon,
   FiveWingStarIcon,
   LocationIcon,
+  LocationPin,
   LocationTransparent,
   LogoCTCT,
   LogoCTCTNoText,

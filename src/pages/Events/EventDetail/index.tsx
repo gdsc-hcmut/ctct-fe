@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 
-import { Footer, LazyLoadImage } from '../../../components';
+import { Footer, LazyLoadImage, Icon } from '../../../components';
 import { Page } from '../../../layout';
 import EventService from '../../../service/event.service';
 
@@ -50,7 +50,7 @@ const EventsPage = () => {
         </div>
 
         <div className='mt-[1.25rem] flex flex-col justify-center gap-2 lg:mt-[1.5rem] lg:gap-4 xl:mt-[2rem] 2xl:gap-5 3xl:mt-[2.25rem]'>
-          <h2 className='text-start text-[14px] font-normal text-[#696984] lg:text-[18px] 2xl:text-[24px]'>
+          <h2 className='whitespace-pre-line text-start text-[14px] font-normal text-[#696984] lg:text-[18px] 2xl:text-[24px]'>
             {events?.description}
           </h2>
         </div>
@@ -65,6 +65,32 @@ const EventsPage = () => {
           </div>
         )}
       </main>
+
+      <div className='mt-[1rem] flex h-[5rem] w-screen flex-col justify-center gap-2 bg-[#E3F2FD] md:rounded-lg lg:mt-[1.25rem] lg:gap-4 xl:mt-[1.75rem] 2xl:gap-5 3xl:mt-[2rem]'>
+        <div className='flex h-full w-full flex-row items-center justify-start px-6 py-5 lg:px-10 lg:py-7 xl:px-20 3xl:px-[100px] 3xl:py-9'>
+          <div className='flex flex-row items-center justify-center'>
+            <Icon.Clock
+              className='ml-[0.5rem] aspect-square h-[12px] w-auto lg:h-[16px] 2xl:h-[20px]'
+              fill={'#000000'}
+            />
+            <div className='ml-[0.5rem] text-start text-[12px] font-bold text-black lg:text-[16px] 2xl:text-[20px]'>
+              {EpochTimeInVietnamese(events?.startedAt || 0)} -{' '}
+              {EpochTimeInVietnamese(events?.endedAt || 0)}
+            </div>
+          </div>
+          <div className='ml-[2.25rem] flex flex-row items-center justify-center'>
+            <Icon.LocationPin
+              className='ml-[0.5rem] aspect-square h-[12px] w-auto lg:h-[16px] 2xl:h-[20px]'
+              fill={'#000000'}
+            />
+            <div className='ml-[0.5rem] text-start text-[12px] font-normal text-black lg:text-[16px] 2xl:text-[20px]'>
+              {events?.venue}
+            </div>
+          </div>
+          <div className='ml-auto flex flex-col items-center justify-center'>Hello</div>
+        </div>
+      </div>
+
       <Footer />
     </Page>
   );
