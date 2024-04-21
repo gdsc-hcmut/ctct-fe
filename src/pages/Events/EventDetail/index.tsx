@@ -14,6 +14,30 @@ const EpochTimeInVietnamese = (epochTime: number) => {
   }${date.getMonth() + 1}`;
 };
 
+const EpochTimeInVietnameseSameDay = (epochTime1: number, epochTime2: number) => {
+  const date1 = new Date(epochTime1);
+  const date2 = new Date(epochTime2);
+
+  return `${date1.getHours() < 10 ? '0' : ''}${date1.getHours()}:${
+    date1.getMinutes() < 10 ? '0' : ''
+  }${date1.getMinutes()} - ${date2.getHours() < 10 ? '0' : ''}${date2.getHours()}:${
+    date2.getMinutes() < 10 ? '0' : ''
+  }${date2.getMinutes()}, ${date1.getDate() < 10 ? '0' : ''}${date1.getDate()} tháng ${
+    date1.getMonth() < 10 ? '0' : ''
+  }${date1.getMonth() + 1}`;
+};
+
+const isSameDay = (epochTime1: number, epochTime2: number) => {
+  const date1 = new Date(epochTime1);
+  const date2 = new Date(epochTime2);
+
+  return (
+    date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
+  );
+};
+
 const EventsPage = () => {
   const params = useParams();
 
@@ -66,17 +90,23 @@ const EventsPage = () => {
         )}
       </main>
 
-      <div className='mt-[1rem] flex h-[5rem] w-screen flex-col justify-center gap-2 bg-[#E3F2FD] md:rounded-lg lg:mt-[1.25rem] lg:gap-4 xl:mt-[1.75rem] 2xl:gap-5 3xl:mt-[2rem]'>
+      <div className='mb-[1.5rem] mt-[1rem] flex h-[5rem] w-screen flex-col justify-center gap-2 bg-[#E3F2FD] md:rounded-lg lg:mt-[1.25rem] lg:gap-4 xl:mt-[1.75rem] 2xl:gap-5 3xl:mt-[2rem]'>
         <div className='flex h-full w-full flex-row items-center justify-start px-6 py-5 lg:px-10 lg:py-7 xl:px-20 3xl:px-[100px] 3xl:py-9'>
           <div className='flex flex-row items-center justify-center'>
             <Icon.Clock
               className='ml-[0.5rem] aspect-square h-[12px] w-auto lg:h-[16px] 2xl:h-[20px]'
               fill={'#000000'}
             />
-            <div className='ml-[0.5rem] text-start text-[12px] font-bold text-black lg:text-[16px] 2xl:text-[20px]'>
-              {EpochTimeInVietnamese(events?.startedAt || 0)} -{' '}
-              {EpochTimeInVietnamese(events?.endedAt || 0)}
-            </div>
+            {isSameDay(events?.startedAt || 0, events?.endedAt || 0) ? (
+              <div className='ml-[0.5rem] text-start text-[12px] font-bold text-black lg:text-[16px] 2xl:text-[20px]'>
+                {EpochTimeInVietnameseSameDay(events?.startedAt || 0, events?.endedAt || 0)}
+              </div>
+            ) : (
+              <div className='ml-[0.5rem] text-start text-[12px] font-bold text-black lg:text-[16px] 2xl:text-[20px]'>
+                {EpochTimeInVietnamese(events?.startedAt || 0)} -{' '}
+                {EpochTimeInVietnamese(events?.endedAt || 0)}
+              </div>
+            )}
           </div>
           <div className='ml-[2.25rem] flex flex-row items-center justify-center'>
             <Icon.LocationPin
