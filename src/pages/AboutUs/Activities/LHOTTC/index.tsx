@@ -282,10 +282,6 @@ const LHOTTCPage = () => {
                 <div className='text-[24px] font-bold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
                   Đánh giá của sinh viên
                 </div>
-                <p className='mx-auto max-w-full leading-7 text-[#696984] md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
-                  Trên hết, sinh viên tham gia lớp học chính là những người cảm nhận rõ nhất những
-                  giá trị mà Lớp Học Ôn Tập mang lại.*
-                </p>
               </div>
               <Comments />
             </div>
@@ -294,7 +290,7 @@ const LHOTTCPage = () => {
               <div className='flex w-full flex-col items-start justify-start gap-5 md:h-min md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
                 <div className='flex min-h-min flex-col justify-start space-y-[1.5rem] md:max-w-[46%] lg:space-y-[2.5rem] '>
                   <h2 className='text-start text-[24px] font-semibold text-[#010514] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
-                    Feedback cho chúng tôi
+                    Đóng góp ý kiến cho chúng tôi
                   </h2>
                   <p className='text-start leading-7 text-[#010514] md:leading-7 lg:leading-9 2xl:leading-10'>
                     Lớp học ôn tập là thành quả của sự nỗ lực và tâm huyết không hề nhỏ của Trung
@@ -304,7 +300,7 @@ const LHOTTCPage = () => {
                     giá trị hơn nữa cho cộng đồng sinh viên.
                   </p>
                   <div className='flex h-[3rem] w-[10rem] flex-row items-center justify-center rounded-full bg-[#4285F4] lg:h-[3.5rem] lg:w-[12erm] xl:h-[4rem] xl:w-[15rem]'>
-                    <p className='cursor-pointer font-semibold text-white'>Feedback tại đây</p>
+                    <p className='cursor-pointer font-semibold text-white'>Đóng góp tại đây</p>
                   </div>
                 </div>
                 <div className='w-[100%] md:w-[50%]'>

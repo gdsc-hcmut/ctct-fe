@@ -1,8 +1,8 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import { Footer, Loading, LazyLoadImage } from '../../../components';
+import { Footer, LazyLoadImage } from '../../../components';
 import Achievement1 from '../../../components/Achivement/Achievement1';
 import BenefitBoard from '../../../components/BenefitBoard';
 import Comments from '../../../components/Comments';
@@ -11,7 +11,6 @@ import NewsCarousel from '../../../components/NewsCarousel/NewsCarousel';
 import SignUpManual from '../../../components/SignUpManual';
 import SocialMediaCarousel from '../../../components/SocialMediaCarousel/SocialMediaCarousel';
 import Timetable from '../../../components/Timetable';
-import { useDebounce } from '../../../hooks';
 import { Page } from '../../../layout';
 import EventService from '../../../service/event.service';
 import { Event } from '../../../types/events';
@@ -19,85 +18,78 @@ import { Event } from '../../../types/events';
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
 const LHOTDKPage = () => {
-  const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient();
+
   const [displatedDate, setDisplayedDate] = useState<number[]>([]);
   const [displatedEventSet, setDisplatedEventSet] = useState<Event[][]>([[]]);
+
+  const { data: events } = useQuery({
+    queryKey: ['events', 'LOP_HOC_ON_TAP'],
+    queryFn: async () => {
+      const { data } = await EventService.getAllPaginated(
+        {
+          startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
+          pageSize: 100,
+          eventType: 'LOP_HOC_ON_TAP',
+        },
+        false
+      );
+
+      return data.payload.result;
+    },
+  });
 
   const { mutateAsync: register } = useMutation({
     mutationFn: async (eventId: string) => {
       await EventService.register(eventId);
-      fetchEvent();
     },
     onSuccess: () => {
       toast.success('Đăng ký sự kiện thành công');
+      queryClient.invalidateQueries(['events', 'LOP_HOC_ON_TAP']);
     },
     onError: () => {
       toast.error('Đã có lỗi trong lúc đăng ký sự kiện! Vui lòng thử lại sau.');
     },
   });
 
-  const fetchEvent = useDebounce(() => {
-    setLoading(true);
-    EventService.getAllPaginated(
-      {
-        startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
-        pageSize: 100,
-      },
-      false
-    )
-      .then((res) => {
-        const { result: allEvents } = res.data.payload;
-
-        const sortedEvents = allEvents.sort((a, b) => a.startedAt - b.startedAt);
-        const firstDate =
-          allEvents.length > 0
-            ? allEvents[0].startedAt - (allEvents[0].startedAt % ONE_DAY_MILLISECOND)
-            : 0;
-        const firstEventSet = sortedEvents.filter(
-          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === firstDate
-        );
-        const remainingEvents = sortedEvents.filter(
-          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== firstDate
-        );
-
-        const secondDate =
-          remainingEvents.length > 0
-            ? remainingEvents[0].startedAt - (remainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
-            : 0;
-        const secondEventSet = remainingEvents.filter(
-          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === secondDate
-        );
-
-        const secondRemainingEvents = remainingEvents.filter(
-          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== secondDate
-        );
-
-        const thirdDate =
-          secondRemainingEvents.length > 0
-            ? secondRemainingEvents[0].startedAt -
-              (secondRemainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
-            : 0;
-
-        const thirdEventSet = secondRemainingEvents.filter(
-          (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === thirdDate
-        );
-
-        setDisplayedDate([firstDate, secondDate, thirdDate]);
-        setDisplatedEventSet([firstEventSet, secondEventSet, thirdEventSet]);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  });
-
   useEffect(() => {
-    fetchEvent();
-  }, [fetchEvent]);
+    if (events === undefined) return;
 
-  if (loading) return <Loading />;
+    const sortedEvents = events.sort((a, b) => a.startedAt - b.startedAt);
+    const firstDate =
+      events.length > 0 ? events[0].startedAt - (events[0].startedAt % ONE_DAY_MILLISECOND) : 0;
+    const firstEventSet = sortedEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === firstDate
+    );
+    const remainingEvents = sortedEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== firstDate
+    );
+
+    const secondDate =
+      remainingEvents.length > 0
+        ? remainingEvents[0].startedAt - (remainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
+        : 0;
+    const secondEventSet = remainingEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === secondDate
+    );
+
+    const secondRemainingEvents = remainingEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== secondDate
+    );
+
+    const thirdDate =
+      secondRemainingEvents.length > 0
+        ? secondRemainingEvents[0].startedAt -
+          (secondRemainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
+        : 0;
+
+    const thirdEventSet = secondRemainingEvents.filter(
+      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === thirdDate
+    );
+
+    setDisplayedDate([firstDate, secondDate, thirdDate]);
+    setDisplatedEventSet([firstEventSet, secondEventSet, thirdEventSet]);
+  }, [events]);
 
   return (
     <Page title='Lớp học ôn tập'>
@@ -122,7 +114,7 @@ const LHOTDKPage = () => {
                   </p>
                 </div>
 
-                <div className='absolute bottom-0 right-0 z-0 hidden aspect-square w-[52px] rounded-lg bg-[#33EFA0] md:-bottom-4 md:-right-4 md:block md:w-24 md:rounded-xl lg:-bottom-5 lg:-right-5 lg:w-32 xl:-bottom-6 xl:-right-6 xl:w-40 xl:rounded-2xl 2xl:-bottom-8 2xl:-right-8 2xl:w-52 2xl:rounded-3xl' />
+                <div className='absolute bottom-0 right-0 z-0 hidden aspect-square w-[52px] rounded-lg bg-[#4285F4] md:-bottom-4 md:-right-4 md:block md:w-24 md:rounded-xl lg:-bottom-5 lg:-right-5 lg:w-32 xl:-bottom-6 xl:-right-6 xl:w-40 xl:rounded-2xl 2xl:-bottom-8 2xl:-right-8 2xl:w-52 2xl:rounded-3xl' />
 
                 <div className='relative block h-full w-[100%] overflow-hidden md:w-[50%]'>
                   <LazyLoadImage
@@ -136,7 +128,7 @@ const LHOTDKPage = () => {
               </div>
 
               <div className='relative flex w-full flex-col-reverse items-start justify-between gap-5 md:flex-row md:gap-8 lg:gap-12 2xl:gap-[56px]'>
-                <div className='absolute top-0 left-0 z-0 hidden aspect-square h-[3rem] w-[3rem] rounded-full bg-[#5B61EB] md:-top-4 md:-left-4 md:block md:h-[4rem] md:w-[4rem] lg:-top-5 lg:-left-5 lg:h-[6rem] lg:w-[6rem] xl:-top-6 xl:-left-6 xl:h-[7rem] xl:w-[7rem] 2xl:-top-8 2xl:-left-8 2xl:h-[8rem] 2xl:w-[8rem]' />
+                <div className='absolute top-0 left-0 z-0 hidden aspect-square h-[3rem] w-[3rem] rounded-full bg-[#4285F4] md:-top-4 md:-left-4 md:block md:h-[4rem] md:w-[4rem] lg:-top-5 lg:-left-5 lg:h-[6rem] lg:w-[6rem] xl:-top-6 xl:-left-6 xl:h-[7rem] xl:w-[7rem] 2xl:-top-8 2xl:-left-8 2xl:h-[8rem] 2xl:w-[8rem]' />
                 <div className='relative block h-full w-[100%] overflow-hidden md:w-[50%]'>
                   <LazyLoadImage
                     className='z-[1] block aspect-[3/1] rounded-[20px]'
@@ -177,6 +169,11 @@ const LHOTDKPage = () => {
                   eventSets={displatedEventSet}
                   register={register}
                 />
+                <div className='flex w-full flex-row items-end justify-end'>
+                  <a className='text-end underline' href='/profile/event'>
+                    Sự kiện của tôi
+                  </a>
+                </div>
               </div>
 
               <div className='relative flex w-full flex-col items-center justify-between gap-5 md:flex-row md:gap-[1rem] lg:gap-[1.5rem] 2xl:gap-[2rem]'>
@@ -188,7 +185,7 @@ const LHOTDKPage = () => {
 
                 <SignUpManual />
 
-                <div className='relative hidden h-full w-[35%] flex-row items-center justify-between lg:block'>
+                <div className='relative hidden h-full w-[70%] flex-row items-center justify-between lg:block'>
                   <LazyLoadImage
                     className='z-[1] block aspect-[2/1] rounded-[20px] md:aspect-[5/2]'
                     src={require('../../../assets/images/LHOTDK_8.png')}
@@ -196,7 +193,7 @@ const LHOTDKPage = () => {
                     alt='tstt_alt'
                     objectFit='cover'
                   />
-                  <div className='absolute bottom-0 right-0 z-0 hidden aspect-square w-[52px] rounded-lg bg-[#5B72EE] md:-bottom-4 md:-right-4 md:block md:w-24 md:rounded-xl lg:-bottom-5 lg:-right-5 lg:w-32 xl:-bottom-6 xl:-right-6 xl:w-40 xl:rounded-2xl 2xl:-bottom-8 2xl:-right-8 2xl:w-52 2xl:rounded-3xl' />
+                  <div className='absolute bottom-0 right-0 z-0 hidden aspect-square w-[52px] rounded-lg bg-[#4285F4] md:-bottom-4 md:-right-4 md:block md:w-24 md:rounded-xl lg:-bottom-5 lg:-right-5 lg:w-32 xl:-bottom-6 xl:-right-6 xl:w-40 xl:rounded-2xl 2xl:-bottom-8 2xl:-right-8 2xl:w-52 2xl:rounded-3xl' />
                 </div>
               </div>
 
