@@ -108,7 +108,7 @@ const NewsCreate = () => {
       });
   };
 
-  const createEvent = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const createNews = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setLoading(true);
     const data = {
@@ -145,7 +145,7 @@ const NewsCreate = () => {
       <Wrapper className='flex flex-1 flex-col'>
         <div className='w-full bg-[#4285F4]/90 py-4'>
           <p className='text-center text-sm font-bold text-white md:text-2xl 3xl:text-4xl'>
-            Tạo sự kiện
+            Tạo bài viết
           </p>
         </div>
         <div className='w-full p-4'>
@@ -161,7 +161,7 @@ const NewsCreate = () => {
               <div className='flex w-full flex-col items-start justify-center'>
                 <label className='mb-2 w-full' htmlFor='event-name'>
                   <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
-                    Tên sự kiện
+                    Tên bài viết
                   </p>
                 </label>
                 <input
@@ -169,7 +169,7 @@ const NewsCreate = () => {
                   className='flex w-full rounded-lg border border-[#CCC] p-1 text-xs font-medium
                   lg:p-3 lg:text-sm 3xl:p-5 3xl:text-base'
                   value={name}
-                  placeholder='Nhập tên sự kiện'
+                  placeholder='Nhập tên bài viết'
                   onChange={({ target }) => setName(target.value)}
                 />
               </div>
@@ -406,7 +406,7 @@ const NewsCreate = () => {
                 <button
                   type='submit'
                   disabled={submitDisabled}
-                  onClick={createEvent}
+                  onClick={createNews}
                   className={`flex items-center rounded-lg px-6 py-1
                   transition-all duration-200 lg:px-7 lg:py-2 3xl:px-8 3xl:py-3 ${
                     submitDisabled ? 'bg-gray-400/80' : 'bg-[#4285F4]/80 hover:bg-[#4285F4]'

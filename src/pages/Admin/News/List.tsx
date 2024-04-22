@@ -51,9 +51,9 @@ const NewsList = () => {
     if (eventId !== null) {
       EventService.deleteById(eventId)
         .then((_res) => {
-          toast.success('Xóa sự kiện thành công');
+          toast.success('Xóa bài viết thành công');
           setPage(1);
-          fetchEvent();
+          fetchNews();
         })
         .catch((err) => {
           toast.error(err.response.data.message);
@@ -79,7 +79,7 @@ const NewsList = () => {
     };
   }, []);
 
-  const fetchEvent = useDebounce(() => {
+  const fetchNews = useDebounce(() => {
     setLoading(true);
     EventService.getAllPaginated(
       {
@@ -104,13 +104,13 @@ const NewsList = () => {
   });
 
   useEffect(() => {
-    fetchEvent();
-  }, [page, filterName, filterEventType, fetchEvent]);
+    fetchNews();
+  }, [page, filterName, filterEventType, fetchNews]);
 
   return (
     <Page>
       <DeleteModal
-        text='Bạn có chắc chắn muốn xóa sự kiện này?'
+        text='Bạn có chắc chắn muốn xóa bài viết này?'
         onClose={() => setDeleteModal(false)}
         show={deleteModal}
         onDelete={() => onDeleteEvent()}
@@ -118,7 +118,7 @@ const NewsList = () => {
       <Wrapper className='flex flex-1 flex-col'>
         <div className='w-full bg-[#4285F4]/90 py-4'>
           <p className='text-center text-sm font-bold text-white md:text-2xl 3xl:text-4xl'>
-            Danh sách sự kiện
+            Danh sách bài viết
           </p>
         </div>
         <div className='w-full p-4'>
@@ -192,7 +192,7 @@ const NewsList = () => {
                       <thead>
                         <tr className='flex w-full flex-1 items-center justify-start gap-x-4 px-6 lg:px-8 3xl:px-10'>
                           <th className='flex flex-[1.5] items-center justify-start text-base font-semibold text-[#4285f4] lg:text-lg 3xl:text-xl'>
-                            Tên sự kiện
+                            Tên bài viết
                           </th>
                           <th className='flex flex-[1.5] items-center justify-start text-base font-semibold text-[#4285f4] lg:text-lg 3xl:text-xl'>
                             Danh mục

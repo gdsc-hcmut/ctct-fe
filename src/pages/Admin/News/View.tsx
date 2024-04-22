@@ -120,7 +120,7 @@ const NewsView = () => {
       <Wrapper className='flex flex-1 flex-col'>
         <div className='w-full bg-[#4285F4]/90 py-4'>
           <p className='text-center text-sm font-bold text-white md:text-2xl 3xl:text-4xl'>
-            Xem thông tin sự kiện
+            Xem thông tin bài viết
           </p>
         </div>
         <div className='w-full p-4'>
@@ -153,12 +153,12 @@ const NewsView = () => {
               >
                 <form className='flex flex-col gap-y-6'>
                   <p className='flex flex-[2.5] text-base lg:text-lg 3xl:text-xl'>
-                    ID sự kiện: {id}
+                    ID bài viết: {id}
                   </p>
                   <div className='flex w-full flex-col items-start justify-center'>
                     <label className='mb-2 w-full' htmlFor='event-name'>
                       <p className='w-full text-sm font-semibold lg:text-base 3xl:text-xl'>
-                        Tên sự kiện
+                        Tên bài viết
                       </p>
                     </label>
                     <div
@@ -320,7 +320,7 @@ const NewsView = () => {
               <div className='mt-4 h-full w-full rounded-lg bg-white px-8 py-2 lg:px-10 lg:py-4 3xl:px-12 3xl:py-6'>
                 <form className='flex flex-col gap-y-6'>
                   <p className='mt-4 flex flex-[2.5] text-base font-semibold lg:text-lg 3xl:text-xl'>
-                    Check-In sự kiện
+                    Check-In bài viết
                   </p>
                   <div className='flex w-full flex-1 flex-col items-center justify-center space-y-4'>
                     {toggleScanner && (
