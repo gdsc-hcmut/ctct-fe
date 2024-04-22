@@ -12,7 +12,8 @@ type AdminAsideLinkProps = {
     | 'subject'
     | 'chapter'
     | 'mockTest'
-    | 'event';
+    | 'event'
+    | 'news';
   titleName: string;
   isOpen: boolean;
   handleClick: (
@@ -25,6 +26,7 @@ type AdminAsideLinkProps = {
       | 'chapter'
       | 'mockTest'
       | 'event'
+      | 'news'
   ) => void;
   IconProp: React.FC<SVGProps<SVGSVGElement>>;
 };

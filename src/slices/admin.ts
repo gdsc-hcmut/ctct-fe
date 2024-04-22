@@ -15,6 +15,8 @@ export interface TAdminFilterSlice {
     | 'exam'
     | 'exercise'
     | 'mockTest'
+    | 'event'
+    | 'news'
     | null;
   setFilterName: (option: string) => void;
   setFilterSubject: (option: string) => void;
@@ -23,7 +25,17 @@ export interface TAdminFilterSlice {
   setFilterEventType: (option: string) => void;
   setPage: (option: number) => void;
   setPathState: (
-    path: 'subject' | 'chapter' | 'question' | 'material' | 'exam' | 'exercise' | 'mockTest' | null
+    path:
+      | 'subject'
+      | 'chapter'
+      | 'question'
+      | 'material'
+      | 'exam'
+      | 'exercise'
+      | 'mockTest'
+      | 'event'
+      | 'news'
+      | null
   ) => void;
 }
 
