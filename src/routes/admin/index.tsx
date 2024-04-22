@@ -22,6 +22,10 @@ import EditSlot from '../../pages/Admin/MockTest/EditSlot';
 import MockTestList from '../../pages/Admin/MockTest/List';
 import MockTestView from '../../pages/Admin/MockTest/View';
 import ViewSlot from '../../pages/Admin/MockTest/ViewSlot';
+import NewsCreate from '../../pages/Admin/News/Create';
+import NewsEdit from '../../pages/Admin/News/Edit';
+import NewsList from '../../pages/Admin/News/List';
+import NewsView from '../../pages/Admin/News/View';
 import EditQuestionPage from '../../pages/Admin/Question/Edit';
 import ViewQuestionPage from '../../pages/Admin/Question/View';
 import SubjectEdit from '../../pages/Admin/Subject/Edit';
@@ -360,6 +364,40 @@ const AdministratorRoute = () => {
               element={
                 <Suspense fallback={<Loading />}>
                   <EventEdit />
+                </Suspense>
+              }
+            />
+          </Route>
+          <Route path='news'>
+            <Route
+              path='manage'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <NewsList />
+                </Suspense>
+              }
+            />
+            <Route
+              path='create'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <NewsCreate />
+                </Suspense>
+              }
+            />
+            <Route
+              path='view/:id'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <NewsView />
+                </Suspense>
+              }
+            />
+            <Route
+              path='edit/:id'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <NewsEdit />
                 </Suspense>
               }
             />

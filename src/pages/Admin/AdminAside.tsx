@@ -17,6 +17,7 @@ type AdminAsideState = {
     | 'chapter'
     | 'mockTest'
     | 'event'
+    | 'news'
     | null;
   material: boolean;
   exam: boolean;
@@ -26,6 +27,7 @@ type AdminAsideState = {
   chapter: boolean;
   mockTest: boolean;
   event: boolean;
+  news: boolean;
 };
 
 const AdminAside: FC = () => {
@@ -39,6 +41,7 @@ const AdminAside: FC = () => {
     chapter: false,
     mockTest: false,
     event: false,
+    news: false,
   });
   const { pathname } = useLocation();
   const pathState = useBoundStore.use.pathState();
@@ -59,6 +62,7 @@ const AdminAside: FC = () => {
       | 'chapter'
       | 'mockTest'
       | 'event'
+      | 'news'
   ) => {
     setMenuState((prevState) => {
       const newState = { ...prevState };
@@ -108,6 +112,12 @@ const AdminAside: FC = () => {
     } else if (pathname.includes('admin/mockTest')) {
       setMenuState((prevState) => ({ ...prevState, isActive: 'mockTest' }));
       setPathState('mockTest');
+    } else if (pathname.includes('admin/event')) {
+      setMenuState((prevState) => ({ ...prevState, isActive: 'event' }));
+      setPathState('event');
+    } else if (pathname.includes('admin/news')) {
+      setMenuState((prevState) => ({ ...prevState, isActive: 'news' }));
+      setPathState('news');
     } else setPathState(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
@@ -170,6 +180,13 @@ const AdminAside: FC = () => {
           isOpen={menuState.event}
           handleClick={handleClick}
           IconProp={Icon.CalendarIcon}
+        />
+        <AdminAsideLink
+          path='news'
+          titleName='bài viết'
+          isOpen={menuState.news}
+          handleClick={handleClick}
+          IconProp={Icon.Newspaper}
         />
       </div>
     </Aside>
