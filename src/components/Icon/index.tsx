@@ -39,6 +39,7 @@ import { ReactComponent as EqualizerIcon } from '../../assets/svgs/EqualizerIcon
 import { ReactComponent as Exercise } from '../../assets/svgs/ExerciseIcon.svg';
 import { ReactComponent as FacebookIcon } from '../../assets/svgs/FacebookIcon.svg';
 import { ReactComponent as FacebookSolid } from '../../assets/svgs/FacebookSolidIcon.svg';
+import { ReactComponent as FacebookSolidLetter } from '../../assets/svgs/FacebookSolidLetter.svg';
 import { ReactComponent as LogoFessior } from '../../assets/svgs/FessiorLogo.svg';
 import { ReactComponent as FileInvoiceWhite } from '../../assets/svgs/FileInvoiceWhite.svg';
 import { ReactComponent as FilterIcon } from '../../assets/svgs/FilterIcon.svg';
@@ -192,4 +193,5 @@ export default {
   Letter,
   Link,
   FacebookSolid,
+  FacebookSolidLetter,
 };
