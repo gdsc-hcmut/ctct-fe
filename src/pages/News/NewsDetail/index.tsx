@@ -170,7 +170,7 @@ const NewsDetail = () => {
                   </p>
                 </div>
                 <div className='mt-[1rem] flex flex-row items-center justify-end'>
-                  <ShareOptions link='https://www.facebook.com' />
+                  <ShareOptions link={window.location.href} />
                 </div>
               </div>
               <div className='flex w-full flex-col border-b-[1px] border-[#696984] border-opacity-10 pb-[1rem]'></div>
