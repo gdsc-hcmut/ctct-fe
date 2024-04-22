@@ -1,5 +1,4 @@
 // import { API_URL } from '../config';
-import { News } from '../types/news';
 // import { axios } from '../utils/custom-axios';
 
 // import type { Response } from '../types/response';
@@ -25,13 +24,13 @@ type GetAllNewsPaginatedArgument = {
   pageSize?: number;
 };
 
-type GetAllNewsPaginatedReturnType = {
-  total: number;
-  pageCount: number;
-  pageSize: number;
-  pageNumber: number;
-  result: News[];
-};
+// type GetAllNewsPaginatedReturnType = {
+//   total: number;
+//   pageCount: number;
+//   pageSize: number;
+//   pageNumber: number;
+//   result: News[];
+// };
 
 const create = async (data: CreateNewsArgument) => {
   console.log(data);
