@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 import { Footer, LazyLoadImage } from '../../../components';
 import LoadMoreButton from '../../../components/LoadMoreButton';
-import { NewsCard, NewsCard2, NewsTimetableCard } from '../../../components/NewsCard';
+import { NewsCard, NewsDescriptionCard, NewsTimetableCard } from '../../../components/NewsCard';
 import NewsItem from '../../../components/NewsItem';
 import ShareOptions from '../../../components/ShareOptions';
 import { Page } from '../../../layout';
@@ -160,7 +160,7 @@ const NewsDetail = () => {
                     <NewsTimetableCard eventSets={displayedEventSet} />
                   )}
                   <NewsCard title={'GIA SƯ ÁO XANH'} isImageLeft={true} isSolidColor={false} />
-                  <NewsCard2 title={'HỖ TRỢ TRUYỀN THÔNG'} />
+                  <NewsDescriptionCard title={'HỖ TRỢ TRUYỀN THÔNG'} />
                 </div>
               </div>
             </div>

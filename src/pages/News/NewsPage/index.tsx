@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 import { Footer } from '../../../components';
 import LoadMoreButton from '../../../components/LoadMoreButton';
-import { NewsCard, NewsCard2, NewsTimetableCard } from '../../../components/NewsCard';
+import { NewsCard, NewsDescriptionCard, NewsTimetableCard } from '../../../components/NewsCard';
 import NewsFirstItem from '../../../components/NewsFirstItem';
 import NewsItem from '../../../components/NewsItem';
 import { Page } from '../../../layout';
@@ -102,7 +102,7 @@ const NewsPage = () => {
                     <NewsTimetableCard eventSets={displayedEventSet} />
                   )}
                   <NewsCard title={'GIA SƯ ÁO XANH'} isImageLeft={true} isSolidColor={false} />
-                  <NewsCard2 title={'HỖ TRỢ TRUYỀN THÔNG'} />
+                  <NewsDescriptionCard title={'HỖ TRỢ TRUYỀN THÔNG'} />
                 </div>
               </div>
             </div>
