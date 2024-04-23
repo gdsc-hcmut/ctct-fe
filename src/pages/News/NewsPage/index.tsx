@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 import { Footer } from '../../../components';
 import LoadMoreButton from '../../../components/LoadMoreButton';
-import { NewsCard1, NewsCard2, NewsTimetableCard } from '../../../components/NewsCard';
+import { NewsCard, NewsCard2, NewsTimetableCard } from '../../../components/NewsCard';
 import NewsFirstItem from '../../../components/NewsFirstItem';
 import NewsItem from '../../../components/NewsItem';
 import { Page } from '../../../layout';
@@ -93,11 +93,11 @@ const NewsPage = () => {
                   <LoadMoreButton />
                 </div>
                 <div className='mt-[2rem] flex w-full max-w-full flex-col space-y-[2rem] lg:ml-[1.5rem] lg:mt-0 xl:ml-[1.75rem] 3xl:ml-[2rem]'>
-                  <NewsCard1 title={'LỚP HỌC ÔN TẬP'} isImageLeft={true} isSolidColor={true} />
+                  <NewsCard title={'LỚP HỌC ÔN TẬP'} isImageLeft={true} isSolidColor={true} />
                   {displayedEventSet.length !== 0 && (
                     <NewsTimetableCard eventSets={displayedEventSet} />
                   )}
-                  <NewsCard1 title={'GIA SƯ ÁO XANH'} isImageLeft={true} isSolidColor={false} />
+                  <NewsCard title={'GIA SƯ ÁO XANH'} isImageLeft={true} isSolidColor={false} />
                   <NewsCard2 title={'HỖ TRỢ TRUYỀN THÔNG'} />
                 </div>
               </div>

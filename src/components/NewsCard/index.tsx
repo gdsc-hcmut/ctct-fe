@@ -1,5 +1,5 @@
-import NewsCard1 from './NewsCard1';
-import NewsCard2 from './NewsCard2';
+import NewsCard from './NewsCard';
+import NewsDescriptionCard from './NewsDescriptionCard';
 import NewsTimetableCard from './NewsTimetableCard';
 
-export { NewsCard1, NewsCard2, NewsTimetableCard };
+export { NewsCard, NewsDescriptionCard as NewsCard2, NewsTimetableCard };

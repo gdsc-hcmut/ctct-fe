@@ -1,15 +1,18 @@
 import { LazyLoadImage } from '..';
-import { Event } from '../../types/events';
+import { News } from '../../types/news';
 
 interface NewsCardProps {
-  eventSets?: Event[];
+  newsSets?: News[];
   isSolidColor: boolean;
   isImageLeft: boolean;
   title: string;
 }
 
-const NewsCard1 = ({ eventSets, isSolidColor, isImageLeft, title }: NewsCardProps) => {
-  console.log(eventSets, isImageLeft);
+const NewsCard = ({ newsSets, isSolidColor, isImageLeft, title }: NewsCardProps) => {
+  if (newsSets === undefined) {
+    return <></>;
+  }
+
   return (
     <div
       className={`flex w-full flex-col rounded-[0.5rem] p-0 md:p-[1.25rem] ${
@@ -43,11 +46,11 @@ const NewsCard1 = ({ eventSets, isSolidColor, isImageLeft, title }: NewsCardProp
             />
           </div>
           <p className='hidden text-start font-semibold text-[12x] text-[#696984] md:block xl:text-[16px]'>
-            Độc đáo lớp học cùng tiến, giúp bạn học tốt hơn
+            {newsSets[0].title}
           </p>
           <div className='mt-[1rem] flex min-w-full flex-col md:mt-0 md:hidden md:min-w-[65%] lg:max-w-full xl:max-w-[65%]'>
             <p className='text-start text-[16px] font-semibold text-black md:text-[14px] md:text-[#696984] 3xl:text-[16px]'>
-              Độc đáo lớp học cùng tiến, giúp bạn học tốt hơn
+              {newsSets[0].title}
             </p>
             <p className='mt-[0.25rem] text-start text-[14px] leading-6 text-[#696984] xl:leading-7'>
               Nhiều trường ĐH tuyển chọn sinh viên khá, giỏi làm trợ lý giảng dạy cho giảng viên.
@@ -64,33 +67,20 @@ const NewsCard1 = ({ eventSets, isSolidColor, isImageLeft, title }: NewsCardProp
               : 'min-w-[45%]'
           } flex-col space-y-[1.5rem] lg:space-y-[1rem] xl:space-y-[1.25rem] 2xl:space-y-[1.5rem]`}
         >
-          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]'>
-            <p className='text-start font-medium text-[16x] text-black md:font-normal md:text-[#696984] xl:text-[18px]'>
-              Thông tin lớp học tuần 14/2024
-            </p>
-          </div>
-
-          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]'>
-            <p className='text-start font-medium text-[16x] text-black md:font-normal md:text-[#696984] xl:text-[18px]'>
-              Thông tin lớp học tuần 15/2024
-            </p>
-          </div>
-
-          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]'>
-            <p className='text-start font-medium text-[16x] text-black md:font-normal md:text-[#696984] xl:text-[18px]'>
-              Mở đăng ký thi thử giữa kỳ HK232
-            </p>
-          </div>
-
-          <div className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]'>
-            <p className='text-start font-medium text-[16x] text-black md:font-normal md:text-[#696984] xl:text-[18px]'>
-              Lịch thi thử cuối kỳ HK232
-            </p>
-          </div>
+          {newsSets.slice(1, 5).map((news, index) => (
+            <div
+              key={index}
+              className='flex max-w-full flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[0.5rem]'
+            >
+              <p className='text-start font-medium text-[16x] text-black md:font-normal md:text-[#696984] xl:text-[18px]'>
+                {news.title}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default NewsCard1;
+export default NewsCard;
