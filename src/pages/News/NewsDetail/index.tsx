@@ -9,6 +9,7 @@ import ShareOptions from '../../../components/ShareOptions';
 import { Page } from '../../../layout';
 import EventService from '../../../service/event.service';
 import { Event } from '../../../types/events';
+import { groupEventByDay } from '../NewsPage';
 
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
@@ -34,7 +35,7 @@ const translateVietnameseDay = (date: Date) => {
 };
 
 const NewsDetail = () => {
-  const [displayedEventSet, setDisplatedEventSet] = useState<Event[]>([]);
+  const [displayedEventSet, setDisplayedEventSet] = useState<Event[]>([]);
 
   const { data: events } = useQuery({
     queryKey: ['events', 'LOP_HOC_ON_TAP'],
@@ -53,40 +54,8 @@ const NewsDetail = () => {
 
   useEffect(() => {
     if (events === undefined) return;
-
-    const sortedEvents = events.sort((a, b) => a.startedAt - b.startedAt);
-    const firstDate =
-      events.length > 0 ? events[0].startedAt - (events[0].startedAt % ONE_DAY_MILLISECOND) : 0;
-    const firstEventSet = sortedEvents.filter(
-      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === firstDate
-    );
-    const remainingEvents = sortedEvents.filter(
-      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== firstDate
-    );
-
-    const secondDate =
-      remainingEvents.length > 0
-        ? remainingEvents[0].startedAt - (remainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
-        : 0;
-    const secondEventSet = remainingEvents.filter(
-      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === secondDate
-    );
-
-    const secondRemainingEvents = remainingEvents.filter(
-      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) !== secondDate
-    );
-
-    const thirdDate =
-      secondRemainingEvents.length > 0
-        ? secondRemainingEvents[0].startedAt -
-          (secondRemainingEvents[0].startedAt % ONE_DAY_MILLISECOND)
-        : 0;
-
-    const thirdEventSet = secondRemainingEvents.filter(
-      (event) => event.startedAt - (event.startedAt % ONE_DAY_MILLISECOND) === thirdDate
-    );
-
-    setDisplatedEventSet([...firstEventSet, ...secondEventSet, ...thirdEventSet]);
+    const groupedEvent = groupEventByDay(events);
+    setDisplayedEventSet(groupedEvent);
   }, [events]);
 
   return (
