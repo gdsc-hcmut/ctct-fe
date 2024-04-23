@@ -19,6 +19,27 @@ export function formatTime(time: number) {
   })}, ${date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })}`;
 }
 
+export function formatTimeWithoutDate(time: number) {
+  const date = new Date(time);
+
+  return date.toLocaleTimeString('vi-VN', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
+const DayOfWeekVietnamese = ['Chủ Nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+
+export const getDayOfWeekVietnamese = (dayOfWeek: number) => {
+  return DayOfWeekVietnamese[dayOfWeek];
+};
+
+export function formatVietnameseDate(epochTime: number) {
+  return `${getDayOfWeekVietnamese(new Date(epochTime).getDay())}, ${new Date(
+    epochTime
+  ).getDate()}/${new Date(epochTime).getMonth() + 1}`;
+}
+
 export function getOffset(ref: React.RefObject<HTMLElement>) {
   const rect =
       ref.current === null || ref.current === undefined
@@ -161,4 +182,9 @@ export const getCurrentSemester = () => {
   return `${Number(year) - (Number(month) >= 9 && Number(month) <= 12 ? 0 : 1)}${
     Number(month) >= 9 && Number(month) <= 12 ? 1 : Number(month) >= 1 && Number(month) <= 6 ? 2 : 3
   }`;
+};
+
+export const cutContent = (content: string, cutoffLength: number) => {
+  let displayedContent = content.split('\n')[0].split(' ').slice(0, cutoffLength).join(' ');
+  return displayedContent + '. . .';
 };

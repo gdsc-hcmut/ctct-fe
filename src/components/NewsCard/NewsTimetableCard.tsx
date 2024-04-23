@@ -1,15 +1,10 @@
 import { Event } from '../../types/events';
+import { formatTimeWithoutDate, formatVietnameseDate } from '../../utils/helper';
 import Icon from '../Icon';
 
 interface NewsTimetableCardProps {
   eventSets: Event[];
 }
-
-const DayOfWeekVietnamese = ['Chủ Nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
-
-const translateDayOfWeekVietnamese = (dayOfWeek: number) => {
-  return DayOfWeekVietnamese[dayOfWeek];
-};
 
 const NewsTimetableCard = ({ eventSets }: NewsTimetableCardProps) => {
   return (
@@ -27,16 +22,12 @@ const NewsTimetableCard = ({ eventSets }: NewsTimetableCardProps) => {
           >
             <div className='flex flex-row items-center justify-between'>
               <p className='text-start font-normal text-[10x] text-[#696984] xl:text-[14px]'>
-                {translateDayOfWeekVietnamese(new Date(event.startedAt).getDay())},{' '}
-                {new Date(event.startedAt).getDate()}/{new Date(event.startedAt).getMonth() + 1}
+                {formatVietnameseDate(event.startedAt)}
               </p>
               <div className='flex max-h-full max-w-full flex-row items-center justify-end'>
                 <Icon.Clock className='aspect-square w-2 fill-[#696984] p-0 lg:w-3 2xl:w-4' />
                 <p className='ml-[0.25rem] text-start font-normal text-[10x] text-[#696984] xl:text-[14px]'>
-                  {new Date(event.startedAt).toLocaleTimeString('vi-VN', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
+                  {formatTimeWithoutDate(event.startedAt)}
                 </p>
               </div>
             </div>

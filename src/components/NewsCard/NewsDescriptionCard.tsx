@@ -1,5 +1,6 @@
 import { LazyLoadImage } from '..';
 import { News } from '../../types/news';
+import { cutContent } from '../../utils/helper';
 
 interface NewsCardProps {
   newsSets?: News[];
@@ -30,9 +31,7 @@ const NewsDescriptionCard = ({ newsSets, title }: NewsCardProps) => {
                   {news.title}
                 </p>
                 <p className='mt-[0.25rem] text-start text-[14px] leading-6 text-[#696984] xl:leading-7'>
-                  CLB Google Developer Student Club - Trường Đại học Bách khoa - ĐHQG-HCM chính thức
-                  nhận đơn đăng ký của đội thi tham gia cuộc thi ý tưởng công nghệ GDSC Idea Contest
-                  2023: THiNK
+                  {cutContent(news.content, 30)}
                 </p>
               </div>
               <div className='ml-0 block w-full max-w-full md:ml-[1.5rem] lg:hidden xl:ml-[1rem] xl:block 2xl:ml-[1.5rem]'>

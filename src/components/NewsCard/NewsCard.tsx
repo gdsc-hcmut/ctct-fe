@@ -1,5 +1,6 @@
 import { LazyLoadImage } from '..';
 import { News } from '../../types/news';
+import { cutContent } from '../../utils/helper';
 
 interface NewsCardProps {
   newsSets?: News[];
@@ -53,9 +54,7 @@ const NewsCard = ({ newsSets, isSolidColor, isImageLeft, title }: NewsCardProps)
               {newsSets[0].title}
             </p>
             <p className='mt-[0.25rem] text-start text-[14px] leading-6 text-[#696984] xl:leading-7'>
-              Nhiều trường ĐH tuyển chọn sinh viên khá, giỏi làm trợ lý giảng dạy cho giảng viên.
-              Các “giảng viên sinh viên" này tham gia đứng lớp giảng dạy, phụ chấm bài và được nhà
-              trường trả lương.
+              {cutContent(newsSets[0].content, 30)}
             </p>
           </div>
         </div>
