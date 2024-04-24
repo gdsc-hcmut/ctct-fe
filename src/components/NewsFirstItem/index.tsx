@@ -6,7 +6,7 @@ interface NewsFirstItemProps {
 }
 
 const NewsFirstItem = ({ news }: NewsFirstItemProps) => {
-  if (news === null) {
+  if (news === undefined) {
     return <></>;
   }
 
