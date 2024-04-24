@@ -1,6 +1,6 @@
 import { LazyLoadImage } from '../';
 import { News } from '../../types';
-import { cutContent } from '../../utils/helper';
+import { cutContent, getDifferenceWithCurrentTime } from '../../utils/helper';
 
 interface NewsItemProps {
   news: News;
@@ -39,7 +39,7 @@ const NewsItem = ({ news }: NewsItemProps) => {
           </div>
           <div className='mt-[0.375rem] hidden max-w-full xl:mt-[0.5rem] xl:block 3xl:mt-[0.75rem]'>
             <p className='text-start text-[12px] font-normal leading-6 text-[#696984] xl:text-[16px] xl:leading-7'>
-              50 phút trước
+              {getDifferenceWithCurrentTime(news.createdAt)}
             </p>
           </div>
         </div>
