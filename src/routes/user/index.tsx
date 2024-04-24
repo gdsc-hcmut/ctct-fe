@@ -143,7 +143,7 @@ const UserRoute = () => {
             }
           />
           <Route
-            path='detail'
+            path=':newsId?'
             element={
               <Suspense fallback={<Loading />}>
                 <NewsDetail />
