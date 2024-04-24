@@ -8,7 +8,7 @@ const Achievement2 = () => {
           className='mx-auto flex h-full w-full flex-col items-center justify-start space-y-1'
           key={achievement.id}
         >
-          <p className='text-[48px] leading-[3.5rem] text-[#4285F4] xl:text-[60px] xl:leading-[4rem] 2xl:text-[80px] 2xl:leading-[8rem]'>
+          <p className='text-[36px] leading-[2.5rem] text-[#4285F4] md:text-[48px] xl:text-[60px] xl:leading-[3rem] 2xl:text-[80px] 2xl:leading-[5rem]'>
             {achievement.number}
           </p>
           <p className='text-center font-medium text-[#010514]'>{achievement.title}</p>

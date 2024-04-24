@@ -110,6 +110,8 @@ const UserEvent = () => {
         onClose={() => setDeleteModal(false)}
         show={deleteModal}
         onDelete={() => onDeleteEvent()}
+        positiveOption='Hủy'
+        negativeOption='Huỷ đ.ký'
       />
       <main className='with-nav-height w-full overflow-y-auto'>
         <ProfileOption option={4} editAvatar={false} setAvatar={() => {}} updatedName='' />
