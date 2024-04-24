@@ -40,6 +40,18 @@ export function formatVietnameseDate(epochTime: number) {
   ).getDate()}/${new Date(epochTime).getMonth() + 1}`;
 }
 
+export function formatDetailVietnameseDate(epochTime: number) {
+  const date = new Date(epochTime);
+  const vietnameseDay = DayOfWeekVietnamese[date.getDay()];
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const time = date.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+  return `${vietnameseDay}, ${day < 10 ? 0 : ''}${day}/${
+    month < 10 ? 0 : ''
+  }${month}/${year}, ${time} (GMT+7)`;
+}
+
 export function getOffset(ref: React.RefObject<HTMLElement>) {
   const rect =
       ref.current === null || ref.current === undefined

@@ -15,30 +15,10 @@ import { Page } from '../../../layout';
 import EventService from '../../../service/event.service';
 import NewsService from '../../../service/news.service';
 import { Event, News } from '../../../types';
+import { formatDetailVietnameseDate } from '../../../utils/helper';
 import { groupEventByDay } from '../NewsPage';
 
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
-
-const DayOfWeekVietnamese = [
-  'Chủ Nhật',
-  'Thứ Hai',
-  'Thứ Ba',
-  'Thứ Tư',
-  'Thứ Năm',
-  'Thứ Sáu',
-  'Thứ Bảy',
-];
-
-const translateVietnameseDay = (date: Date) => {
-  const vietnameseDay = DayOfWeekVietnamese[date.getDay()];
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  const time = date.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
-  return `${vietnameseDay}, ${day < 10 ? 0 : ''}${day}/${
-    month < 10 ? 0 : ''
-  }${month}/${year}, ${time} (GMT+7)`;
-};
 
 const NewsDetail = () => {
   const [displayedEventSet, setDisplayedEventSet] = useState<Event[]>([]);
@@ -96,7 +76,7 @@ const NewsDetail = () => {
                     Sự kiện
                   </p>
                   <p className='text-start text-[14px] font-normal text-[#696984] md:text-[16px] xl:text-[18px]'>
-                    {translateVietnameseDay(new Date())}
+                    {formatDetailVietnameseDate(Date.now())}
                   </p>
                 </div>
                 <div className='mt-[0.75rem] flex w-full flex-row'>
