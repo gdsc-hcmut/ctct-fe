@@ -9,3 +9,5 @@ export * from './subject';
 export * from './user';
 export * from './event';
 export * from './exam';
+export * from './events';
+export * from './news';

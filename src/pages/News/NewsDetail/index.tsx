@@ -1,14 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 
-import { Footer, LazyLoadImage } from '../../../components';
-import LoadMoreButton from '../../../components/LoadMoreButton';
-import { NewsCard, NewsDescriptionCard, NewsTimetableCard } from '../../../components/NewsCard';
-import NewsItem from '../../../components/NewsItem';
-import ShareOptions from '../../../components/ShareOptions';
+import {
+  Footer,
+  LazyLoadImage,
+  NewsCard,
+  NewsDescriptionCard,
+  NewsTimetableCard,
+  LoadMoreButton,
+  NewsItem,
+  ShareOptions,
+} from '../../../components';
 import { Page } from '../../../layout';
 import EventService from '../../../service/event.service';
-import { Event } from '../../../types/events';
+import NewsService from '../../../service/news.service';
+import { Event, News } from '../../../types';
 import { groupEventByDay } from '../NewsPage';
 
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
@@ -36,6 +42,7 @@ const translateVietnameseDay = (date: Date) => {
 
 const NewsDetail = () => {
   const [displayedEventSet, setDisplayedEventSet] = useState<Event[]>([]);
+  const [displayedNewsSet, setDisplayedNewsSet] = useState<News[]>([]);
 
   const { data: events } = useQuery({
     queryKey: ['events', 'LOP_HOC_ON_TAP'],
@@ -52,11 +59,30 @@ const NewsDetail = () => {
     },
   });
 
+  const { data: newsSet } = useQuery({
+    queryKey: ['news'],
+    queryFn: async () => {
+      const { data } = await NewsService.getAllPaginated(
+        {
+          pageNumber: 1,
+          pageSize: 8,
+        },
+        false
+      );
+      return data.payload.result;
+    },
+  });
+
   useEffect(() => {
     if (events === undefined) return;
     const groupedEvent = groupEventByDay(events);
     setDisplayedEventSet(groupedEvent);
   }, [events]);
+
+  useEffect(() => {
+    if (newsSet === undefined) return;
+    setDisplayedNewsSet(newsSet);
+  }, [newsSet]);
 
   return (
     <Page title='Tin tức'>
@@ -145,22 +171,28 @@ const NewsDetail = () => {
               <div className='flex w-full flex-col border-b-[1px] border-[#696984] border-opacity-10 pb-[1rem]'></div>
               <div className='flex w-full flex-col items-start justify-start lg:flex-row'>
                 <div className='flex max-w-full flex-col space-y-[1rem] lg:max-w-[50%] lg:space-y-[2rem]'>
-                  <NewsItem />
-                  <NewsItem />
-                  <NewsItem />
-                  <NewsItem />
-                  <NewsItem />
-                  <NewsItem />
-                  <NewsItem />
+                  {displayedNewsSet.slice(1, 10).map((news, index) => (
+                    <NewsItem key={index} news={news} />
+                  ))}
                   <LoadMoreButton />
                 </div>
                 <div className='mt-[2rem] flex w-full max-w-full flex-col space-y-[2rem] lg:ml-[1.5rem] lg:mt-0 xl:ml-[1.75rem] 3xl:ml-[2rem]'>
-                  <NewsCard title={'LỚP HỌC ÔN TẬP'} isImageLeft={true} isSolidColor={true} />
+                  <NewsCard
+                    title={'LỚP HỌC ÔN TẬP'}
+                    isImageLeft={true}
+                    isSolidColor={true}
+                    newsSets={displayedNewsSet}
+                  />
                   {displayedEventSet.length !== 0 && (
                     <NewsTimetableCard eventSets={displayedEventSet} />
                   )}
-                  <NewsCard title={'GIA SƯ ÁO XANH'} isImageLeft={true} isSolidColor={false} />
-                  <NewsDescriptionCard title={'HỖ TRỢ TRUYỀN THÔNG'} />
+                  <NewsCard
+                    title={'GIA SƯ ÁO XANH'}
+                    isImageLeft={true}
+                    isSolidColor={false}
+                    newsSets={displayedNewsSet}
+                  />
+                  <NewsDescriptionCard title={'HỖ TRỢ TRUYỀN THÔNG'} newsSets={displayedNewsSet} />
                 </div>
               </div>
             </div>

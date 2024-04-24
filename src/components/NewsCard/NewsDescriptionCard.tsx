@@ -3,7 +3,7 @@ import { News } from '../../types/news';
 import { cutContent } from '../../utils/helper';
 
 interface NewsCardProps {
-  newsSets?: News[];
+  newsSets: News[];
   title: string;
 }
 
