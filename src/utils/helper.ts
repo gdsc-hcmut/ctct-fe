@@ -235,6 +235,8 @@ export const getCurrentSemester = () => {
 };
 
 export const cutContent = (content: string, cutoffLength: number) => {
+  if (!content) return '';
+
   let displayedContent = content.split('\n')[0].split(' ').slice(0, cutoffLength).join(' ');
   return displayedContent + '. . .';
 };

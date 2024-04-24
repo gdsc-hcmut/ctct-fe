@@ -93,7 +93,6 @@ const NewsPage = () => {
 
   useEffect(() => {
     if (newsSet === undefined) return;
-    console.log(newsSet);
     setDisplayedNewsSet(newsSet);
   }, [newsSet]);
 

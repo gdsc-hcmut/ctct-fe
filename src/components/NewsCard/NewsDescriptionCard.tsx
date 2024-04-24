@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { LazyLoadImage } from '..';
 import { News } from '../../types/news';
 import { cutContent } from '../../utils/helper';
@@ -26,16 +28,22 @@ const NewsDescriptionCard = ({ newsSets, title }: NewsCardProps) => {
             className='mt-[1.25rem] flex flex-col border-b-[1px] border-dashed border-[#696984] border-opacity-10 pb-[1rem]'
           >
             <div className='flex flex-col-reverse md:flex-row'>
-              <div className='mt-[1rem] flex min-w-full flex-col md:mt-0 md:min-w-[65%] lg:max-w-full xl:max-w-[65%]'>
-                <p className='text-start text-[16px] font-semibold text-black transition delay-100 hover:text-[#4285F4] md:text-[16px] md:text-[#696984]'>
+              <Link
+                className='mt-[1rem] flex min-w-full flex-col md:mt-0 md:min-w-[65%] lg:max-w-full xl:max-w-[65%]'
+                to={news && news._id}
+              >
+                <p className='text-start text-[16px] font-semibold text-black transition  hover:text-[#4285F4] md:text-[16px] md:text-[#696984]'>
                   {news.title}
                 </p>
                 <p className='mt-[0.25rem] text-start text-[14px] leading-6 text-[#696984] xl:leading-7'>
                   {cutContent(news.content, 30)}
                 </p>
-              </div>
+              </Link>
               <div className='ml-0 block w-full max-w-full md:ml-[1.5rem] lg:hidden xl:ml-[1rem] xl:block 2xl:ml-[1.5rem]'>
-                <div className='relative block aspect-[3/2] h-auto w-[100%] overflow-hidden'>
+                <Link
+                  className='relative block aspect-[3/2] h-auto w-[100%] overflow-hidden'
+                  to={news && news._id}
+                >
                   <LazyLoadImage
                     className='z-[1] block aspect-auto rounded-[0.5rem]'
                     src={require('../../assets/images/News_1.png')}
@@ -43,7 +51,7 @@ const NewsDescriptionCard = ({ newsSets, title }: NewsCardProps) => {
                     alt='tstt_alt'
                     objectFit='cover'
                   />
-                </div>
+                </Link>
               </div>
             </div>
           </div>
