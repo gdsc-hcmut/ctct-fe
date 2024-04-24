@@ -10,7 +10,7 @@ const NewsItem = ({ news }: NewsItemProps) => {
   return (
     <div className='flex w-full flex-col border-b-[1px] border-[#696984] border-opacity-10 pb-[1.5rem]'>
       <div className='block max-w-full sm:hidden'>
-        <p className='text-start font-semibold text-[10x] text-[#000000] lg:text-[14px] xl:text-[20px]'>
+        <p className='text-start font-semibold text-[10x] text-[#000000] transition delay-100 hover:text-[#4285F4] lg:text-[14px] xl:text-[20px]'>
           {news.title}
         </p>
       </div>
@@ -28,7 +28,7 @@ const NewsItem = ({ news }: NewsItemProps) => {
         </div>
         <div className='ml-[1rem] flex w-full max-w-full flex-col xl:ml-[1.25rem]'>
           <div className='hidden max-w-full sm:block'>
-            <p className='text-start font-semibold text-[10x] text-[#000000] lg:text-[14px] xl:text-[20px]'>
+            <p className='text-start font-semibold text-[10x] text-[#000000] transition delay-100 hover:text-[#4285F4] lg:text-[14px] xl:text-[20px]'>
               {news.title}
             </p>
           </div>

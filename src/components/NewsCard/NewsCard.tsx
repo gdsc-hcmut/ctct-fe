@@ -46,11 +46,11 @@ const NewsCard = ({ newsSets, isSolidColor, isImageLeft, title }: NewsCardProps)
               objectFit='cover'
             />
           </div>
-          <p className='hidden text-start font-semibold text-[12x] text-[#696984] md:block xl:text-[16px]'>
+          <p className='hidden text-start font-semibold text-[12x] text-[#696984] transition delay-100 hover:text-[#4285F4] md:block xl:text-[16px]'>
             {newsSets[0] && newsSets[0].title}
           </p>
           <div className='mt-[1rem] flex min-w-full flex-col md:mt-0 md:hidden md:min-w-[65%] lg:max-w-full xl:max-w-[65%]'>
-            <p className='text-start text-[16px] font-semibold text-black md:text-[14px] md:text-[#696984] 3xl:text-[16px]'>
+            <p className='text-start text-[16px] font-semibold text-black transition delay-100 hover:text-[#4285F4] md:text-[14px] md:text-[#696984] 3xl:text-[16px]'>
               {newsSets[0] && newsSets[0].title}
             </p>
             <p className='mt-[0.25rem] text-start text-[14px] leading-6 text-[#696984] xl:leading-7'>

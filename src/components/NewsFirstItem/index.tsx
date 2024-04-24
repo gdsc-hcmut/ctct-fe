@@ -25,7 +25,7 @@ const NewsFirstItem = ({ news }: NewsFirstItemProps) => {
       </div>
       <div className='mt-[1rem] flex w-full max-w-full flex-col space-y-[0.25rem] md:mt-0 md:ml-[1rem] md:space-y-[0.75rem] lg:ml-[1.5rem] xl:ml-[1.75rem] 3xl:ml-[2rem]'>
         <div className='max-w-full lg:max-w-[50%]'>
-          <p className='text-start text-[20px] font-semibold text-[#000000] xl:text-[24px]'>
+          <p className='text-start text-[20px] font-semibold text-[#000000] transition delay-100 hover:text-[#4285F4] xl:text-[24px]'>
             {news.title}
           </p>
         </div>
