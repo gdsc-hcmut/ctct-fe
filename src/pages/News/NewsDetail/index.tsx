@@ -8,7 +8,7 @@ import {
   NewsCard,
   NewsDescriptionCard,
   NewsTimetableCard,
-  LoadMoreButton,
+  // LoadMoreButton,
   NewsItem,
   ShareOptions,
   Loading,
@@ -114,9 +114,9 @@ const NewsDetail = () => {
               <div className='flex w-full flex-col items-start justify-start lg:flex-row'>
                 <div className='flex max-w-full flex-col space-y-[1rem] lg:max-w-[50%] lg:space-y-[2rem]'>
                   {displayedNewsSet.slice(1, 10).map((newsItem, index) => (
-                    <NewsItem key={index} news={newsItem} />
+                    <NewsItem key={index} news={newsItem} loading={false} />
                   ))}
-                  <LoadMoreButton />
+                  {/* <LoadMoreButton /> */}
                 </div>
                 <div className='mt-[2rem] flex w-full max-w-full flex-col space-y-[2rem] lg:ml-[1.5rem] lg:mt-0 xl:ml-[1.75rem] 3xl:ml-[2rem]'>
                   <NewsCard

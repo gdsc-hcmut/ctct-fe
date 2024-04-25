@@ -18,6 +18,8 @@ import { Event, News } from '../../../types';
 
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 const PAGE_SIZE = 10;
+const INITIAL_TOTAL_NEWS_FETCHED = 20;
+const INITIAL_PAGE_INDEX = 2;
 
 export const groupEventByDay = (events: Event[]): Event[] => {
   const sortedEvents = events.sort((a, b) => a.startedAt - b.startedAt);
@@ -60,14 +62,37 @@ const NewsPage = () => {
   const [displayedNewsSet, setDisplayedNewsSet] = useState<News[]>([]);
 
   const [loading, setLoading] = useState(false);
+  const [isFetchingNews, setIsFetchingNews] = useState(false);
+
+  const [pageIndex, setPageIndex] = useState(INITIAL_PAGE_INDEX);
+  const [totalNews, setTotalNews] = useState(0);
+  const [renderedNewsQuantity, setRenderedNewsQuantity] = useState(PAGE_SIZE);
+
+  const onClickLoadMore = () => {
+    if (renderedNewsQuantity + 2 * PAGE_SIZE > INITIAL_TOTAL_NEWS_FETCHED) {
+      setPageIndex((prev) => prev + 1);
+    }
+    setRenderedNewsQuantity((prev) => prev + PAGE_SIZE);
+  };
 
   useEffect(() => {
     setLoading(true);
+
+    let newsLoading = false;
+    let eventLoading = false;
+
+    const handleLoading = () => {
+      setLoading(!(newsLoading && eventLoading));
+    };
 
     const eventQuery = {
       startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
       pageSize: 100,
       eventType: 'LOP_HOC_ON_TAP',
+    };
+
+    const newsQuery = {
+      pageSize: INITIAL_TOTAL_NEWS_FETCHED,
     };
 
     EventService.getAllPaginated(eventQuery, false)
@@ -80,24 +105,45 @@ const NewsPage = () => {
         toast.error(err.response.data.message);
       })
       .finally(() => {
-        setLoading(false);
+        eventLoading = true;
+        handleLoading();
+      });
+
+    NewsService.getAllPaginated(newsQuery, false)
+      .then((res) => {
+        const result = res.data.payload.result;
+        const total = res.data.payload.total;
+        setDisplayedNewsSet(result);
+        setTotalNews(total);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      })
+      .finally(() => {
+        newsLoading = true;
+        handleLoading();
       });
   }, []);
 
   useEffect(() => {
+    setIsFetchingNews(false);
     const newsQuery = {
-      pageSize: 10,
+      pageSize: PAGE_SIZE,
+      pageNumber: pageIndex,
     };
 
     NewsService.getAllPaginated(newsQuery, false)
       .then((res) => {
         const result = res.data.payload.result;
-        setDisplayedNewsSet(result);
+        setDisplayedNewsSet((prev) => [...prev, ...result]);
       })
       .catch((err) => {
         toast.error(err.response.data.message);
+      })
+      .finally(() => {
+        setIsFetchingNews(true);
       });
-  }, []);
+  }, [pageIndex]);
 
   if (loading) return <Loading />;
 
@@ -118,9 +164,13 @@ const NewsPage = () => {
                 <div className='flex max-w-full flex-col space-y-[1rem] lg:max-w-[50%] lg:space-y-[2rem]'>
                   {displayedNewsSet &&
                     displayedNewsSet
-                      .slice(1, PAGE_SIZE)
-                      .map((news, index) => <NewsItem key={index} news={news} />)}
-                  <LoadMoreButton />
+                      .slice(1, renderedNewsQuantity)
+                      .map((news, index) => <NewsItem key={index} news={news} loading={false} />)}
+                  {isFetchingNews ? (
+                    renderedNewsQuantity < totalNews && <LoadMoreButton onClick={onClickLoadMore} />
+                  ) : (
+                    <NewsItem news={undefined} loading={true} />
+                  )}
                 </div>
                 <div className='mt-[2rem] flex w-full max-w-full flex-col space-y-[2rem] lg:ml-[1.5rem] lg:mt-0 xl:ml-[1.75rem] 3xl:ml-[2rem]'>
                   {displayedNewsSet && (
