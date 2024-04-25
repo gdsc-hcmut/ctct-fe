@@ -18,8 +18,8 @@ import { Event, News } from '../../../types';
 
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 const PAGE_SIZE = 10;
-const INITIAL_TOTAL_NEWS_FETCHED = 20;
-const INITIAL_PAGE_INDEX = 2;
+const INITIAL_TOTAL_NEWS_FETCHED = 40;
+const INITIAL_PAGE_INDEX = INITIAL_TOTAL_NEWS_FETCHED / PAGE_SIZE;
 
 export const groupEventByDay = (events: Event[]): Event[] => {
   const sortedEvents = events.sort((a, b) => a.startedAt - b.startedAt);
