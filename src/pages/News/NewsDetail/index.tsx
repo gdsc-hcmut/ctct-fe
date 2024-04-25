@@ -8,7 +8,6 @@ import {
   NewsCard,
   NewsDescriptionCard,
   NewsTimetableCard,
-  // LoadMoreButton,
   NewsItem,
   ShareOptions,
   Loading,
@@ -21,6 +20,7 @@ import { formatDetailVietnameseDate } from '../../../utils/helper';
 import { groupEventByDay } from '../NewsPage';
 
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
+const TOTAL_NEWS_FETCHED = 10;
 
 const NewsDetail = () => {
   const params = useParams();
@@ -41,10 +41,21 @@ const NewsDetail = () => {
   useEffect(() => {
     setLoading(true);
 
+    let newsLoading = false;
+    let eventLoading = false;
+
+    const handleLoading = () => {
+      setLoading(!(newsLoading && eventLoading));
+    };
+
     const eventQuery = {
       startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
       pageSize: 100,
       eventType: 'LOP_HOC_ON_TAP',
+    };
+
+    const newsQuery = {
+      pageSize: TOTAL_NEWS_FETCHED,
     };
 
     EventService.getAllPaginated(eventQuery, false)
@@ -57,14 +68,9 @@ const NewsDetail = () => {
         toast.error(err.response.data.message);
       })
       .finally(() => {
-        setLoading(false);
+        eventLoading = true;
+        handleLoading();
       });
-  }, []);
-
-  useEffect(() => {
-    const newsQuery = {
-      pageSize: 10,
-    };
 
     NewsService.getAllPaginated(newsQuery, false)
       .then((res) => {
@@ -73,6 +79,10 @@ const NewsDetail = () => {
       })
       .catch((err) => {
         toast.error(err.response.data.message);
+      })
+      .finally(() => {
+        newsLoading = true;
+        handleLoading();
       });
   }, []);
 
@@ -113,7 +123,7 @@ const NewsDetail = () => {
               <div className='flex w-full flex-col border-b-[1px] border-[#696984] border-opacity-10 pb-[1rem]'></div>
               <div className='flex w-full flex-col items-start justify-start lg:flex-row'>
                 <div className='flex max-w-full flex-col space-y-[1rem] lg:max-w-[50%] lg:space-y-[2rem]'>
-                  {displayedNewsSet.slice(1, 10).map((newsItem, index) => (
+                  {displayedNewsSet.slice(1, TOTAL_NEWS_FETCHED).map((newsItem, index) => (
                     <NewsItem key={index} news={newsItem} loading={false} />
                   ))}
                   {/* <LoadMoreButton /> */}
