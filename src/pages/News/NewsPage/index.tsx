@@ -68,11 +68,22 @@ const NewsPage = () => {
   const [totalNews, setTotalNews] = useState(0);
   const [renderedNewsQuantity, setRenderedNewsQuantity] = useState(PAGE_SIZE);
 
+  const [toggleLoadMoreButton, setToggleLoadMoreButton] = useState(true);
+
   const onClickLoadMore = () => {
-    if (renderedNewsQuantity + 2 * PAGE_SIZE > INITIAL_TOTAL_NEWS_FETCHED) {
-      setPageIndex((prev) => prev + 1);
-    }
-    setRenderedNewsQuantity((prev) => prev + PAGE_SIZE);
+    setRenderedNewsQuantity((prev) => {
+      const updatedQuantity = prev + PAGE_SIZE;
+
+      if (updatedQuantity > INITIAL_TOTAL_NEWS_FETCHED) {
+        setPageIndex((prevIndex) => prevIndex + 1);
+      }
+
+      if (updatedQuantity >= totalNews) {
+        setToggleLoadMoreButton(false);
+      }
+
+      return updatedQuantity;
+    });
   };
 
   useEffect(() => {
@@ -167,7 +178,7 @@ const NewsPage = () => {
                       .slice(1, renderedNewsQuantity)
                       .map((news, index) => <NewsItem key={index} news={news} loading={false} />)}
                   {isFetchingNews ? (
-                    renderedNewsQuantity < totalNews && <LoadMoreButton onClick={onClickLoadMore} />
+                    toggleLoadMoreButton && <LoadMoreButton onClick={onClickLoadMore} />
                   ) : (
                     <NewsItem news={undefined} loading={true} />
                   )}
