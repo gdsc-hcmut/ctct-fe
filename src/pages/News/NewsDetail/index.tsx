@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import {
   Footer,
@@ -10,6 +11,7 @@ import {
   LoadMoreButton,
   NewsItem,
   ShareOptions,
+  Loading,
 } from '../../../components';
 import { Page } from '../../../layout';
 import EventService from '../../../service/event.service';
@@ -34,45 +36,47 @@ const NewsDetail = () => {
   const [displayedEventSet, setDisplayedEventSet] = useState<Event[]>([]);
   const [displayedNewsSet, setDisplayedNewsSet] = useState<News[]>([]);
 
-  const { data: events } = useQuery({
-    queryKey: ['events', 'LOP_HOC_ON_TAP'],
-    queryFn: async () => {
-      const { data } = await EventService.getAllPaginated(
-        {
-          startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
-          pageSize: 100,
-          eventType: 'LOP_HOC_ON_TAP',
-        },
-        false
-      );
-      return data.payload.result;
-    },
-  });
-
-  const { data: newsSet } = useQuery({
-    queryKey: ['news'],
-    queryFn: async () => {
-      const { data } = await NewsService.getAllPaginated(
-        {
-          pageNumber: 1,
-          pageSize: 8,
-        },
-        false
-      );
-      return data.payload.result;
-    },
-  });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (events === undefined) return;
-    const groupedEvent = groupEventByDay(events);
-    setDisplayedEventSet(groupedEvent);
-  }, [events]);
+    setLoading(true);
+
+    const eventQuery = {
+      startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
+      pageSize: 100,
+      eventType: 'LOP_HOC_ON_TAP',
+    };
+
+    EventService.getAllPaginated(eventQuery, false)
+      .then((res) => {
+        const result = res.data.payload.result;
+        const groupedEvent = groupEventByDay(result);
+        setDisplayedEventSet(groupedEvent);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
-    if (newsSet === undefined) return;
-    setDisplayedNewsSet(newsSet);
-  }, [newsSet]);
+    const newsQuery = {
+      pageSize: 10,
+    };
+
+    NewsService.getAllPaginated(newsQuery, false)
+      .then((res) => {
+        const result = res.data.payload.result;
+        setDisplayedNewsSet(result);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <Page title='Tin tức'>

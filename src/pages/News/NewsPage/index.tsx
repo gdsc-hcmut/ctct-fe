@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 import {
   Footer,
@@ -9,6 +9,7 @@ import {
   NewsDescriptionCard,
   NewsTimetableCard,
   LoadMoreButton,
+  Loading,
 } from '../../../components';
 import { Page } from '../../../layout';
 import EventService from '../../../service/event.service';
@@ -16,6 +17,7 @@ import NewsService from '../../../service/news.service';
 import { Event, News } from '../../../types';
 
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
+const PAGE_SIZE = 10;
 
 export const groupEventByDay = (events: Event[]): Event[] => {
   const sortedEvents = events.sort((a, b) => a.startedAt - b.startedAt);
@@ -57,44 +59,47 @@ const NewsPage = () => {
   const [displayedEventSet, setDisplayedEventSet] = useState<Event[]>([]);
   const [displayedNewsSet, setDisplayedNewsSet] = useState<News[]>([]);
 
-  const { data: events } = useQuery({
-    queryKey: ['events', 'LOP_HOC_ON_TAP'],
-    queryFn: async () => {
-      const { data } = await EventService.getAllPaginated(
-        {
-          startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
-          pageSize: 100,
-          eventType: 'LOP_HOC_ON_TAP',
-        },
-        false
-      );
-      return data.payload.result;
-    },
-  });
-
-  const { data: newsSet } = useQuery({
-    queryKey: ['news'],
-    queryFn: async () => {
-      const { data } = await NewsService.getAllPaginated(
-        {
-          pageSize: 10,
-        },
-        false
-      );
-      return data.payload.result;
-    },
-  });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (events === undefined) return;
-    const groupedEvent = groupEventByDay(events);
-    setDisplayedEventSet(groupedEvent);
-  }, [events]);
+    setLoading(true);
+
+    const eventQuery = {
+      startedAtMin: Date.now() - (Date.now() % ONE_DAY_MILLISECOND),
+      pageSize: 100,
+      eventType: 'LOP_HOC_ON_TAP',
+    };
+
+    EventService.getAllPaginated(eventQuery, false)
+      .then((res) => {
+        const result = res.data.payload.result;
+        const groupedEvent = groupEventByDay(result);
+        setDisplayedEventSet(groupedEvent);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
-    if (newsSet === undefined) return;
-    setDisplayedNewsSet(newsSet);
-  }, [newsSet]);
+    const newsQuery = {
+      pageSize: 10,
+    };
+
+    NewsService.getAllPaginated(newsQuery, false)
+      .then((res) => {
+        const result = res.data.payload.result;
+        setDisplayedNewsSet(result);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <Page title='Tin tức'>
@@ -113,7 +118,7 @@ const NewsPage = () => {
                 <div className='flex max-w-full flex-col space-y-[1rem] lg:max-w-[50%] lg:space-y-[2rem]'>
                   {displayedNewsSet &&
                     displayedNewsSet
-                      .slice(1, 10)
+                      .slice(1, PAGE_SIZE)
                       .map((news, index) => <NewsItem key={index} news={news} />)}
                   <LoadMoreButton />
                 </div>
