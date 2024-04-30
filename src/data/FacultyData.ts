@@ -55,10 +55,6 @@ const FACULTY_OPTIONS = [
     value: 'OISP',
     label: 'Văn phòng Đào tạo Quốc tế',
   },
-  {
-    value: 'OTHER',
-    label: 'Khác',
-  },
 ];
 
 export default FACULTY_OPTIONS;
