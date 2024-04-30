@@ -108,7 +108,6 @@ const EventEdit = () => {
     name === '' ||
     venue === '' ||
     eventType === '' ||
-    description === '' ||
     subject === '' ||
     loading ||
     eventDuration.start === 0 ||
