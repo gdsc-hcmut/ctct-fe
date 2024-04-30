@@ -136,9 +136,6 @@ const EventEdit = () => {
     }
   });
 
-  console.log('canSave', canSave);
-  console.log('submitDisabled', submitDisabled);
-
   const fetchData = useCallback(() => {
     setLoading(true);
     EventService.getById(id, true)
