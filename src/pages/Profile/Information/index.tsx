@@ -10,6 +10,7 @@ import { Page } from '../../../layout';
 import UserService from '../../../service/user.service';
 import useBoundStore from '../../../store';
 import { User } from '../../../types';
+import { facultyOptions } from '../../../utils/helper';
 
 const UserInformation = () => {
   const user = useBoundStore.use.user();
@@ -40,6 +41,14 @@ const UserInformation = () => {
       }
     }
   };
+
+  const parsedOptions = facultyOptions.map((option) => (
+    <option key={option.value} value={option.value}>
+      {option.label}
+    </option>
+  ));
+
+  parsedOptions.unshift(<option key='' value='' disabled className='hidden'></option>);
 
   return (
     <Page title='Thông tin người dùng - Xem và cập nhật thông tin'>
@@ -153,20 +162,23 @@ const UserInformation = () => {
                 >
                   Khoa
                 </label>
-                <input
-                  type='text'
-                  id='major'
-                  name='major'
+                <select
+                  name='faculty'
+                  id='faculty'
                   disabled={!isEditMode}
-                  value={userProfile.major}
-                  placeholder={userProfile.major}
-                  onChange={(e) => setUserProfile({ ...userProfile, major: e.target.value })}
+                  value={userProfile?.major}
                   className={`black-placeholder mt-2 w-full rounded-[10px] md:w-[70%] ${
                     isEditMode
                       ? 'border-[1px] border-[#D9D9D9] hover:border-[#4285f4]'
                       : 'text-[#696984] disabled:bg-[#E9E9E9]'
                   } px-4 py-3 text-xl`}
-                />
+                  onChange={(e) => {
+                    setUserProfile({ ...userProfile, major: e.target.value });
+                  }}
+                  defaultValue={''}
+                >
+                  {parsedOptions.map((option) => option)}
+                </select>
               </div>
               <div className='flex flex-col md:mt-2 md:flex-row md:items-center'>
                 <label

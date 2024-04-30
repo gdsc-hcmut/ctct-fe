@@ -1,11 +1,15 @@
-#gender-selection .react-select__control {
+#gender-selection .react-select__control,
+#major-selection .react-select__control {
   border-radius: 10px;
   padding: 0.75rem 1rem;
 }
 
 #gender-selection .react-select__value-container,
 #gender-selection .react-select__input-container,
-#gender-selection .react-select__input-container input {
+#gender-selection .react-select__input-container,
+#major-selection .react-select__value-container,
+#major-selection .react-select__input-container,
+#major-selection .react-select__input-container input {
   height: 1.75rem;
   font-size: 1.25rem;
   line-height: 1.75rem;
@@ -13,7 +17,8 @@
   color: inherit;
 }
 
-#gender-selection .react-select__placeholder p {
+#gender-selection .react-select__placeholder,
+#major-selection .react-select__placeholder p {
   color: inherit;
   font-size: 1.25rem;
   line-height: 1.75rem;
