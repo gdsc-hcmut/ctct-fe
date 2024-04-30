@@ -40,7 +40,7 @@ const FACULTY_OPTIONS = [
     label: 'Khoa Quản lý Công nghiệp',
   },
   {
-    value: 'CSE',
+    value: 'FENR',
     label: 'Khoa Khoa học Môi trường và Tài nguyên',
   },
   {
