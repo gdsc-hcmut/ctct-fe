@@ -6,11 +6,11 @@ import { toast } from 'react-toastify';
 import { Footer } from '../../../components';
 import Icon from '../../../components/Icon';
 import ProfileOption from '../../../components/ProfileOption';
+import FACULTY_OPTIONS from '../../../data/FacultyData';
 import { Page } from '../../../layout';
 import UserService from '../../../service/user.service';
 import useBoundStore from '../../../store';
 import { User } from '../../../types';
-import { facultyOptions } from '../../../utils/helper';
 
 const UserInformation = () => {
   const user = useBoundStore.use.user();
@@ -42,7 +42,7 @@ const UserInformation = () => {
     }
   };
 
-  const parsedOptions = facultyOptions.map((option) => (
+  const parsedOptions = FACULTY_OPTIONS.map((option) => (
     <option key={option.value} value={option.value}>
       {option.label}
     </option>

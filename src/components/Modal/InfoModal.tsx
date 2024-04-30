@@ -9,11 +9,10 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { Select } from '..';
+import FACULTY_OPTIONS from '../../data/FacultyData';
 import UserService from '../../service/user.service';
 import useBoundStore from '../../store';
 import { User } from '../../types';
-import { facultyOptions } from '../../utils/helper';
-
 const InfoModal: FC<{
   isOpen: boolean;
   handleOpen: Dispatch<SetStateAction<boolean>>;
@@ -283,9 +282,9 @@ const InfoModal: FC<{
                       Khoa
                     </label>
                     <Select
-                      options={facultyOptions}
+                      options={FACULTY_OPTIONS}
                       value={
-                        facultyOptions.find((option) => option.value === userProfile.major) || null
+                        FACULTY_OPTIONS.find((option) => option.value === userProfile.major) || null
                       }
                       onChange={(option) => {
                         setUserProfile({ ...userProfile, major: option?.value || '' });
