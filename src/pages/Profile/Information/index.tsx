@@ -42,14 +42,6 @@ const UserInformation = () => {
     }
   };
 
-  const parsedOptions = FACULTY_OPTIONS.map((option) => (
-    <option key={option.value} value={option.value}>
-      {option.label}
-    </option>
-  ));
-
-  parsedOptions.unshift(<option key='' value='' disabled className='hidden'></option>);
-
   return (
     <Page title='Thông tin người dùng - Xem và cập nhật thông tin'>
       <main className='with-nav-height w-full overflow-y-auto'>
@@ -177,7 +169,11 @@ const UserInformation = () => {
                   }}
                   defaultValue={''}
                 >
-                  {parsedOptions.map((option) => option)}
+                  {FACULTY_OPTIONS.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className='flex flex-col md:mt-2 md:flex-row md:items-center'>
