@@ -276,7 +276,7 @@ const InfoModal: FC<{
                     className='flex flex-col md:mt-2 md:flex-row md:items-center'
                   >
                     <label
-                      htmlFor='major-selection'
+                      htmlFor='major'
                       className='mt-4 text-xl font-semibold text-[#5B5B5B] md:w-[30%]'
                     >
                       Khoa
