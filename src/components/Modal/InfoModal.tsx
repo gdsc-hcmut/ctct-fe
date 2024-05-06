@@ -9,10 +9,10 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { Select } from '..';
+import FACULTY_OPTIONS from '../../data/FacultyData';
 import UserService from '../../service/user.service';
 import useBoundStore from '../../store';
 import { User } from '../../types';
-
 const InfoModal: FC<{
   isOpen: boolean;
   handleOpen: Dispatch<SetStateAction<boolean>>;
@@ -271,23 +271,27 @@ const InfoModal: FC<{
                       border-[#D9D9D9] px-4 py-3 text-xl  md:w-[70%]'
                     />
                   </div>
-                  <div className='flex flex-col md:mt-2 md:flex-row md:items-center'>
+                  <div
+                    id='major-selection'
+                    className='flex flex-col md:mt-2 md:flex-row md:items-center'
+                  >
                     <label
                       htmlFor='major'
                       className='mt-4 text-xl font-semibold text-[#5B5B5B] md:w-[30%]'
                     >
                       Khoa
                     </label>
-                    <input
-                      type='text'
-                      disabled={isEnoughInfo}
-                      id='major'
-                      name='major'
-                      value={userProfile.major}
-                      placeholder={userProfile.major}
-                      onChange={(e) => setUserProfile({ ...userProfile, major: e.target.value })}
-                      className='black-placeholder mt-2 w-full rounded-[10px] border-[1px] border-[#D9D9D9] px-4 py-3 
-                      text-xl  md:w-[70%]'
+                    <Select
+                      options={FACULTY_OPTIONS}
+                      value={
+                        FACULTY_OPTIONS.find((option) => option.value === userProfile.major) || null
+                      }
+                      onChange={(option) => {
+                        setUserProfile({ ...userProfile, major: option?.value || '' });
+                      }}
+                      isDisabled={isEnoughInfo}
+                      placeholder='n/a'
+                      className='mt-2'
                     />
                   </div>
                   <div className='flex flex-col md:mt-2 md:flex-row md:items-center'>
@@ -310,7 +314,7 @@ const InfoModal: FC<{
                         })
                       }
                       className='black-placeholder mt-2 w-full rounded-[10px] border-[1px] border-[#D9D9D9] px-4 py-3 
-                      text-xl  md:w-[70%]'
+                      text-xl md:w-[70%]'
                     />
                   </div>
                   <div
