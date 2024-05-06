@@ -75,7 +75,6 @@ const EventCreate = () => {
     venue === '' ||
     eventType === '' ||
     loading ||
-    description === '' ||
     eventDuration.start === 0 ||
     eventDuration.end === 0 ||
     eventDuration.start > eventDuration.end ||

@@ -108,7 +108,6 @@ const EventEdit = () => {
     name === '' ||
     venue === '' ||
     eventType === '' ||
-    description === '' ||
     subject === '' ||
     loading ||
     eventDuration.start === 0 ||
@@ -136,9 +135,6 @@ const EventEdit = () => {
       );
     }
   });
-
-  console.log('canSave', canSave);
-  console.log('submitDisabled', submitDisabled);
 
   const fetchData = useCallback(() => {
     setLoading(true);
