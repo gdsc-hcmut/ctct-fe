@@ -143,9 +143,10 @@ const LHOTDKPage = () => {
                     Địa điểm tổ chức
                   </h2>
                   <p className='text-start leading-7 text-[#696984] md:leading-7 lg:leading-9 2xl:leading-10'>
-                    Lớp họp được tổ chức hàng tuần tại{' '}
-                    <span className='text-[#4285F4]'>Phòng 210H6, 212H6, 213H6, 214H6</span> - Toà
-                    nhà H6, Trường Đại học Bách khoa - ĐHQG-HCM, Cơ sở Dĩ An
+                    Lớp họp được tổ chức hàng tuần tại các Tòa học ở{' '}
+                    <span className='text-[#4285F4]'>
+                      Trường Đại học Bách khoa - ĐHQG-HCM, Cơ sở Dĩ An
+                    </span>
                   </p>
                 </div>
               </div>

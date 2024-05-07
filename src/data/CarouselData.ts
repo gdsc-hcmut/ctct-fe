@@ -65,24 +65,24 @@ const EventsAndActivities = [
 const CommentsData = [
   {
     id: '1',
-    name: 'Nguyễn Văn A',
+    name: 'Diệu My',
     comment:
       'Thật sự, chương trình đã giúp đỡ em rất nhiều trong việc cải thiện học tập. Không những thế, các anh chị và các bạn trong clb cũng rất nhiệt tình và dễ thương. Em nhìn ai em cũng thích hết trơn á. Em cảm ơn mọi người rất nhiều vì đã bỏ ra nhiều công sức cũng như thời gian như vậy để giúp đỡ tụi em tiến bộ hơn trong học tập.',
     profileImg: require('../assets/images/DieuMyProfile.png'),
   },
   {
     id: '2',
-    name: 'Nguyễn Văn A',
+    name: 'Ngọc Nam',
     comment:
       'Em chỉ nói 1 câu hoy: ước học năm nhất hoài để được học lớp CTCT và giải đáp các thắc mắc trên cộng đồng CTCT á. Em siêu thích luôn <3',
-    profileImg: require('../assets/images/DieuMyProfile.png'),
+    profileImg: require('../assets/images/NgocNamProfile.png'),
   },
   {
     id: '3',
-    name: 'Nguyễn Văn A',
+    name: 'Thùy Linh',
     comment:
       'Thật sự rất cần thiết với nhiều bạn như em ạ. Em xin chân thành cảm ơn anh chị nhiều!',
-    profileImg: require('../assets/images/DieuMyProfile.png'),
+    profileImg: require('../assets/images/ThuyLinhProfile.png'),
   },
 ];
 
