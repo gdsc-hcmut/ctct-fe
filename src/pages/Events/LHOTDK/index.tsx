@@ -162,7 +162,7 @@ const LHOTDKPage = () => {
                   <p className='mx-auto max-w-full text-justify leading-7 text-[#696984] md:text-center md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
                     Lịch học linh hoạt, được cập nhật hàng tuần phù hợp với nhu cầu của sinh viên.
                     <br className='hidden md:block' /> Số lượng các lớp học được tăng cường vào gần
-                    mùa thi.*
+                    mùa thi.
                   </p>
                 </div>
                 <Timetable
@@ -205,7 +205,7 @@ const LHOTDKPage = () => {
                   </div>
                   <p className='mx-auto max-w-full text-justify leading-7 text-[#ffffff] md:text-center md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
                     Tham gia lớp học, sinh viên sẽ nhận được rất nhiều lợi ích đi kèm mà chỉ Lớp Học
-                    Ôn Tập có thể mang lại được.*
+                    Ôn Tập có thể mang lại được.
                   </p>
                 </div>
                 <BenefitBoard />
@@ -221,7 +221,7 @@ const LHOTDKPage = () => {
                     Lớp Học Ôn Tập tự hào đạt được những kết quả cùng thành tựu xuất sắc sau hơn 10
                     năm hoạt động. Những con số cũng đồng thời là những cột mốc, những mục tiêu mà
                     Câu lạc bộ Chúng Ta Cùng Tiến muốn duy trì và phát triển hơn cả về số lượng và
-                    chất lượng.*
+                    chất lượng.
                   </p>
                 </div>
                 <Achievement1 />
@@ -234,7 +234,7 @@ const LHOTDKPage = () => {
                   </div>
                   <p className='mx-auto max-w-full text-justify leading-7 text-[#696984] md:text-center md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
                     Trên hết, sinh viên tham gia lớp học chính là những người cảm nhận rõ nhất những
-                    giá trị mà Lớp Học Ôn Tập mang lại.*
+                    giá trị mà Lớp Học Ôn Tập mang lại.
                   </p>
                 </div>
                 <Comments />
@@ -247,7 +247,7 @@ const LHOTDKPage = () => {
                   </div>
                   <p className='mx-auto max-w-full text-justify leading-7 text-[#696984] md:text-center md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
                     Lớp Học Ôn Tập cùng Chúng Ta Cùng Tiến đã vinh dự và tự hào được xuất hiện trên
-                    các phương tiện truyền thông.*
+                    các phương tiện truyền thông.
                   </p>
                 </div>
                 <NewsCarousel />
@@ -260,7 +260,7 @@ const LHOTDKPage = () => {
                   </div>
                   <p className='mx-auto max-w-full text-justify leading-7 text-[#696984] md:text-center md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
                     Câu lạc bộ Chúng Ta Cùng Tiến mang đến những công cụ hỗ trợ trên Internet để
-                    việc học tập và ôn luyện của sinh viên được diễn ra hiệu quả nhất.*
+                    việc học tập và ôn luyện của sinh viên được diễn ra hiệu quả nhất.
                   </p>
                 </div>
                 <SocialMediaCarousel />
