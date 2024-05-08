@@ -2,15 +2,19 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import { Footer, LazyLoadImage, LoginButton } from '../../../components';
-import Achievement1 from '../../../components/Achivement/Achievement1';
-import BenefitBoard from '../../../components/BenefitBoard';
-import Comments from '../../../components/Comments';
-import HeroSection from '../../../components/HeroSection';
-import NewsCarousel from '../../../components/NewsCarousel/NewsCarousel';
-import SignUpManual from '../../../components/SignUpManual';
-import SocialMediaCarousel from '../../../components/SocialMediaCarousel/SocialMediaCarousel';
-import Timetable from '../../../components/Timetable';
+import {
+  Footer,
+  LazyLoadImage,
+  LoginButton,
+  Achievement1,
+  BenefitBoard,
+  Comments,
+  HeroSection,
+  NewsCarousel,
+  SignUpManual,
+  SocialMediaCarousel,
+  Timetable,
+} from '../../../components';
 import { Page } from '../../../layout';
 import EventService from '../../../service/event.service';
 import useBoundStore from '../../../store';
