@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import { Footer, LazyLoadImage } from '../../../components';
+import { Footer, LazyLoadImage, LoginButton } from '../../../components';
 import Achievement1 from '../../../components/Achivement/Achievement1';
 import BenefitBoard from '../../../components/BenefitBoard';
 import Comments from '../../../components/Comments';
@@ -13,12 +13,15 @@ import SocialMediaCarousel from '../../../components/SocialMediaCarousel/SocialM
 import Timetable from '../../../components/Timetable';
 import { Page } from '../../../layout';
 import EventService from '../../../service/event.service';
+import useBoundStore from '../../../store';
 import { Event } from '../../../types/events';
 
 const ONE_DAY_MILLISECOND = 24 * 60 * 60 * 1000;
 
 const LHOTDKPage = () => {
   const queryClient = useQueryClient();
+
+  const isAuthenticated = useBoundStore.use.isAuthenticated();
 
   const [displatedDate, setDisplayedDate] = useState<number[]>([]);
   const [displatedEventSet, setDisplatedEventSet] = useState<Event[][]>([[]]);
@@ -151,30 +154,41 @@ const LHOTDKPage = () => {
                 </div>
               </div>
 
-              <div
-                className='flex w-full flex-col items-start justify-between gap-8'
-                id='timetable'
-              >
-                <div className='flex w-full flex-col justify-start gap-2 md:items-center md:justify-center lg:gap-4 2xl:gap-5'>
+              <div className='flex w-full flex-col items-start justify-between' id='timetable'>
+                <div className='mb-[2rem] flex w-full flex-col justify-start gap-2 md:items-center md:justify-center lg:gap-4 2xl:gap-5'>
                   <div className='text-justify text-[24px] font-bold text-[#000000] lg:text-[28px] xl:text-[32px] 2xl:text-[36px]'>
                     Các lớp học sắp tới
                   </div>
-                  <p className='mx-auto max-w-full text-justify leading-7 text-[#696984] md:text-center md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
-                    Lịch học linh hoạt, được cập nhật hàng tuần phù hợp với nhu cầu của sinh viên.
-                    <br className='hidden md:block' /> Số lượng các lớp học được tăng cường vào gần
-                    mùa thi.
-                  </p>
+                  {isAuthenticated && (
+                    <p className='mx-auto max-w-full text-justify leading-7 text-[#696984] md:text-center md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
+                      Lịch học linh hoạt, được cập nhật hàng tuần phù hợp với nhu cầu của sinh viên.
+                      <br className='hidden md:block' /> Số lượng các lớp học được tăng cường vào
+                      gần mùa thi.
+                    </p>
+                  )}
+                  {!isAuthenticated && (
+                    <p className='max-w-full text-left leading-7 text-[#696984] md:mx-auto md:text-center md:leading-7 lg:leading-9 2xl:max-w-[75%] 2xl:leading-10'>
+                      Đăng nhập để theo dõi lịch học và đăng ký tham gia các lớp học.
+                    </p>
+                  )}
                 </div>
                 <Timetable
                   dates={displatedDate}
                   eventSets={displatedEventSet}
                   register={register}
                 />
-                <div className='flex w-full flex-row items-end justify-end'>
-                  <a className='text-end underline' href='/profile/event'>
-                    Sự kiện của tôi
-                  </a>
-                </div>
+                {isAuthenticated && (
+                  <div className='mt-[2rem] flex w-full flex-row items-end justify-end'>
+                    <a className='text-end underline' href='/profile/event'>
+                      Sự kiện của tôi
+                    </a>
+                  </div>
+                )}
+                {!isAuthenticated && (
+                  <div className='flex w-full flex-row items-center justify-center'>
+                    <LoginButton />
+                  </div>
+                )}
               </div>
 
               <div className='relative flex w-full flex-col items-center justify-between gap-5 md:flex-row md:gap-[1rem] lg:gap-[1.5rem] 2xl:gap-[2rem]'>
