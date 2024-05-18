@@ -24,7 +24,6 @@ interface TimetableCardProps {
 enum EventStatus {
   OPEN = 'Mở đăng ký',
   REGISTERED = 'Đã đăng ký',
-  ONGOING = 'Đang diễn ra',
   ENDED = 'Đã kết thúc',
 }
 
@@ -58,16 +57,6 @@ const EventButton = memo<EventButtonProps>(function Button({
           className='absolute bottom-[1.25rem] right-[1.25rem] z-[1] font-semibold text-[#0F9D58]'
         >
           Đã đăng ký
-        </button>
-      );
-    case EventStatus.ONGOING:
-      return (
-        <button
-          {...props}
-          disabled={true}
-          className='absolute bottom-[1.25rem] right-[1.25rem] z-[1] text-[#696984]'
-        >
-          Đang diễn ra
         </button>
       );
     default:
@@ -114,9 +103,6 @@ const TimetableCard = ({
   useEffect(() => {
     if (Date.now() > endedAt.getTime()) {
       setEventStatus(EventStatus.ENDED);
-    } else if (Date.now() > startedAt.getTime() && Date.now() < endedAt.getTime()) {
-      if (isRegistered) setEventStatus(EventStatus.REGISTERED);
-      else setEventStatus(EventStatus.ONGOING);
     } else {
       if (isRegistered) setEventStatus(EventStatus.REGISTERED);
       else setEventStatus(EventStatus.OPEN);
