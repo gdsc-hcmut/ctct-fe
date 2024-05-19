@@ -11,15 +11,20 @@ import InputNumber from './InputNumber';
 import LazyLoadImage from './LazyLoadImage';
 import Linkify from './Linkify';
 import Loading from './Loading';
+import LoadMoreButton from './LoadMoreButton';
 import LoginButton from './LoginButton';
 import Markdown from './Markdown';
 import FinishModal from './Modal/FinishModal';
 import SignInModal from './Modal/SignInModal';
+import { NewsCard, NewsDescriptionCard, NewsTimetableCard } from './NewsCard';
+import NewsFirstItem from './NewsFirstItem';
+import NewsItem from './NewsItem';
 import Pagination from './Pagination';
 import PDF from './PDF';
 import QuestionBoard from './QuestionBoard';
 import QuestionCard from './QuestionCard';
 import Select from './Select';
+import ShareOptions from './ShareOptions';
 import SlotCard from './SlotCard';
 import UserSharingCard from './UserSharingCard';
 
@@ -49,4 +54,11 @@ export {
   UserSharingCard,
   MarkdownEditor,
   ExpressionEditor,
+  NewsCard,
+  NewsDescriptionCard,
+  NewsFirstItem,
+  NewsItem,
+  NewsTimetableCard,
+  LoadMoreButton,
+  ShareOptions,
 };

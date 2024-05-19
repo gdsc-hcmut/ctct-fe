@@ -38,6 +38,8 @@ import { ReactComponent as EducationHat } from '../../assets/svgs/EducationHatIc
 import { ReactComponent as EqualizerIcon } from '../../assets/svgs/EqualizerIcon.svg';
 import { ReactComponent as Exercise } from '../../assets/svgs/ExerciseIcon.svg';
 import { ReactComponent as FacebookIcon } from '../../assets/svgs/FacebookIcon.svg';
+import { ReactComponent as FacebookSolid } from '../../assets/svgs/FacebookSolidIcon.svg';
+import { ReactComponent as FacebookSolidLetter } from '../../assets/svgs/FacebookSolidLetter.svg';
 import { ReactComponent as LogoFessior } from '../../assets/svgs/FessiorLogo.svg';
 import { ReactComponent as FileInvoiceWhite } from '../../assets/svgs/FileInvoiceWhite.svg';
 import { ReactComponent as FilterIcon } from '../../assets/svgs/FilterIcon.svg';
@@ -47,7 +49,9 @@ import { ReactComponent as Help } from '../../assets/svgs/HelpIcon.svg';
 import { ReactComponent as Home } from '../../assets/svgs/HomeIcon.svg';
 import { ReactComponent as Introduction } from '../../assets/svgs/IntroductionIcon.svg';
 import { ReactComponent as IpodWhite } from '../../assets/svgs/IpodWhite.svg';
+import { ReactComponent as Letter } from '../../assets/svgs/LetterIcon.svg';
 import { ReactComponent as Library } from '../../assets/svgs/LibraryIcon.svg';
+import { ReactComponent as Link } from '../../assets/svgs/LinkIcon.svg';
 import { ReactComponent as List } from '../../assets/svgs/ListIcon.svg';
 import { ReactComponent as LiveHelpIcon } from '../../assets/svgs/LiveHelpIcon.svg';
 import { ReactComponent as LocationIcon } from '../../assets/svgs/LocationIcon.svg';
@@ -64,6 +68,7 @@ import { ReactComponent as Logout } from '../../assets/svgs/LogoutIcon.svg';
 import { ReactComponent as LogoYoutube } from '../../assets/svgs/LogoYoutube.svg';
 import { ReactComponent as MailIcon } from '../../assets/svgs/MailIcon.svg';
 import { ReactComponent as MockTestIcon } from '../../assets/svgs/MockTestIcon.svg';
+import { ReactComponent as Newspaper } from '../../assets/svgs/Newspaper.svg';
 import { ReactComponent as OpenAside } from '../../assets/svgs/OpenAsideIcon.svg';
 import { ReactComponent as OpenBook } from '../../assets/svgs/OpenBookIcon.svg';
 import { ReactComponent as OpenQuote } from '../../assets/svgs/OpenQuoteIcon.svg';
@@ -144,6 +149,7 @@ export default {
   List,
   MailIcon,
   MockTestIcon,
+  Newspaper,
   Help,
   Home,
   Introduction,
@@ -184,4 +190,8 @@ export default {
   FileInvoiceWhite,
   CalendarIconWhite,
   IpodWhite,
+  Letter,
+  Link,
+  FacebookSolid,
+  FacebookSolidLetter,
 };
